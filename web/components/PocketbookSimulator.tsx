@@ -57,7 +57,7 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
         {/* Sliders container */}
         <div className="space-y-6 rounded-xl border border-slate-800 bg-slate-900/50 p-5 sm:p-6">
           {/* CPI Slider */}
-          <div>
+          <div className="select-none">
             <div className="flex items-center justify-between">
               <label className="text-sm sm:text-base font-bold text-white">
                 Zmiana inflacji CPI (r/r)
@@ -66,24 +66,44 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
                 {cpiDelta > 0 ? `+${cpiDelta.toFixed(2)}` : cpiDelta.toFixed(2)} pp
               </span>
             </div>
-            <input
-              type="range"
-              min="-1.5"
-              max="1.5"
-              step="0.75"
-              value={cpiDelta}
-              onChange={(e) => setCpiDelta(parseFloat(e.target.value))}
-              className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-700 accent-slate-200"
-            />
-            <div className="mt-1.5 flex justify-between text-xs text-slate-400 font-semibold">
-              <span>-1.50 pp (Dezinflacja)</span>
-              <span>Bazowa (0.00)</span>
-              <span>+1.50 pp (Drożyzna)</span>
+            <div className="relative mt-3 pt-1 pb-1">
+              <input
+                type="range"
+                min="-1.5"
+                max="1.5"
+                step="0.75"
+                value={cpiDelta}
+                onChange={(e) => setCpiDelta(parseFloat(e.target.value))}
+                className="h-3 w-full cursor-pointer appearance-none rounded-full bg-slate-800 border border-slate-700/80 touch-none select-none"
+              />
+            </div>
+            <div className="mt-1 flex justify-between text-xs font-semibold text-slate-400">
+              <button
+                type="button"
+                onClick={() => setCpiDelta(-1.5)}
+                className={`transition hover:text-white ${cpiDelta === -1.5 ? "text-emerald-400 font-bold" : ""}`}
+              >
+                -1.50 pp (Dezinflacja)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCpiDelta(0.0)}
+                className={`transition hover:text-white ${cpiDelta === 0.0 ? "text-blue-400 font-bold" : ""}`}
+              >
+                Bazowa (0.00)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCpiDelta(1.5)}
+                className={`transition hover:text-white ${cpiDelta === 1.5 ? "text-rose-400 font-bold" : ""}`}
+              >
+                +1.50 pp (Drożyzna)
+              </button>
             </div>
           </div>
 
           {/* NBP Rate Slider */}
-          <div>
+          <div className="select-none">
             <div className="flex items-center justify-between">
               <label className="text-sm sm:text-base font-bold text-white">
                 Zmiana stopy referencyjnej NBP
@@ -92,19 +112,39 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
                 {rateDelta > 0 ? `+${rateDelta.toFixed(2)}` : rateDelta.toFixed(2)} pp
               </span>
             </div>
-            <input
-              type="range"
-              min="-1.0"
-              max="1.0"
-              step="0.5"
-              value={rateDelta}
-              onChange={(e) => setRateDelta(parseFloat(e.target.value))}
-              className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-700 accent-slate-200"
-            />
-            <div className="mt-1.5 flex justify-between text-xs text-slate-400 font-semibold">
-              <span>-1.00 pp (Cięcie stóp)</span>
-              <span>Bazowa (0.00)</span>
-              <span>+1.00 pp (Podwyżka)</span>
+            <div className="relative mt-3 pt-1 pb-1">
+              <input
+                type="range"
+                min="-1.0"
+                max="1.0"
+                step="0.5"
+                value={rateDelta}
+                onChange={(e) => setRateDelta(parseFloat(e.target.value))}
+                className="h-3 w-full cursor-pointer appearance-none rounded-full bg-slate-800 border border-slate-700/80 touch-none select-none"
+              />
+            </div>
+            <div className="mt-1 flex justify-between text-xs font-semibold text-slate-400">
+              <button
+                type="button"
+                onClick={() => setRateDelta(-1.0)}
+                className={`transition hover:text-white ${rateDelta === -1.0 ? "text-emerald-400 font-bold" : ""}`}
+              >
+                -1.00 pp (Cięcie stóp)
+              </button>
+              <button
+                type="button"
+                onClick={() => setRateDelta(0.0)}
+                className={`transition hover:text-white ${rateDelta === 0.0 ? "text-blue-400 font-bold" : ""}`}
+              >
+                Bazowa (0.00)
+              </button>
+              <button
+                type="button"
+                onClick={() => setRateDelta(1.0)}
+                className={`transition hover:text-white ${rateDelta === 1.0 ? "text-rose-400 font-bold" : ""}`}
+              >
+                +1.00 pp (Podwyżka)
+              </button>
             </div>
           </div>
 

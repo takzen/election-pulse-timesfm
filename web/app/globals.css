@@ -44,11 +44,69 @@ body {
   line-height: 1.5;
 }
 
-/* Explicitly allow selection in input fields and copy preview */
-input, textarea, code, pre, .select-text {
+/* Explicitly allow selection in text input fields and copy preview */
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+textarea,
+code,
+pre,
+.select-text {
   user-select: text !important;
   -webkit-user-select: text !important;
   cursor: text;
+}
+
+/* Range slider touch & grab optimization - eliminate blinking caret and enable smooth dragging */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  caret-color: transparent !important;
+  touch-action: none;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 3px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 8px rgba(59, 130, 246, 0.6);
+  cursor: pointer;
+  cursor: grab;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.2);
+  background: #ffffff;
+  border-color: #60a5fa;
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.9);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 3px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 8px rgba(59, 130, 246, 0.6);
+  cursor: pointer;
+  cursor: grab;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+  cursor: grabbing;
+  transform: scale(1.2);
+  background: #ffffff;
+  border-color: #60a5fa;
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.9);
 }
 
 button, a, [role="button"] {
