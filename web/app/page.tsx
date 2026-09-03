@@ -41,9 +41,9 @@ export default function Home() {
         {/* Top Header Bar - Editorial Style with Official Logo */}
         <header className="w-full border-b border-slate-800/80 pb-5 sm:pb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div>
+            <div className="min-w-0 flex-1">
               {/* Official Brand Logo */}
-              <div>
+              <div className="shrink-0">
                 <Logo size="lg" />
               </div>
 
@@ -53,7 +53,7 @@ export default function Home() {
             </div>
 
             {/* Quick specs pill */}
-            <div className="flex flex-wrap gap-2.5 text-xs sm:text-sm">
+            <div className="flex flex-wrap gap-2.5 text-xs sm:text-sm shrink-0">
               <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0e1424] px-3.5 py-2 text-slate-200 shadow-sm">
                 <Calendar className="h-4 w-4 text-slate-400 flex-shrink-0" />
                 <span>Horyzont prognozy: <strong className="text-white">{metadata.horizon_days} dni</strong> ({metadata.target_date})</span>

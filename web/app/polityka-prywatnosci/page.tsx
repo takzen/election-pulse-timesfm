@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
           </Link>
 
           <div className="mt-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 border-b border-slate-800 pb-8">
-            <div>
+            <div className="min-w-0 flex-1">
               <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
                 Polityka prywatności i nota prawna
               </h1>
@@ -41,7 +41,9 @@ export default function PrivacyPolicy() {
                 Serwis Puls Wyborczy (<strong>pulswyborczy.pl</strong>) • Ostatnia aktualizacja: wrzesień 2026 r.
               </p>
             </div>
-            <Logo size="md" withLink={false} />
+            <div className="shrink-0 self-start lg:self-center">
+              <Logo size="md" withLink={false} />
+            </div>
           </div>
         </div>
 
