@@ -24,21 +24,21 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
   const [copied, setCopied] = useState(false);
   const [mode, setMode] = useState<"standard" | "compact">("standard");
 
-  const standardText = `🗳️ Najnowsza prognoza AI na ${metadata.target_date} (PulsWyborczy.pl):
+  const standardText = `🗳️ Prognoza wyborcza AI na koniec września 2026 (+30 dni, PulsWyborczy.pl):
 
-KO: ${partiesMeta["KO"]?.forecast.toFixed(1)}%
-PiS: ${partiesMeta["PiS"]?.forecast.toFixed(1)}%
-Konfederacja: ${partiesMeta["Konfederacja"]?.forecast.toFixed(1)}%
-Korona: ${partiesMeta["KKP"]?.forecast.toFixed(1)}%
-Lewica: ${partiesMeta["Lewica"]?.forecast.toFixed(1)}%
-Rozwój Plus: ${partiesMeta["Rozwoj_Plus"]?.forecast.toFixed(1)}%
-Razem: ${partiesMeta["Razem"]?.forecast.toFixed(1)}%
-PSL: ${partiesMeta["PSL"]?.forecast.toFixed(1)}%
-Polska 2050: ${partiesMeta["Polska_2050"]?.forecast.toFixed(1)}%
-Niezdecydowani: ${partiesMeta["Niezdecydowani"]?.forecast.toFixed(1)}%
+KO: ${(partiesMeta["KO"]?.forecast ?? 0).toFixed(1)}%
+PiS: ${(partiesMeta["PiS"]?.forecast ?? 0).toFixed(1)}%
+Konfederacja: ${(partiesMeta["Konfederacja"]?.forecast ?? 0).toFixed(1)}%
+Korona: ${(partiesMeta["KKP"]?.forecast ?? 0).toFixed(1)}%
+Lewica: ${(partiesMeta["Lewica"]?.forecast ?? 0).toFixed(1)}%
+Rozwój Plus: ${(partiesMeta["Rozwoj_Plus"]?.forecast ?? 0).toFixed(1)}%
+Razem: ${(partiesMeta["Razem"]?.forecast ?? 0).toFixed(1)}%
+PSL: ${(partiesMeta["PSL"]?.forecast ?? 0).toFixed(1)}%
+Polska 2050: ${(partiesMeta["Polska_2050"]?.forecast ?? 0).toFixed(1)}%
+Niezdecydowani: ${(partiesMeta["Niezdecydowani"]?.forecast ?? 0).toFixed(1)}%
 
-Silnik AI: Google TimesFM 3.0
-Interaktywny symulator gospodarczy i układ Sejmu:`;
+Silnik AI: Google TimesFM 3.0 (baza sondaży: ${metadata.cutoff_date})
+Wykresy prawdopodobieństwa i szacunek mandatów Sejmu:`;
 
   const compactText = `📊 Sondaż AI (PulsWyborczy.pl):
 KO: ${partiesMeta["KO"]?.forecast.toFixed(1)}% | PiS: ${partiesMeta["PiS"]?.forecast.toFixed(1)}% | Konf: ${partiesMeta["Konfederacja"]?.forecast.toFixed(1)}% | KKP: ${partiesMeta["KKP"]?.forecast.toFixed(1)}% | Lewica: ${partiesMeta["Lewica"]?.forecast.toFixed(1)}% | R+: ${partiesMeta["Rozwoj_Plus"]?.forecast.toFixed(1)}% | Razem: ${partiesMeta["Razem"]?.forecast.toFixed(1)}% | PSL: ${partiesMeta["PSL"]?.forecast.toFixed(1)}%
