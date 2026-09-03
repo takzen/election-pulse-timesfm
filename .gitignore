@@ -31,6 +31,13 @@ data/processed/*
 .streamlit/secrets.toml
 .env
 
+# Node & Next.js web build
+node_modules/
+.next/
+web/node_modules/
+web/.next/
+web/out/
+
 # OS specific
 Thumbs.db
 Desktop.ini
