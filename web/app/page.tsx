@@ -7,10 +7,10 @@ import { MajorityBar } from "@/components/MajorityBar";
 import { FanChart } from "@/components/FanChart";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
-import { Activity, Calendar, Award, ExternalLink } from "lucide-react";
+import { Activity, Calendar, ExternalLink } from "lucide-react";
 
 export default function Home() {
-  const { metadata, parties_meta, history, forecast_chart, baselines_comparison } = forecastsData;
+  const { metadata, parties_meta, history, forecast_chart } = forecastsData;
 
   // Governing coalition: KO + PSL + Polska 2050 + Nowa Lewica
   const coalitionTotal = roundOne(
@@ -105,55 +105,7 @@ export default function Home() {
               />
             </section>
 
-            {/* Model Arena */}
-            <section className="w-full">
-              <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-5 sm:p-6 shadow-md">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800 pb-4 gap-2">
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-lg bg-slate-800 p-2 text-slate-200 flex-shrink-0">
-                      <Award className="h-5 w-5 text-amber-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Arena modeli: TimesFM 3.0 vs metody klasyczne</h3>
-                      <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-                        Porównanie prognozy końcowej na {metadata.target_date} (+30 dni) generowanej przez różne algorytmy
-                      </p>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="mt-4 overflow-x-auto">
-                  <table className="w-full text-left text-sm sm:text-base">
-                    <thead className="border-b border-slate-800 text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-wider">
-                      <tr>
-                        <th className="py-3 px-3">Partia / Opcja</th>
-                        <th className="py-3 px-3 text-white">Google TimesFM 3.0 (AI)</th>
-                        <th className="py-3 px-3 text-slate-300">LightGBM (ML)</th>
-                        <th className="py-3 px-3 text-slate-300">ARIMA (1,1,1)</th>
-                        <th className="py-3 px-3 text-slate-300">EWMA (Średnia ważona)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800/60 font-mono text-sm sm:text-base">
-                      {Object.entries(baselines_comparison).map(([party, comp]: [string, any]) => (
-                        <tr key={party} className="hover:bg-slate-800/20 transition">
-                          <td className="py-3 px-3 font-sans font-medium text-slate-200 flex items-center gap-2">
-                            <span
-                              className="h-2.5 w-2.5 rounded-full flex-shrink-0"
-                              style={{ backgroundColor: (parties_meta as any)[party]?.color || "#64748b" }}
-                            />
-                            <span>{party.replace("_", " ")}</span>
-                          </td>
-                          <td className="py-3 px-3 font-black text-white">{comp.TimesFM_3}%</td>
-                          <td className="py-3 px-3 text-slate-300">{comp.LightGBM}%</td>
-                          <td className="py-3 px-3 text-slate-400">{comp.ARIMA}%</td>
-                          <td className="py-3 px-3 text-slate-400">{comp.EWMA}%</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
 
             {/* Public Twitter / X Generator */}
             <section className="w-full">
