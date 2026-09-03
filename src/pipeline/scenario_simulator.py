@@ -65,11 +65,18 @@ class PocketbookSimulator:
             diff_from_base[party] = round(final_val - base_val, 2)
 
         coalition = round(
-            final_support.get("KO", 0.0) + final_support.get("Trzecia_Droga", 0.0) + final_support.get("Lewica", 0.0),
+            final_support.get("KO", 0.0)
+            + final_support.get("PSL", 0.0)
+            + final_support.get("Polska_2050", 0.0)
+            + final_support.get("Lewica", 0.0),
             2,
         )
         opposition = round(
-            final_support.get("PiS", 0.0) + final_support.get("Konfederacja", 0.0),
+            final_support.get("PiS", 0.0)
+            + final_support.get("Konfederacja", 0.0)
+            + final_support.get("KKP", 0.0)
+            + final_support.get("Rozwoj_Plus", 0.0)
+            + final_support.get("Razem", 0.0),
             2,
         )
 

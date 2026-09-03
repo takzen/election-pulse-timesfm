@@ -15,7 +15,18 @@ from scipy.interpolate import PchipInterpolator
 
 logger = logging.getLogger(__name__)
 
-PARTIES = ["KO", "PiS", "Trzecia_Droga", "Lewica", "Konfederacja"]
+PARTIES = [
+    "KO",
+    "PiS",
+    "Konfederacja",
+    "KKP",
+    "Lewica",
+    "Rozwoj_Plus",
+    "Razem",
+    "PSL",
+    "Polska_2050",
+    "Niezdecydowani",
+]
 
 
 def interpolate_party_series_pchip(

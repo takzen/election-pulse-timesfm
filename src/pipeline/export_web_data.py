@@ -86,7 +86,7 @@ def export_complete_web_payload(
         "KO": {
             "name": "Koalicja Obywatelska",
             "leader": "Donald Tusk",
-            "color": "#f97316",  # Vibrant orange
+            "color": "#f97316",  # Orange
             "current": round(float(df_features["KO"].iloc[-1]), 1),
             "forecast": tfm_output.parties["KO"].p50[-1],
             "p10": tfm_output.parties["KO"].p10[-1],
@@ -95,38 +95,83 @@ def export_complete_web_payload(
         "PiS": {
             "name": "Prawo i Sprawiedliwość",
             "leader": "Jarosław Kaczyński",
-            "color": "#3b82f6",  # Dark blue
+            "color": "#2563eb",  # Blue
             "current": round(float(df_features["PiS"].iloc[-1]), 1),
             "forecast": tfm_output.parties["PiS"].p50[-1],
             "p10": tfm_output.parties["PiS"].p10[-1],
             "p90": tfm_output.parties["PiS"].p90[-1],
         },
         "Konfederacja": {
-            "name": "Konfederacja",
+            "name": "Konfederacja (NN + RN)",
             "leader": "Sławomir Mentzen / Krzysztof Bosak",
-            "color": "#14b8a6",  # Teal / Navy
+            "color": "#0d9488",  # Teal
             "current": round(float(df_features["Konfederacja"].iloc[-1]), 1),
             "forecast": tfm_output.parties["Konfederacja"].p50[-1],
             "p10": tfm_output.parties["Konfederacja"].p10[-1],
             "p90": tfm_output.parties["Konfederacja"].p90[-1],
         },
-        "Trzecia_Droga": {
-            "name": "Trzecia Droga (PSL + PL2050)",
-            "leader": "Szymon Hołownia / Władysław Kosiniak-Kamysz",
-            "color": "#eab308",  # Gold / Yellow
-            "current": round(float(df_features["Trzecia_Droga"].iloc[-1]), 1),
-            "forecast": tfm_output.parties["Trzecia_Droga"].p50[-1],
-            "p10": tfm_output.parties["Trzecia_Droga"].p10[-1],
-            "p90": tfm_output.parties["Trzecia_Droga"].p90[-1],
+        "KKP": {
+            "name": "Konfederacja Korony Polskiej",
+            "leader": "Grzegorz Braun",
+            "color": "#b45309",  # Amber / Dark Gold
+            "current": round(float(df_features["KKP"].iloc[-1]), 1),
+            "forecast": tfm_output.parties["KKP"].p50[-1],
+            "p10": tfm_output.parties["KKP"].p10[-1],
+            "p90": tfm_output.parties["KKP"].p90[-1],
         },
         "Lewica": {
-            "name": "Lewica",
+            "name": "Nowa Lewica",
             "leader": "Włodzimierz Czarzasty / Robert Biedroń",
-            "color": "#ec4899",  # Magenta / Red
+            "color": "#e11d48",  # Rose Red
             "current": round(float(df_features["Lewica"].iloc[-1]), 1),
             "forecast": tfm_output.parties["Lewica"].p50[-1],
             "p10": tfm_output.parties["Lewica"].p10[-1],
             "p90": tfm_output.parties["Lewica"].p90[-1],
+        },
+        "Rozwoj_Plus": {
+            "name": "Rozwój Plus",
+            "leader": "Mateusz Morawiecki",
+            "color": "#6366f1",  # Indigo
+            "current": round(float(df_features["Rozwoj_Plus"].iloc[-1]), 1),
+            "forecast": tfm_output.parties["Rozwoj_Plus"].p50[-1],
+            "p10": tfm_output.parties["Rozwoj_Plus"].p10[-1],
+            "p90": tfm_output.parties["Rozwoj_Plus"].p90[-1],
+        },
+        "Razem": {
+            "name": "Partia Razem",
+            "leader": "Adrian Zandberg / Magdalena Biejat",
+            "color": "#a855f7",  # Purple
+            "current": round(float(df_features["Razem"].iloc[-1]), 1),
+            "forecast": tfm_output.parties["Razem"].p50[-1],
+            "p10": tfm_output.parties["Razem"].p10[-1],
+            "p90": tfm_output.parties["Razem"].p90[-1],
+        },
+        "PSL": {
+            "name": "Polskie Stronnictwo Ludowe",
+            "leader": "Władysław Kosiniak-Kamysz",
+            "color": "#16a34a",  # Green
+            "current": round(float(df_features["PSL"].iloc[-1]), 1),
+            "forecast": tfm_output.parties["PSL"].p50[-1],
+            "p10": tfm_output.parties["PSL"].p10[-1],
+            "p90": tfm_output.parties["PSL"].p90[-1],
+        },
+        "Polska_2050": {
+            "name": "Polska 2050",
+            "leader": "Szymon Hołownia",
+            "color": "#eab308",  # Yellow
+            "current": round(float(df_features["Polska_2050"].iloc[-1]), 1),
+            "forecast": tfm_output.parties["Polska_2050"].p50[-1],
+            "p10": tfm_output.parties["Polska_2050"].p10[-1],
+            "p90": tfm_output.parties["Polska_2050"].p90[-1],
+        },
+        "Niezdecydowani": {
+            "name": "Niezdecydowani",
+            "leader": "Trudno powiedzieć",
+            "color": "#64748b",  # Slate Gray
+            "current": round(float(df_features["Niezdecydowani"].iloc[-1]), 1),
+            "forecast": tfm_output.parties["Niezdecydowani"].p50[-1],
+            "p10": tfm_output.parties["Niezdecydowani"].p10[-1],
+            "p90": tfm_output.parties["Niezdecydowani"].p90[-1],
         },
     }
 
