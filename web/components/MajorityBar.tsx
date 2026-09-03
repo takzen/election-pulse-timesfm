@@ -8,7 +8,7 @@ interface MajorityBarProps {
 }
 
 export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProps) {
-  // Polish Sejm majority calculation: 460 total seats, 231 to govern
+  // Polish Sejm majority calculation: 460 total seats, 231 needed to govern
   const totalVotes = coalitionTotal + oppositionTotal;
   const coalitionSeats = totalVotes > 0 ? Math.round((coalitionTotal / totalVotes) * 460) : 230;
   const oppositionSeats = 460 - coalitionSeats;
@@ -19,10 +19,10 @@ export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProp
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-slate-800 pb-4">
         <div>
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-            Układ Sił w Sejmie RP (Szacunek Mandatów D&apos;Hondt)
+            Układ sił w Sejmie RP (szacunek mandatów D&apos;Hondt)
           </span>
           <h3 className="mt-1 text-lg sm:text-2xl font-black text-white flex flex-wrap items-center gap-2 sm:gap-3">
-            <span>Pojedynek Bloków</span>
+            <span>Pojedynek bloków</span>
             <span
               className={`rounded-md px-2.5 py-0.5 text-xs sm:text-sm font-bold ${
                 hasMajority
@@ -30,7 +30,7 @@ export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProp
                   : "bg-rose-950/60 text-rose-400 border border-rose-800/50"
               }`}
             >
-              {hasMajority ? `Większość Koalicji (${coalitionSeats} m.)` : `Przewaga Opozycji (${oppositionSeats} m.)`}
+              {hasMajority ? `Większość koalicji (${coalitionSeats} m.)` : `Przewaga opozycji (${oppositionSeats} m.)`}
             </span>
           </h3>
         </div>
@@ -73,7 +73,7 @@ export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProp
           style={{ left: "50.2%" }}
         >
           <div className="absolute -top-5 -left-8 rounded bg-slate-800 border border-slate-600 px-1.5 py-0.2 text-[10px] sm:text-xs font-bold text-white uppercase whitespace-nowrap">
-            231
+            Próg 231
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
         </div>
         <div>
           <h2 className="text-lg sm:text-xl font-bold text-white">
-            Symulator Portfela Wyborcy (Pocketbook Voting)
+            Symulator portfela wyborcy (pocketbook voting)
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
             Wpływ decyzji RPP o stopach procentowych i skoków inflacji na poparcie bloków politycznych
@@ -110,7 +110,7 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
 
           {/* Preset buttons */}
           <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-800">
-            <span className="text-xs sm:text-sm text-slate-300 font-semibold mr-1">Warianty:</span>
+            <span className="text-xs sm:text-sm text-slate-300 font-semibold mr-1">Gotowe warianty:</span>
             <button
               onClick={() => { setCpiDelta(-1.5); setRateDelta(-1.0); }}
               className="rounded-lg bg-slate-800 px-3 py-1.5 text-xs sm:text-sm font-semibold text-slate-200 hover:bg-slate-700 transition"
@@ -132,7 +132,7 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
           </div>
         </div>
 
-        {/* Results column: NO internal scrollbar, natural full expansion */}
+        {/* Results column */}
         <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-400">
@@ -164,7 +164,7 @@ export function PocketbookSimulator({ scenarios, partiesMeta }: PocketbookSimula
               </div>
             </div>
 
-            {/* Individual party shifts - 2-column grid, NO SCROLLBAR */}
+            {/* Individual party shifts */}
             <div className="mt-4 pt-3 border-t border-slate-800/80">
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">
                 Wyniki partii w scenariuszu:

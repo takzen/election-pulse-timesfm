@@ -43,7 +43,7 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
     <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-6 shadow-md">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-white">Trajektoria Poparcia i Prognoza AI</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-white">Trajektoria poparcia i prognoza AI</h2>
           <p className="text-sm sm:text-base text-slate-300 mt-1">
             Historia sondażowa oraz projekcja modelu (od {cutoffDate})
           </p>
@@ -111,7 +111,7 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
                 `${Number(value).toFixed(1)}%`,
                 name.replace("_", " "),
               ]}
-              labelFormatter={(label) => `Data pomiaru: ${label}`}
+              labelFormatter={(label) => `Data: ${label}`}
             />
             <Legend
               wrapperStyle={{ paddingTop: 20 }}
@@ -122,7 +122,7 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
               stroke="#cbd5e1"
               strokeDasharray="4 4"
               label={{
-                value: "Start AI (Dziś)",
+                value: "Start prognozy",
                 fill: "#cbd5e1",
                 fontSize: 13,
                 fontWeight: "bold",

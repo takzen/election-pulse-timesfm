@@ -106,9 +106,9 @@ def run_rolling_backtest(
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     df_all = load_and_merge_processed_features()
-    print("=" * 65)
-    print("⚖️ ElectionPulse-TimesFM: Rolling Backtesting Results (14-day Horizon)")
-    print("=" * 65)
+    print("=" * 70)
+    print("⚖️ Puls Wyborczy: Rolling Backtesting Results (14-day Horizon)")
+    print("=" * 70)
 
     results = run_rolling_backtest(df_all)
     print(f"{'Model':<18} | {'MAE (pp)':<10} | {'RMSE (pp)':<10} | {'Bias (pp)':<10}")

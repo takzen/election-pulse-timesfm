@@ -1,16 +1,16 @@
 "use client";
 
 import React from "react";
-import { Megaphone, ExternalLink, Code2, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Code2, Megaphone, ExternalLink } from "lucide-react";
 
 export function AdSidebar() {
   return (
-    <aside className="w-full space-y-5 lg:sticky lg:top-8">
-      {/* TAKZEN DEV Featured Card */}
+    <aside className="w-full space-y-5">
+      {/* TAKZEN DEV Creator Card */}
       <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-5 shadow-sm transition hover:border-slate-700">
         <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
           <span className="flex items-center gap-1.5">
-            <Code2 className="h-4 w-4 text-slate-300" /> Twórca Projektu
+            <Code2 className="h-4 w-4 text-slate-300" /> Twórca projektu
           </span>
           <span className="rounded bg-slate-800 px-2 py-0.5 text-xs text-slate-300 font-semibold">
             ENGINEERING
@@ -59,13 +59,13 @@ export function AdSidebar() {
       <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-5 shadow-sm">
         <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
           <span className="flex items-center gap-1.5">
-            <Megaphone className="h-4 w-4 text-slate-400" /> Miejsce na Reklamę
+            <Megaphone className="h-4 w-4 text-slate-400" /> Miejsce na reklamę
           </span>
           <span className="text-xs text-slate-500 font-semibold">Slot #1</span>
         </div>
 
         <div className="mt-2.5">
-          <h4 className="text-sm font-bold text-slate-200">Twój Projekt lub Marka</h4>
+          <h4 className="text-sm font-bold text-slate-200">Twój projekt lub marka</h4>
           <p className="mt-1 text-xs sm:text-sm text-slate-400 leading-relaxed">
             Dotrzyj bezpośrednio do analityków, dziennikarzy i entuzjastów AI śledzących polskie wybory.
           </p>
@@ -76,6 +76,7 @@ export function AdSidebar() {
           className="mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800 transition"
         >
           <span>Zarezerwuj ten slot</span>
+          <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
       </div>
     </aside>

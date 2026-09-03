@@ -82,7 +82,7 @@ export function PartyCard({ partyKey, meta }: PartyCardProps) {
 
           <div className="text-right">
             <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              Sondaż dziś
+              Ostatni sondaż
             </span>
             <div className="text-xl font-bold text-slate-200 mt-1">
               {meta.current.toFixed(1)}%
@@ -103,7 +103,7 @@ export function PartyCard({ partyKey, meta }: PartyCardProps) {
 
         {/* Quantile Range */}
         <div className="mt-3 flex items-center justify-between text-sm text-slate-400">
-          <span>Przedział 10%–90%:</span>
+          <span>Przedział ufności 10%–90%:</span>
           <span className="font-mono font-bold text-slate-200">
             {meta.p10.toFixed(1)}% – {meta.p90.toFixed(1)}%
           </span>

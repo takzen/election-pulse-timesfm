@@ -28,7 +28,7 @@ logger = logging.getLogger("run_sync")
 def run_full_ingestion_sync(output_dir: str = "data/raw") -> dict[str, Path]:
     """Runs end-to-end synchronization across all raw data sources."""
     print("=" * 70)
-    print("📡 ElectionPulse-TimesFM: Synchronizing External Data Feeds")
+    print("📡 Puls Wyborczy: Synchronizing External Data Feeds")
     print("=" * 70)
 
     out_path = Path(output_dir)

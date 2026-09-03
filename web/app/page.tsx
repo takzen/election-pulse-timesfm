@@ -13,7 +13,7 @@ import { Activity, Calendar, Award, ExternalLink, Cpu } from "lucide-react";
 export default function Home() {
   const { metadata, parties_meta, history, forecast_chart, scenarios_grid, baselines_comparison, inflections } = forecastsData;
 
-  // Koalicja rządowa: KO + PSL + Polska 2050 + Nowa Lewica
+  // Governing coalition: KO + PSL + Polska 2050 + Nowa Lewica
   const coalitionTotal = roundOne(
     (parties_meta["KO"]?.forecast || 0) +
     (parties_meta["PSL"]?.forecast || 0) +
@@ -21,7 +21,7 @@ export default function Home() {
     (parties_meta["Lewica"]?.forecast || 0)
   );
 
-  // Opozycja parlamentarna: PiS + Konfederacja + KKP + Rozwój Plus + Razem
+  // Parliamentary opposition: PiS + Konfederacja + KKP + Rozwój Plus + Razem
   const oppositionTotal = roundOne(
     (parties_meta["PiS"]?.forecast || 0) +
     (parties_meta["Konfederacja"]?.forecast || 0) +
@@ -38,7 +38,7 @@ export default function Home() {
     <div className="min-h-screen w-full bg-[#090d16] text-slate-100 antialiased selection:bg-slate-700 selection:text-white">
       {/* Full width container spanning edge-to-edge with responsive margins */}
       <main className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-6 sm:py-8 space-y-8">
-        {/* Top Header Bar - Clean, Professional Editorial Style with Official Logo */}
+        {/* Top Header Bar - Editorial Style with Official Logo */}
         <header className="w-full border-b border-slate-800/80 pb-5 sm:pb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -84,10 +84,10 @@ export default function Home() {
         <section className="w-full space-y-3.5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/60 pb-2.5 gap-1">
             <h2 className="text-base sm:text-lg font-bold tracking-wide text-white uppercase">
-              Prognoza Poparcia wg Modeli Sondażowych (Stan na {metadata.target_date})
+              Prognoza poparcia według modeli sondażowych (stan na {metadata.target_date})
             </h2>
             <p className="text-xs sm:text-sm text-slate-400">
-              9 partii politycznych + Niezdecydowani (suma 100%)
+              9 partii politycznych + niezdecydowani (suma 100%)
             </p>
           </div>
 
@@ -130,7 +130,7 @@ export default function Home() {
                       <Award className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Arena Modeli: TimesFM 3.0 vs Metody Klasyczne</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-white">Arena modeli: TimesFM 3.0 vs metody klasyczne</h3>
                       <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
                         Zestawienie predykcji końcowych dla horyzontu 30 dni
                       </p>
@@ -171,7 +171,7 @@ export default function Home() {
                     <Activity className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold text-white">Wykryte Szoki & Zmiany Dynamiki</h3>
+                    <h3 className="text-base sm:text-lg font-bold text-white">Wykryte szoki i zmiany dynamiki</h3>
                     <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
                       Punkty przegięcia trendu skorelowane z wydarzeniami politycznymi
                     </p>
@@ -239,7 +239,7 @@ export default function Home() {
               href="/polityka-prywatnosci"
               className="text-xs text-slate-400 hover:text-slate-200 underline underline-offset-4 transition"
             >
-              Polityka prywatności & Nota prawna
+              Polityka prywatności i nota prawna
             </Link>
           </div>
         </footer>

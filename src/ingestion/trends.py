@@ -35,7 +35,7 @@ def fetch_wikipedia_pageviews(
     article: str,
     start_date: str = "20230101",
     end_date: str = "20260831",
-    user_agent: str = "ElectionPulse-TimesFM/1.0 (contact: takzen@github)",
+    user_agent: str = "PulsWyborczy/1.0 (contact: takzen.app@gmail.com)",
 ) -> pd.DataFrame:
     """Fetches daily pageviews for a Polish Wikipedia article via Wikimedia REST API."""
     url = f"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/pl.wikipedia/all-access/user/{article}/daily/{start_date}/{end_date}"

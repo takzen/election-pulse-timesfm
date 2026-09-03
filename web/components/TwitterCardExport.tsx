@@ -37,7 +37,7 @@ PSL: ${partiesMeta["PSL"]?.forecast.toFixed(1)}%
 Polska 2050: ${partiesMeta["Polska_2050"]?.forecast.toFixed(1)}%
 Niezdecydowani: ${partiesMeta["Niezdecydowani"]?.forecast.toFixed(1)}%
 
-Silnik: Google TimesFM 3.0
+Silnik AI: Google TimesFM 3.0
 Interaktywny symulator gospodarczy i układ Sejmu:`;
 
   const compactText = `📊 Sondaż AI (PulsWyborczy.pl):
@@ -64,7 +64,7 @@ Sprawdź symulator na żywo:`;
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-white">Generator Posta na X</h2>
+              <h2 className="text-xl font-bold text-white">Generator posta na X</h2>
             </div>
             <p className="text-sm text-slate-400 mt-0.5">
               Udostępnij aktualną prognozę z PulsWyborczy.pl jednym kliknięciem
@@ -90,7 +90,7 @@ Sprawdź symulator na żywo:`;
                 mode === "compact" ? "bg-slate-700 text-white" : "text-slate-400 hover:text-white"
               }`}
             >
-              Krótki (1-liner)
+              Krótki (1 linijka)
             </button>
           </div>
 

@@ -9,7 +9,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 def verify_environment():
     print("=" * 60)
-    print("🚀 ElectionPulse-TimesFM: Environment & GPU Verification")
+    print("🚀 Puls Wyborczy: Environment & GPU Verification")
     print("=" * 60)
     print(f"Python version : {sys.version.split()[0]} ({sys.executable})")
 
