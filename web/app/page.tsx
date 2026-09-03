@@ -158,39 +158,37 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Recent Inflection Points - NO SCROLLBAR */}
-              <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-5 sm:p-6 shadow-md flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2.5 border-b border-slate-800 pb-4">
-                    <div className="rounded-lg bg-slate-800 p-2 text-slate-200">
-                      <Activity className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Wykryte Szoki & Zmiany Dynamiki</h3>
-                      <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-                        Punkty przegięcia trendu skorelowane z wydarzeniami politycznymi
-                      </p>
-                    </div>
+              {/* Recent Inflection Points */}
+              <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-5 sm:p-6 shadow-md">
+                <div className="flex items-center gap-2.5 border-b border-slate-800 pb-4">
+                  <div className="rounded-lg bg-slate-800 p-2 text-slate-200">
+                    <Activity className="h-5 w-5" />
                   </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-white">Wykryte Szoki & Zmiany Dynamiki</h3>
+                    <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
+                      Punkty przegięcia trendu skorelowane z wydarzeniami politycznymi
+                    </p>
+                  </div>
+                </div>
 
-                  <div className="mt-4 space-y-2.5">
-                    {inflections.slice(0, 5).map((inf: any, idx: number) => (
-                      <div key={idx} className="flex items-start justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-3 sm:p-3.5 text-sm sm:text-base">
-                        <div>
-                          <div className="flex items-center gap-2.5">
-                            <span className="font-bold text-white">{inf.party.replace("_", " ")}</span>
-                            <span className="text-xs text-slate-400 font-mono">{inf.date}</span>
-                          </div>
-                          {inf.event_label && (
-                            <div className="mt-1 text-xs sm:text-sm text-slate-300">{inf.event_label}</div>
-                          )}
+                <div className="mt-4 space-y-3">
+                  {inflections.slice(0, 5).map((inf: any, idx: number) => (
+                    <div key={idx} className="flex items-start justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-3.5 text-sm sm:text-base shadow-sm">
+                      <div className="min-w-0 pr-2">
+                        <div className="flex items-center gap-2.5">
+                          <span className="font-bold text-white text-base">{inf.party.replace("_", " ")}</span>
+                          <span className="text-xs text-slate-400 font-mono">{inf.date}</span>
                         </div>
-                        <span className={`font-mono text-sm sm:text-base font-black flex-shrink-0 ml-2 ${inf.shift_magnitude > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                          {inf.shift_magnitude > 0 ? `+${inf.shift_magnitude.toFixed(1)}` : inf.shift_magnitude.toFixed(1)} pp
-                        </span>
+                        {inf.event_label && (
+                          <div className="mt-1 text-xs sm:text-sm text-slate-300">{inf.event_label}</div>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                      <span className={`font-mono text-sm sm:text-base font-black flex-shrink-0 ml-2 ${inf.shift_magnitude > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                        {inf.shift_magnitude > 0 ? `+${inf.shift_magnitude.toFixed(1)}` : inf.shift_magnitude.toFixed(1)} pp
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
