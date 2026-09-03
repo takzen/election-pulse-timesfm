@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.pipeline.interpolator import build_daily_regularized_polls, interpolate_party_series_pchip
+from src.pipeline.interpolator import PARTIES, build_daily_regularized_polls, interpolate_party_series_pchip
 from src.pipeline.tensor_builder import load_and_merge_processed_features, build_inference_payload
 
 
@@ -32,8 +32,8 @@ def test_build_inference_payload_shapes():
         macro_scenario_deltas={"nbp_reference_rate": -0.50},
     )
 
-    # 5 targets
-    assert payload.targets_context.shape == (5, context_len)
+    # All tracked entities
+    assert payload.targets_context.shape == (len(PARTIES), context_len)
     # Past covariates have length == context_len
     assert payload.past_covariates.shape[1] == context_len
     # Dynamic covariates have length == context_len + horizon_len

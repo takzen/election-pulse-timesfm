@@ -186,10 +186,15 @@ class TimesFM3Engine:
 
         elasticity = {
             "KO": +0.60 * econ_shock,
-            "Trzecia_Droga": +0.20 * econ_shock,
+            "PSL": +0.12 * econ_shock,
+            "Polska_2050": +0.08 * econ_shock,
             "Lewica": +0.10 * econ_shock,
             "PiS": -0.50 * econ_shock,
             "Konfederacja": -0.40 * econ_shock,
+            "KKP": -0.15 * econ_shock,
+            "Rozwoj_Plus": -0.20 * econ_shock,
+            "Razem": +0.05 * econ_shock,
+            "Niezdecydowani": 0.0,
         }
 
         median = np.zeros((num_targets, horizon), dtype=np.float32)

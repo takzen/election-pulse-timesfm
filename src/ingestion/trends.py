@@ -19,7 +19,18 @@ logger = logging.getLogger(__name__)
 
 # Key political figures and entities
 POLITICAL_ENTITIES = {
-    "parties": ["Koalicja Obywatelska", "PiS", "Konfederacja", "Trzecia Droga", "Lewica"],
+    "parties": [
+        "Koalicja Obywatelska",
+        "PiS",
+        "Konfederacja",
+        "KKP Korona",
+        "Lewica",
+        "Rozwój Plus Morawiecki",
+        "Razem partia",
+        "PSL Polskie Stronnictwo Ludowe",
+        "Polska 2050 Hołownia",
+        "Niezdecydowani wybory",
+    ],
     "leaders_wiki": [
         "Donald_Tusk",
         "Jarosław_Kaczyński",
@@ -27,6 +38,9 @@ POLITICAL_ENTITIES = {
         "Szymon_Hołownia",
         "Włodzimierz_Czarzasty",
         "Mateusz_Morawiecki",
+        "Grzegorz_Braun",
+        "Adrian_Zandberg",
+        "Władysław_Kosiniak-Kamysz",
     ],
 }
 

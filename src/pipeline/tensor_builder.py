@@ -115,7 +115,7 @@ def build_inference_payload(
         for i in range(horizon_len)
     ]
 
-    # Target series (e.g. 5 parties)
+    # Target series (10 entities: 9 parties + Niezdecydowani)
     target_names = PARTIES
     # Shape: (num_targets, context_len)
     targets_matrix = np.array([df_context[p].values for p in target_names], dtype=np.float32)

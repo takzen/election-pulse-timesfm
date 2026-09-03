@@ -20,7 +20,8 @@ def test_pocketbook_scenario_simulation():
     assert sc.rate_delta == -0.50
     assert "KO" in sc.final_support
     assert "PiS" in sc.final_support
-    assert abs(sc.coalition_total + sc.opposition_total - 100.0) < 1.0
+    assert "Niezdecydowani" in sc.final_support
+    assert abs(sc.coalition_total + sc.opposition_total + sc.undecided_total - 100.0) < 1.0
 
 
 def test_inflection_detection():

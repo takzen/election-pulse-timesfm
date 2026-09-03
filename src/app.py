@@ -41,13 +41,16 @@ st.sidebar.markdown(f"**Architecture:** {meta['architecture']}")
 st.sidebar.markdown(f"**Cutoff Date:** `{meta['cutoff_date']}`")
 st.sidebar.markdown(f"**Forecast Horizon:** `{meta['target_date']}` ({meta['horizon_days']} dni)")
 
-cols = st.columns(5)
-for idx, (p_code, p_info) in enumerate(parties_meta.items()):
-    with cols[idx]:
-        diff = round(p_info["forecast"] - p_info["current"], 1)
-        st.metric(
-            label=p_info["name"].split()[0],
-            value=f"{p_info['forecast']:.1f}%",
+party_items = list(parties_meta.items())
+for row_start in range(0, len(party_items), 5):
+    row_items = party_items[row_start:row_start + 5]
+    cols = st.columns(len(row_items))
+    for idx, (p_code, p_info) in enumerate(row_items):
+        with cols[idx]:
+            diff = round(p_info["forecast"] - p_info["current"], 1)
+            st.metric(
+                label=p_info["name"].split()[0],
+                value=f"{p_info['forecast']:.1f}%",
             delta=f"{diff:+.1f} pp",
         )
         st.caption(f"Przedział p10–p90: {p_info['p10']:.1f}% – {p_info['p90']:.1f}%")
@@ -147,18 +150,21 @@ with tab2:
             break
 
     if matched:
-        sc_cols = st.columns(2)
+        sc_cols = st.columns(3)
         with sc_cols[0]:
             st.metric(
-                label="Koalicja Rządowa (KO + TD + Lewica)",
+                label="Koalicja Rządowa (KO + PSL + P2050 + Lewica)",
                 value=f"{matched['coalition_total']:.1f}%",
-                delta=f"{matched['coalition_total'] - 49.3:+.1f} pp",
             )
         with sc_cols[1]:
             st.metric(
-                label="Opozycja (PiS + Konfederacja)",
+                label="Opozycja (PiS + Konf + KKP + R+ + Razem)",
                 value=f"{matched['opposition_total']:.1f}%",
-                delta=f"{matched['opposition_total'] - 50.7:+.1f} pp",
+            )
+        with sc_cols[2]:
+            st.metric(
+                label="Niezdecydowani",
+                value=f"{matched.get('undecided_total', 0.0):.1f}%",
             )
 
         st.markdown("#### Wyniki poszczególnych partii w tym scenariuszu:")

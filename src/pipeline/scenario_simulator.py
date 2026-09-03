@@ -27,8 +27,9 @@ class ScenarioResult:
     end_date: str
     final_support: Dict[str, float]  # Party -> final median support %
     delta_from_baseline: Dict[str, float]  # Party -> diff from baseline in percentage points
-    coalition_total: float  # KO + TD + Lewica
-    opposition_total: float  # PiS + Konfederacja
+    coalition_total: float  # KO + PSL + Polska_2050 + Lewica
+    opposition_total: float  # PiS + Konfederacja + KKP + Rozwoj_Plus + Razem
+    undecided_total: float  # Niezdecydowani
 
 
 class PocketbookSimulator:
@@ -80,6 +81,8 @@ class PocketbookSimulator:
             2,
         )
 
+        undecided = round(final_support.get("Niezdecydowani", 0.0), 2)
+
         return ScenarioResult(
             scenario_name=scenario_name,
             cpi_delta=cpi_delta,
@@ -89,6 +92,7 @@ class PocketbookSimulator:
             delta_from_baseline=diff_from_base,
             coalition_total=coalition,
             opposition_total=opposition,
+            undecided_total=undecided,
         )
 
     def generate_scenario_grid(
@@ -111,6 +115,7 @@ class PocketbookSimulator:
                     "delta_from_baseline": sc.delta_from_baseline,
                     "coalition_total": sc.coalition_total,
                     "opposition_total": sc.opposition_total,
+                    "undecided_total": sc.undecided_total,
                 })
         return grid
 

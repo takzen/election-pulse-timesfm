@@ -115,6 +115,15 @@ def generate_dense_poll_series(
     return df
 
 
+def standardize_polls(df: pd.DataFrame) -> pd.DataFrame:
+    """Calculates normalized percentage shares across parties."""
+    df_res = df.copy()
+    raw_sums = df_res[PARTIES].sum(axis=1)
+    for p in PARTIES:
+        df_res[f"{p}_norm"] = (df_res[p] / raw_sums) * 100.0
+    return df_res
+
+
 def fetch_and_save_polls(output_path: str = "data/raw/polls.parquet") -> pd.DataFrame:
     """Standardizes polling series covering all 10 Polish electoral choices."""
     logger.info("Ingesting Polish election polling series (10 parties/entities)...")
