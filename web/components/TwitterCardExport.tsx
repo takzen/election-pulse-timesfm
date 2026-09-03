@@ -24,7 +24,7 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
   const [copied, setCopied] = useState(false);
   const [mode, setMode] = useState<"standard" | "compact">("standard");
 
-  const standardText = `🗳️ Najnowsza prognoza wyborcza AI na ${metadata.target_date} (ElectionPulse):
+  const standardText = `🗳️ Najnowsza prognoza AI na ${metadata.target_date} (PulsWyborczy.pl):
 
 KO: ${partiesMeta["KO"]?.forecast.toFixed(1)}%
 PiS: ${partiesMeta["PiS"]?.forecast.toFixed(1)}%
@@ -37,15 +37,16 @@ PSL: ${partiesMeta["PSL"]?.forecast.toFixed(1)}%
 Polska 2050: ${partiesMeta["Polska_2050"]?.forecast.toFixed(1)}%
 Niezdecydowani: ${partiesMeta["Niezdecydowani"]?.forecast.toFixed(1)}%
 
-Symuluj wpływ stóp NBP i inflacji w aplikacji:`;
+Silnik: Google TimesFM 3.0
+Interaktywny symulator gospodarczy i układ Sejmu:`;
 
-  const compactText = `📊 Sondaż AI (ElectionPulse):
+  const compactText = `📊 Sondaż AI (PulsWyborczy.pl):
 KO: ${partiesMeta["KO"]?.forecast.toFixed(1)}% | PiS: ${partiesMeta["PiS"]?.forecast.toFixed(1)}% | Konf: ${partiesMeta["Konfederacja"]?.forecast.toFixed(1)}% | KKP: ${partiesMeta["KKP"]?.forecast.toFixed(1)}% | Lewica: ${partiesMeta["Lewica"]?.forecast.toFixed(1)}% | R+: ${partiesMeta["Rozwoj_Plus"]?.forecast.toFixed(1)}% | Razem: ${partiesMeta["Razem"]?.forecast.toFixed(1)}% | PSL: ${partiesMeta["PSL"]?.forecast.toFixed(1)}%
 
-Sprawdź interaktywny symulator:`;
+Sprawdź symulator na żywo:`;
 
   const activeText = mode === "standard" ? standardText : compactText;
-  const webUrl = "https://election-pulse.vercel.app";
+  const webUrl = "https://pulswyborczy.pl";
   const twitterIntentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(activeText)}&url=${encodeURIComponent(webUrl)}`;
 
   const handleCopy = () => {
@@ -66,7 +67,7 @@ Sprawdź interaktywny symulator:`;
               <h2 className="text-xl font-bold text-white">Generator Posta na X</h2>
             </div>
             <p className="text-sm text-slate-400 mt-0.5">
-              Udostępnij aktualną prognozę wyborczą jednym kliknięciem
+              Udostępnij aktualną prognozę z PulsWyborczy.pl jednym kliknięciem
             </p>
           </div>
         </div>

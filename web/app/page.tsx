@@ -6,7 +6,7 @@ import { FanChart } from "@/components/FanChart";
 import { PocketbookSimulator } from "@/components/PocketbookSimulator";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
-import { Activity, Calendar, Award, ExternalLink } from "lucide-react";
+import { Activity, Calendar, Award, ExternalLink, Cpu } from "lucide-react";
 
 export default function Home() {
   const { metadata, parties_meta, history, forecast_chart, scenarios_grid, baselines_comparison, inflections } = forecastsData;
@@ -40,15 +40,23 @@ export default function Home() {
         <header className="w-full border-b border-slate-800/80 pb-5 sm:pb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-md border border-slate-700 bg-slate-800/70 px-3 py-1 text-xs sm:text-sm font-semibold text-slate-200">
-                Zaawansowany Model Predykcyjny • Analiza Wielowymiarowa
+              {/* Prominent Model Info Badge at Top */}
+              <div className="inline-flex items-center gap-2 rounded-lg border border-slate-700/80 bg-slate-800/80 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-200">
+                <Cpu className="h-4 w-4 text-emerald-400" />
+                <span>Model analityczny AI: <strong>Google TimesFM 3.0</strong> (Multivariate Foundation Model, 330M)</span>
               </div>
 
-              <h1 className="mt-2.5 text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-                ElectionPulse
-              </h1>
+              <div className="mt-2.5 flex flex-wrap items-baseline gap-3">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+                  Puls Wyborczy
+                </h1>
+                <span className="rounded-md border border-slate-700 bg-slate-800 px-2.5 py-0.5 text-xs sm:text-sm font-mono font-semibold text-slate-300">
+                  pulswyborczy.pl
+                </span>
+              </div>
+
               <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-4xl leading-relaxed">
-                Niezależny model probabilistyczny prognozujący poparcie 9 partii i niezdecydowanych. Analizuje równolegle sondaże (IBRiS, United Surveys, CBOS), trendy wyszukiwań, inflację CPI i stopy referencyjne NBP.
+                Niezależny model probabilistyczny prognozujący poparcie 9 partii i grupy niezdecydowanych. Silnik <strong>Google TimesFM 3.0</strong> analizuje równolegle sondaże (IBRiS, United Surveys, CBOS), trendy wyszukiwań w sieci, inflację CPI i decyzje RPP o stopach referencyjnych NBP.
               </p>
             </div>
 
@@ -124,7 +132,7 @@ export default function Home() {
                       <Award className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Arena Modeli: Predykcja AI vs Metody Klasyczne</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-white">Arena Modeli: TimesFM 3.0 vs Metody Klasyczne</h3>
                       <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
                         Zestawienie predykcji końcowych dla horyzontu 30 dni
                       </p>
@@ -136,7 +144,7 @@ export default function Home() {
                       <thead className="border-b border-slate-800 text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-wider">
                         <tr>
                           <th className="py-2.5 px-2">Partia</th>
-                          <th className="py-2.5 px-2 text-white">Model AI</th>
+                          <th className="py-2.5 px-2 text-white">TimesFM 3.0</th>
                           <th className="py-2.5 px-2">LightGBM</th>
                           <th className="py-2.5 px-2">ARIMA</th>
                           <th className="py-2.5 px-2">EWMA</th>
@@ -211,7 +219,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="w-full mt-12 border-t border-slate-800/80 pt-8 pb-12 text-center text-xs sm:text-sm text-slate-400 space-y-2">
           <p>
-            Projekt stworzony przez{" "}
+            <strong>PulsWyborczy.pl</strong> • Projekt stworzony przez{" "}
             <a
               href="https://takzendev.pl/"
               target="_blank"
@@ -219,7 +227,8 @@ export default function Home() {
               className="font-semibold text-slate-200 hover:text-white underline underline-offset-4 inline-flex items-center gap-1"
             >
               TAKZEN DEV <ExternalLink className="h-3.5 w-3.5" />
-            </a>
+            </a>{" "}
+            • Silnik AI: <strong>Google TimesFM 3.0</strong> (PyTorch CUDA)
           </p>
           <p className="text-xs text-slate-400">
             Źródła: IBRiS, United Surveys, CBOS, Opinia24, Pollster | Wskaźniki: Google Trends, Wikimedia REST, NBP, GUS
