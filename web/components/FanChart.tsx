@@ -40,23 +40,23 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
   ];
 
   return (
-    <div className="rounded-xl border border-slate-800/90 bg-[#0d121f] p-5 shadow-sm">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3.5">
+    <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-6 shadow-md">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
-          <h2 className="text-lg font-bold text-white">Trajektoria Poparcia i Prognoza AI</h2>
-          <p className="text-xs text-slate-400">
-            Historia sondażowa oraz projekcja modelu Google TimesFM 3.0 (od {cutoffDate})
+          <h2 className="text-xl sm:text-2xl font-bold text-white">Trajektoria Poparcia i Prognoza AI</h2>
+          <p className="text-sm sm:text-base text-slate-300 mt-1">
+            Historia sondażowa oraz projekcja modelu (od {cutoffDate})
           </p>
         </div>
 
-        {/* Party filter pills */}
-        <div className="flex flex-wrap items-center gap-1">
+        {/* Party filter pills with large, readable fonts */}
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setActiveParty(null)}
-            className={`rounded px-2 py-0.5 text-xs font-medium transition ${
+            className={`rounded-lg px-3.5 py-1.5 text-sm font-bold transition ${
               activeParty === null
-                ? "bg-slate-700 text-white"
-                : "bg-slate-800/60 text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                ? "bg-slate-700 text-white shadow"
+                : "bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white"
             }`}
           >
             Wszystkie
@@ -65,35 +65,35 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
             <button
               key={code}
               onClick={() => setActiveParty(activeParty === code ? null : code)}
-              className={`flex items-center gap-1.5 rounded px-2 py-0.5 text-xs font-medium transition ${
+              className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-semibold transition ${
                 activeParty === code
-                  ? "bg-slate-700 text-white"
-                  : "bg-slate-800/60 text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                  ? "bg-slate-700 text-white shadow"
+                  : "bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white"
               }`}
             >
               <span
-                className="h-2 w-2 rounded-full"
+                className="h-3 w-3 rounded-full flex-shrink-0"
                 style={{ backgroundColor: meta.color }}
               />
-              {code.replace("_", " ")}
+              <span>{code.replace("_", " ")}</span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="mt-4 h-[420px] w-full">
+      <div className="mt-6 h-[520px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 10, right: 15, left: -15, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="2 2" stroke="#1e293b" opacity={0.4} />
+          <LineChart data={chartData} margin={{ top: 15, right: 25, left: -5, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" opacity={0.5} />
             <XAxis
               dataKey="date"
-              stroke="#64748b"
-              fontSize={11}
+              stroke="#94a3b8"
+              fontSize={14}
               tickFormatter={(v: string) => v.slice(5)} // MM-DD
             />
             <YAxis
-              stroke="#64748b"
-              fontSize={11}
+              stroke="#94a3b8"
+              fontSize={14}
               domain={[0, 36]}
               tickFormatter={(v: number) => `${v}%`}
             />
@@ -101,28 +101,31 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
               contentStyle={{
                 backgroundColor: "#0f172a",
                 borderColor: "#334155",
-                borderRadius: "0.5rem",
-                fontSize: "11px",
+                borderRadius: "0.75rem",
+                fontSize: "14px",
                 color: "#f8fafc",
+                padding: "12px 16px",
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.5)",
               }}
               formatter={(value: any, name: any) => [
                 `${Number(value).toFixed(1)}%`,
                 name.replace("_", " "),
               ]}
-              labelFormatter={(label) => `Data: ${label}`}
+              labelFormatter={(label) => `Data pomiaru: ${label}`}
             />
             <Legend
-              wrapperStyle={{ paddingTop: 14 }}
-              formatter={(val) => <span className="text-xs text-slate-300">{val.replace("_", " ")}</span>}
+              wrapperStyle={{ paddingTop: 20 }}
+              formatter={(val) => <span className="text-sm font-semibold text-slate-200">{val.replace("_", " ")}</span>}
             />
             <ReferenceLine
               x={cutoffDate}
-              stroke="#94a3b8"
-              strokeDasharray="3 3"
+              stroke="#cbd5e1"
+              strokeDasharray="4 4"
               label={{
-                value: "Start AI",
-                fill: "#94a3b8",
-                fontSize: 10,
+                value: "Start AI (Dziś)",
+                fill: "#cbd5e1",
+                fontSize: 13,
+                fontWeight: "bold",
                 position: "insideTopLeft",
               }}
             />
@@ -136,9 +139,9 @@ export function FanChart({ history, forecast, partiesMeta, cutoffDate }: FanChar
                   dataKey={code}
                   name={code}
                   stroke={meta.color}
-                  strokeWidth={activeParty === code ? 3 : 1.8}
+                  strokeWidth={activeParty === code ? 4 : 2.5}
                   dot={false}
-                  activeDot={{ r: 4 }}
+                  activeDot={{ r: 6 }}
                 />
               );
             })}

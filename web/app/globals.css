@@ -6,6 +6,23 @@
   color-scheme: dark;
 }
 
+/* Fluid responsive base scale so everything is perfectly readable without manual zooming */
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 *, *::before, *::after {
   user-select: none;
   -webkit-user-select: none;
@@ -20,6 +37,7 @@ body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+  line-height: 1.5;
 }
 
 /* Explicitly allow selection in input fields and copy preview */
