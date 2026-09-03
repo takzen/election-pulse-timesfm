@@ -1,10 +1,10 @@
 # 🗳️ Puls Wyborczy (pulswyborczy.pl)
 
-> **Zero-shot probabilistic election forecasting and economic scenario simulator powered by Google TimesFM 3.0**
+> **Zero-shot probabilistic election forecasting powered by Google TimesFM 3.0**
 
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 [![TimesFM 3.0](https://img.shields.io/badge/Model-TimesFM%203.0%20(330M)-emerald.svg)](https://huggingface.co/google/timesfm-3.0-pytorch)
-[![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
 [![pnpm 10](https://img.shields.io/badge/pnpm-10.x-orange.svg)](https://pnpm.io/)
 [![uv](https://img.shields.io/badge/package%20manager-uv-purple.svg)](https://astral.sh/uv)
 [![CUDA 12.6](https://img.shields.io/badge/CUDA-12.6-green.svg)](https://developer.nvidia.com/cuda-toolkit)
@@ -24,10 +24,10 @@
 | **Python runtime** | **Python 3.13 + uv 0.6+** | Ultra-fast Rust-based package resolver and virtual environment manager |
 | **Data engine & storage** | **Polars 1.44, Pandas, PyArrow** | Columnar Parquet serialization, zero-copy data pipelines |
 | **Interpolation & splines** | **SciPy (PCHIP)** | Monotonic cubic spline regularization preventing overshoot on irregular polling series |
-| **Web frontend** | **Next.js 15 (App Router) + React 19** | Pre-rendered static dashboard with sub-100ms global latency on Vercel |
+| **Web frontend** | **Next.js 16 (Turbopack) + React 19** | Pre-rendered static dashboard with sub-100ms global latency on Vercel |
 | **Package manager (web)** | **pnpm 10.26+** | Fast, disk-efficient, symlinked dependency manager |
-| **Design & styling** | **Tailwind CSS + Lucide React** | Calm data-analyst palette (charcoal matte dark theme), large readable typography at 100% zoom |
-| **Interactive charts** | **Recharts** | Client-side fan charts with calibrated 10%–90% uncertainty intervals |
+| **Design & styling** | **Tailwind CSS v4 + Lucide React** | Calm data-analyst palette (charcoal matte dark theme), large readable typography at 100% zoom |
+| **Interactive charts** | **Recharts 3** | Client-side fan charts with calibrated 10%–90% uncertainty intervals |
 
 ---
 
