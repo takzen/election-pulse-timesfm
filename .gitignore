@@ -37,6 +37,7 @@ node_modules/
 web/node_modules/
 web/.next/
 web/out/
+*.tsbuildinfo
 
 # OS specific
 Thumbs.db
