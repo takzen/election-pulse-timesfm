@@ -4,9 +4,30 @@
 
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 [![TimesFM 3.0](https://img.shields.io/badge/Model-TimesFM%203.0%20(330M)-orange.svg)](https://huggingface.co/google/timesfm-3.0-pytorch)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
+[![pnpm 10](https://img.shields.io/badge/pnpm-10.x-orange.svg)](https://pnpm.io/)
+[![uv](https://img.shields.io/badge/package%20manager-uv-purple.svg)](https://astral.sh/uv)
+[![CUDA 12.6](https://img.shields.io/badge/CUDA-12.6-green.svg)](https://developer.nvidia.com/cuda-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **ElectionPulse-TimesFM** is an open-source, non-partisan platform for probabilistic electoral forecasting and economic scenario simulation. By leveraging Google's **TimesFM 3.0** foundation model, it unifies irregular polling registers with high-frequency exogenous signals (Google Trends, Wikipedia traffic, macroeconomics, inflation, and interest rates) via native multivariate attention to forecast electoral trajectories and inflection points without task-specific retraining.
+
+---
+
+## 🛠️ Modern Tech Stack
+
+| Domain | Technology & Version | Role & Architecture |
+| :--- | :--- | :--- |
+| **Foundation Model** | **Google TimesFM 3.0 (330M)** | State-of-the-art multivariate foundation model (released Aug 31, 2026) with Stacked Mixing Transformer (temporal + variate attention) |
+| **Deep Learning & CUDA** | **PyTorch 2.14 + cu126** | Sub-100ms hardware-accelerated tensor operations on NVIDIA RTX 4060 GPU |
+| **Python Environment** | **Python 3.13.2 + uv 0.6+** | Ultra-fast Rust-based dependency resolver and virtual environment manager |
+| **Data Engine & Storage** | **Polars 1.44, Pandas 3.0, PyArrow 25** | Columnar Parquet serialization, zero-copy data pipelines, and fast filtering |
+| **Interpolation & Splines** | **SciPy (PCHIP)** | Monotonic cubic spline regularization preventing overshoot on irregular polling series |
+| **Web Frontend (Vercel)** | **Next.js 15 (App Router) + React 19** | Sub-100ms global CDN pre-rendered dashboard with zero serverless cold-start lag |
+| **Package Manager (Web)** | **pnpm 10.26+** | Fast, disk-efficient, symlinked dependency manager |
+| **Styling & Icons** | **Tailwind CSS + Lucide React** | Dark-mode UI with dynamic glassmorphism and mobile-first design |
+| **Interactive Charts** | **Recharts + Plotly** | High-performance client-side fan charts with 10%–90% uncertainty bands |
+| **External Live APIs** | **Wikimedia REST, pytrends, NBP, GUS** | Automated multi-signal ingestion covering media, search, and economic health |
 
 ---
 
@@ -100,8 +121,8 @@ python -m src.pipeline.export_web_data
 ### 4. Run Modern Next.js Web App (Recommended for Vercel)
 ```bash
 cd web
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 # Open http://localhost:3000
 ```
 
