@@ -24,29 +24,36 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
   const [copied, setCopied] = useState(false);
   const [mode, setMode] = useState<"standard" | "compact">("standard");
 
-  const standardText = `🗳️ Prognoza wyborcza AI na koniec września 2026 (+30 dni, PulsWyborczy.pl):
+  const p = (key: string) => (partiesMeta[key]?.forecast ?? 0).toFixed(1);
 
-KO: ${(partiesMeta["KO"]?.forecast ?? 0).toFixed(1)}%
-PiS: ${(partiesMeta["PiS"]?.forecast ?? 0).toFixed(1)}%
-Konfederacja: ${(partiesMeta["Konfederacja"]?.forecast ?? 0).toFixed(1)}%
-Korona: ${(partiesMeta["KKP"]?.forecast ?? 0).toFixed(1)}%
-Lewica: ${(partiesMeta["Lewica"]?.forecast ?? 0).toFixed(1)}%
-Rozwój Plus: ${(partiesMeta["Rozwoj_Plus"]?.forecast ?? 0).toFixed(1)}%
-Razem: ${(partiesMeta["Razem"]?.forecast ?? 0).toFixed(1)}%
-PSL: ${(partiesMeta["PSL"]?.forecast ?? 0).toFixed(1)}%
-Polska 2050: ${(partiesMeta["Polska_2050"]?.forecast ?? 0).toFixed(1)}%
-Niezdecydowani: ${(partiesMeta["Niezdecydowani"]?.forecast ?? 0).toFixed(1)}%
+  // Standard format (compact 2-column list) - guaranteed < 280 characters with URL
+  const standardText = `🗳️ Prognoza AI na wrzesień 2026 (PulsWyborczy.pl):
 
-Silnik AI: Google TimesFM 3.0 (baza sondaży: ${metadata.cutoff_date})
-Wykresy prawdopodobieństwa i szacunek mandatów Sejmu:`;
+KO ${p("KO")}% | PiS ${p("PiS")}%
+Konf. ${p("Konfederacja")}% | Korona ${p("KKP")}%
+Lewica ${p("Lewica")}% | Rozwój+ ${p("Rozwoj_Plus")}%
+PSL ${p("PSL")}% | Razem ${p("Razem")}%
+PL2050 ${p("Polska_2050")}% | Niezdec. ${p("Niezdecydowani")}%
 
-  const compactText = `📊 Sondaż AI (PulsWyborczy.pl):
-KO: ${partiesMeta["KO"]?.forecast.toFixed(1)}% | PiS: ${partiesMeta["PiS"]?.forecast.toFixed(1)}% | Konf: ${partiesMeta["Konfederacja"]?.forecast.toFixed(1)}% | KKP: ${partiesMeta["KKP"]?.forecast.toFixed(1)}% | Lewica: ${partiesMeta["Lewica"]?.forecast.toFixed(1)}% | R+: ${partiesMeta["Rozwoj_Plus"]?.forecast.toFixed(1)}% | Razem: ${partiesMeta["Razem"]?.forecast.toFixed(1)}% | PSL: ${partiesMeta["PSL"]?.forecast.toFixed(1)}%
+Wykresy i mandaty Sejmu:`;
 
-Sprawdź symulator na żywo:`;
+  // Compact format (top 5 + rest) - extra short
+  const compactText = `📊 Sondaż AI TimesFM 3.0 (PulsWyborczy.pl):
+KO ${p("KO")}% | PiS ${p("PiS")}% | Konf ${p("Konfederacja")}% | Korona ${p("KKP")}% | Lewica ${p("Lewica")}%
+Pozostałe + Niezdecydowani: ${(
+    (partiesMeta["Rozwoj_Plus"]?.forecast ?? 0) +
+    (partiesMeta["Razem"]?.forecast ?? 0) +
+    (partiesMeta["PSL"]?.forecast ?? 0) +
+    (partiesMeta["Polska_2050"]?.forecast ?? 0) +
+    (partiesMeta["Niezdecydowani"]?.forecast ?? 0)
+  ).toFixed(1)}%
+
+Pełna prognoza i układ Sejmu:`;
 
   const activeText = mode === "standard" ? standardText : compactText;
   const webUrl = "https://pulswyborczy.pl";
+  // Twitter counts any URL as 23 characters
+  const estimatedTweetLength = activeText.length + 1 + 23;
   const twitterIntentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(activeText)}&url=${encodeURIComponent(webUrl)}`;
 
   const handleCopy = () => {
@@ -116,9 +123,18 @@ Sprawdź symulator na żywo:`;
 
       {/* Visual Post Preview Box */}
       <div className="mt-5 space-y-2.5">
-        <div className="text-xs sm:text-sm font-semibold text-slate-400 flex items-center gap-1.5">
-          <Sparkles className="h-4 w-4 text-slate-300" />
-          <span>Podgląd treści do publikacji:</span>
+        <div className="text-xs sm:text-sm font-semibold text-slate-400 flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <Sparkles className="h-4 w-4 text-slate-300" />
+            <span>Podgląd treści do publikacji:</span>
+          </div>
+          <span className={`font-mono text-xs px-2 py-0.5 rounded border ${
+            estimatedTweetLength <= 280
+              ? "bg-emerald-950/60 text-emerald-400 border-emerald-800/60"
+              : "bg-rose-950/60 text-rose-400 border-rose-800/60"
+          }`}>
+            {estimatedTweetLength} / 280 znaków
+          </span>
         </div>
 
         <div className="rounded-xl border border-slate-800 bg-[#070b14] p-5 font-mono text-sm text-slate-200 whitespace-pre-wrap leading-relaxed shadow-inner">
