@@ -8,6 +8,7 @@
 [![pnpm 10](https://img.shields.io/badge/pnpm-10.x-orange.svg)](https://pnpm.io/)
 [![uv](https://img.shields.io/badge/package%20manager-uv-purple.svg)](https://astral.sh/uv)
 [![CUDA 12.6](https://img.shields.io/badge/CUDA-12.6-green.svg)](https://developer.nvidia.com/cuda-toolkit)
+[![Release](https://img.shields.io/github/v/release/takzen/election-pulse-timesfm?color=purple)](https://github.com/takzen/election-pulse-timesfm/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Puls Wyborczy** ([pulswyborczy.pl](https://pulswyborczy.pl)) is an independent, non-partisan research and analytics platform engineered by [TAKZEN DEV](https://takzendev.pl/). It unifies irregular polling registers across Poland with high-frequency exogenous signals (Google Trends search velocity, Wikipedia biographical traffic, CPI inflation, and NBP policy interest rates) using Google Research's foundation time-series model **TimesFM 3.0 (330M)**.
