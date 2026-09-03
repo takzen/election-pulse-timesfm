@@ -8,7 +8,7 @@ import { FanChart } from "@/components/FanChart";
 import { PocketbookSimulator } from "@/components/PocketbookSimulator";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
-import { Activity, Calendar, Award, ExternalLink, Cpu } from "lucide-react";
+import { Activity, Calendar, Award, ExternalLink } from "lucide-react";
 
 export default function Home() {
   const { metadata, parties_meta, history, forecast_chart, scenarios_grid, baselines_comparison, inflections } = forecastsData;
@@ -42,14 +42,8 @@ export default function Home() {
         <header className="w-full border-b border-slate-800/80 pb-5 sm:pb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              {/* Prominent Model Info Badge at Top */}
-              <div className="inline-flex items-center gap-2 rounded-lg border border-slate-700/80 bg-slate-800/80 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-200">
-                <Cpu className="h-4 w-4 text-emerald-400" />
-                <span>Model analityczny AI: <strong>Google TimesFM 3.0</strong> (Multivariate Foundation Model, 330M)</span>
-              </div>
-
               {/* Official Brand Logo */}
-              <div className="mt-3">
+              <div>
                 <Logo size="lg" />
               </div>
 
