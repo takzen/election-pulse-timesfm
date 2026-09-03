@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: ["/polityka-prywatnosci"],
       },
     ],
     sitemap: "https://pulswyborczy.pl/sitemap.xml",

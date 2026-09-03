@@ -121,7 +121,7 @@ Aplikacja w katalogu `web/` jest skonfigurowana do natychmiastowego wdrożenia:
 Projekt stworzony przez **[TAKZEN DEV](https://takzendev.pl/)**.  
 Tworzymy dedykowane systemy sztucznej inteligencji, architekturę modeli prognozowania i nowoczesne aplikacje webowe.
 
-Kontakt w sprawie reklamy lub współpracy: **contact@takzendev.pl**
+Kontakt w sprawie reklamy lub współpracy: **takzen.app@gmail.com**
 
 ---
 

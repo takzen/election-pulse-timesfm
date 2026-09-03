@@ -72,7 +72,7 @@ export function AdSidebar() {
         </div>
 
         <a
-          href="mailto:contact@takzendev.pl?subject=Reklama%20PulsWyborczy.pl"
+          href="mailto:takzen.app@gmail.com?subject=Reklama%20PulsWyborczy.pl"
           className="mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-800 transition"
         >
           <span>Zarezerwuj ten slot</span>

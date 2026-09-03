@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import forecastsData from "../public/data/forecasts.json";
 import { Logo } from "@/components/Logo";
 import { PartyCard } from "@/components/PartyCard";
@@ -233,6 +234,14 @@ export default function Home() {
           <p className="text-xs text-slate-400">
             Źródła: IBRiS, United Surveys, CBOS, Opinia24, Pollster | Wskaźniki: Google Trends, Wikimedia REST, NBP, GUS
           </p>
+          <div className="pt-2">
+            <Link
+              href="/polityka-prywatnosci"
+              className="text-xs text-slate-400 hover:text-slate-200 underline underline-offset-4 transition"
+            >
+              Polityka prywatności & Nota prawna
+            </Link>
+          </div>
         </footer>
       </main>
     </div>
