@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, Landmark } from "lucide-react";
 
 interface PartyMeta {
   name: string;
@@ -16,9 +16,21 @@ interface PartyMeta {
 interface PartyCardProps {
   partyKey: string;
   meta: PartyMeta;
+  seats?: number;
+  isAboveThreshold?: boolean;
 }
 
-export function PartyCard({ partyKey, meta }: PartyCardProps) {
+function formatMandates(seats: number): string {
+  if (seats === 1) return "1 mandat";
+  const mod10 = seats % 10;
+  const mod100 = seats % 100;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) {
+    return `${seats} mandaty`;
+  }
+  return `${seats} mandatów`;
+}
+
+export function PartyCard({ partyKey, meta, seats = 0, isAboveThreshold = false }: PartyCardProps) {
   const delta = Math.round((meta.forecast - meta.current) * 10) / 10;
   const isPositive = delta > 0.1;
   const isNegative = delta < -0.1;
@@ -107,6 +119,29 @@ export function PartyCard({ partyKey, meta }: PartyCardProps) {
           <span className="font-mono font-bold text-slate-200">
             {meta.p10.toFixed(1)}% – {meta.p90.toFixed(1)}%
           </span>
+        </div>
+
+        {/* Parliamentary Seats (Mandaty w Sejmie) */}
+        <div className="mt-3.5 pt-3 border-t border-slate-800/60 flex items-center justify-between">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <Landmark className="h-3.5 w-3.5 text-amber-400" />
+            Mandaty Sejmu:
+          </span>
+
+          {partyKey === "Niezdecydowani" ? (
+            <span className="text-xs text-slate-400 italic">
+              Poza podziałem
+            </span>
+          ) : isAboveThreshold && seats > 0 ? (
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-amber-950/40 border border-amber-500/40 px-2.5 py-1 text-xs sm:text-sm font-black text-amber-300 font-mono shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+              {formatMandates(seats)}
+            </span>
+          ) : (
+            <span className="inline-flex items-center rounded-md bg-slate-800/80 border border-slate-700/60 px-2 py-0.5 text-xs font-medium text-slate-400">
+              0 m. (pod progiem 5%)
+            </span>
+          )}
         </div>
       </div>
     </div>

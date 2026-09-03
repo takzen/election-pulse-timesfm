@@ -5,13 +5,26 @@ import React from "react";
 interface MajorityBarProps {
   coalitionTotal: number;
   oppositionTotal: number;
+  coalitionSeats?: number;
+  oppositionSeats?: number;
 }
 
-export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProps) {
+export function MajorityBar({
+  coalitionTotal,
+  oppositionTotal,
+  coalitionSeats: propCoalitionSeats,
+  oppositionSeats: propOppositionSeats,
+}: MajorityBarProps) {
   // Polish Sejm majority calculation: 460 total seats, 231 needed to govern
   const totalVotes = coalitionTotal + oppositionTotal;
-  const coalitionSeats = totalVotes > 0 ? Math.round((coalitionTotal / totalVotes) * 460) : 230;
-  const oppositionSeats = 460 - coalitionSeats;
+  const coalitionSeats =
+    propCoalitionSeats !== undefined
+      ? propCoalitionSeats
+      : totalVotes > 0
+      ? Math.round((coalitionTotal / totalVotes) * 460)
+      : 230;
+  const oppositionSeats =
+    propOppositionSeats !== undefined ? propOppositionSeats : 460 - coalitionSeats;
   const hasMajority = coalitionSeats >= 231;
 
   return (
@@ -19,7 +32,7 @@ export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProp
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-slate-800 pb-4">
         <div>
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-            Układ sił w Sejmie RP (szacunek mandatów D&apos;Hondt)
+            Układ sił w Sejmie RP (szacunek mandatów D&apos;Hondt – model ogólnokrajowy)
           </span>
           <h3 className="mt-1 text-lg sm:text-2xl font-black text-white flex flex-wrap items-center gap-2 sm:gap-3">
             <span>Pojedynek bloków</span>
@@ -82,6 +95,10 @@ export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProp
         <span>Koalicja: KO, PSL, Polska 2050, Nowa Lewica</span>
         <span className="font-mono text-slate-300 font-semibold">Większość bezwzględna: 231 / 460</span>
         <span>Opozycja: PiS, Konfederacja, Korona, Rozwój Plus, Razem</span>
+      </div>
+
+      <div className="mt-2 text-[11px] text-slate-400 border-t border-slate-800/40 pt-2">
+        * W Polsce mandaty dzieli się metodą D&apos;Hondta osobno w 41 okręgach wyborczych. Powyższy rozkład to model przybliżony na podstawie poparcia ogólnokrajowego (próg 5%).
       </div>
     </div>
   );

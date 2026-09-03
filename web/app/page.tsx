@@ -8,9 +8,13 @@ import { FanChart } from "@/components/FanChart";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
 import { Activity, Calendar, ExternalLink } from "lucide-react";
+import { calculateDhondtSeats } from "@/lib/dhondt";
 
 export default function Home() {
   const { metadata, parties_meta, history, forecast_chart } = forecastsData;
+
+  // Parliamentary seat distribution (D'Hondt method, 5% statutory threshold)
+  const parliament = calculateDhondtSeats(parties_meta as any);
 
   // Governing coalition: KO + PSL + Polska 2050 + Nowa Lewica
   const coalitionTotal = roundOne(
@@ -70,6 +74,8 @@ export default function Home() {
           <MajorityBar
             coalitionTotal={coalitionTotal}
             oppositionTotal={oppositionTotal}
+            coalitionSeats={parliament.coalitionSeats}
+            oppositionSeats={parliament.oppositionSeats}
           />
         </section>
 
@@ -80,13 +86,19 @@ export default function Home() {
               Prognoza AI na 30 dni w przód (horyzont do {metadata.target_date})
             </h2>
             <p className="text-xs sm:text-sm text-slate-400">
-              Punkt wyjściowy: sondaże z {metadata.cutoff_date} • 9 partii + niezdecydowani
+              Punkt wyjściowy: sondaże z {metadata.cutoff_date} • 9 partii + niezdecydowani • Symulacja mandatów D&apos;Hondta (próg 5%, model przybliżony w skali kraju)
             </p>
           </div>
 
           <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4">
             {Object.entries(parties_meta).map(([key, meta]) => (
-              <PartyCard key={key} partyKey={key} meta={meta as any} />
+              <PartyCard
+                key={key}
+                partyKey={key}
+                meta={meta as any}
+                seats={parliament.seatsByParty[key]}
+                isAboveThreshold={parliament.isAboveThreshold[key]}
+              />
             ))}
           </div>
         </section>
