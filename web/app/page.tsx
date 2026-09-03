@@ -5,13 +5,12 @@ import { Logo } from "@/components/Logo";
 import { PartyCard } from "@/components/PartyCard";
 import { MajorityBar } from "@/components/MajorityBar";
 import { FanChart } from "@/components/FanChart";
-import { PocketbookSimulator } from "@/components/PocketbookSimulator";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
 import { Activity, Calendar, Award, ExternalLink } from "lucide-react";
 
 export default function Home() {
-  const { metadata, parties_meta, history, forecast_chart, scenarios_grid, baselines_comparison, inflections } = forecastsData;
+  const { metadata, parties_meta, history, forecast_chart, baselines_comparison, inflections } = forecastsData;
 
   // Governing coalition: KO + PSL + Polska 2050 + Nowa Lewica
   const coalitionTotal = roundOne(
@@ -103,14 +102,6 @@ export default function Home() {
                 forecast={forecast_chart}
                 partiesMeta={parties_meta as any}
                 cutoffDate={metadata.cutoff_date}
-              />
-            </section>
-
-            {/* Pocketbook Voting Simulator */}
-            <section className="w-full">
-              <PocketbookSimulator
-                scenarios={scenarios_grid as any}
-                partiesMeta={parties_meta as any}
               />
             </section>
 
