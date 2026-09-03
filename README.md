@@ -50,18 +50,17 @@ The platform models the complete spectrum of options present in official Polish 
 
 ## ✨ Key features
 
-- **🧭 Multivariate foundation forecasting:** TimesFM 3.0 jointly attends to polling trends alongside macroeconomic signals in a single forward pass without task-specific fine-tuning.
-- **🏛️ Parliamentary majority tracker (threshold 231):** D'Hondt seat allocation estimator comparing governing coalition vs. parliamentary opposition.
-- **🍞 Pocketbook voting simulator:** Interactive what-if engine: *How does a 100 bps central bank rate cut or a sudden CPI inflation spike redistribute vote shares?*
-- **📊 Probabilistic fan charts:** Calibrated confidence bands ranging from p10 to p90.
-- **⚡ Political shockwave detector:** Automated detection of inflection points correlated with debate spikes and news events.
-- **🐦 1-Click share on X:** Generates verified polling summaries linked to pulswyborczy.pl.
+- **🧭 Multivariate foundation forecasting:** TimesFM 3.0 jointly attends to polling trajectories alongside macroeconomic signals in a single forward pass without task-specific fine-tuning.
+- **🏛️ Parliamentary majority tracker (threshold 231):** Seat allocation estimator comparing governing coalition vs. parliamentary opposition.
+- **📊 Probabilistic fan charts:** Calibrated confidence bands ranging from p10 to p90 (Recharts 3).
+- **📱 Responsive & tablet-optimized:** Charcoal matte dark theme with fluid typography, frameless animated pulse emblem, and clean UI without clutter.
+- **🐦 1-Click share on X:** Generates formatted polling summaries strictly verified under the 280-character limit with live counter.
 
 ---
 
-## ⚖️ Benchmark arena (14-day rolling backtesting)
+## ⚖️ Benchmark evaluation (14-day rolling backtesting)
 
-Evaluated across historical rolling windows prior to Polish parliamentary and presidential elections:
+Evaluated via `python -m src.evaluation.backtest` across historical rolling windows prior to Polish parliamentary and presidential elections:
 
 | Model | MAE (pp) | RMSE (pp) | Bias (pp) | Architecture description |
 | :--- | :---: | :---: | :---: | :--- |
@@ -96,7 +95,7 @@ python -m src.pipeline.interpolator
 python -m src.pipeline.export_web_data
 ```
 
-### 2. Next.js 15 web application
+### 2. Next.js 16 web application
 ```bash
 cd web
 pnpm install
