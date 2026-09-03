@@ -6,11 +6,31 @@
   color-scheme: dark;
 }
 
+*, *::before, *::after {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 body {
   background-color: #090d16;
   color: #f3f4f6;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Explicitly allow selection in input fields and copy preview */
+input, textarea, code, pre, .select-text {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  cursor: text;
+}
+
+button, a, [role="button"] {
+  cursor: pointer;
 }
 
 /* Custom scrollbar */

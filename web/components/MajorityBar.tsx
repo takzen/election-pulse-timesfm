@@ -15,7 +15,7 @@ export function MajorityBar({ coalitionTotal, oppositionTotal }: MajorityBarProp
   const hasMajority = coalitionSeats >= 231;
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-6 shadow-md">
+    <div className="select-none cursor-default rounded-2xl border border-slate-800 bg-[#0e1424] p-6 shadow-md">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-slate-800 pb-4">
         <div>
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">

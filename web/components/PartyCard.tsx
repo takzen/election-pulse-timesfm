@@ -28,7 +28,7 @@ export function PartyCard({ partyKey, meta }: PartyCardProps) {
   const pctWidth = Math.min(100, Math.max(5, (meta.forecast / 35) * 100));
 
   return (
-    <div className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-[#0e1424] p-6 shadow-md transition hover:border-slate-700 hover:bg-[#121b30]">
+    <div className="flex flex-col justify-between select-none cursor-default rounded-2xl border border-slate-800 bg-[#0e1424] p-6 shadow-md transition hover:border-slate-700 hover:bg-[#121b30]">
       {/* Top row: Name, Leader, and Momentum Pill */}
       <div>
         <div className="flex items-start justify-between gap-3">
