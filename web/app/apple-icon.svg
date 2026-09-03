@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="bgGradApple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1424"/>
+      <stop offset="100%" stop-color="#070a14"/>
+    </linearGradient>
+    <linearGradient id="pulseGradApple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="65%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="180" height="180" rx="40" fill="url(#bgGradApple)" stroke="#334155" stroke-width="5"/>
+  <rect x="50" y="38" width="80" height="10" rx="5" fill="#64748b"/>
+  <path d="M 22 104 L 54 104 L 68 62 L 88 136 L 105 80 L 118 114 L 130 104 L 158 104" 
+        fill="none" 
+        stroke="url(#pulseGradApple)" 
+        stroke-width="12" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  <circle cx="130" cy="43" r="8" fill="#10b981"/>
+</svg>

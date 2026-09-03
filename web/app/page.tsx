@@ -1,5 +1,6 @@
 import React from "react";
 import forecastsData from "../public/data/forecasts.json";
+import { Logo } from "@/components/Logo";
 import { PartyCard } from "@/components/PartyCard";
 import { MajorityBar } from "@/components/MajorityBar";
 import { FanChart } from "@/components/FanChart";
@@ -36,7 +37,7 @@ export default function Home() {
     <div className="min-h-screen w-full bg-[#090d16] text-slate-100 antialiased selection:bg-slate-700 selection:text-white">
       {/* Full width container spanning edge-to-edge with responsive margins */}
       <main className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-6 sm:py-8 space-y-8">
-        {/* Top Header Bar - Clean, Professional Editorial Style */}
+        {/* Top Header Bar - Clean, Professional Editorial Style with Official Logo */}
         <header className="w-full border-b border-slate-800/80 pb-5 sm:pb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -46,13 +47,9 @@ export default function Home() {
                 <span>Model analityczny AI: <strong>Google TimesFM 3.0</strong> (Multivariate Foundation Model, 330M)</span>
               </div>
 
-              <div className="mt-2.5 flex flex-wrap items-baseline gap-3">
-                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
-                  Puls Wyborczy
-                </h1>
-                <span className="rounded-md border border-slate-700 bg-slate-800 px-2.5 py-0.5 text-xs sm:text-sm font-mono font-semibold text-slate-300">
-                  pulswyborczy.pl
-                </span>
+              {/* Official Brand Logo */}
+              <div className="mt-3">
+                <Logo size="lg" />
               </div>
 
               <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-4xl leading-relaxed">
@@ -82,7 +79,7 @@ export default function Home() {
           />
         </section>
 
-        {/* 10 Entities Cards - Spacious Responsive Grid (1 col mobile, 2 col tablet, 3-5 col desktop) */}
+        {/* 10 Entities Cards - Spacious Responsive Grid */}
         <section className="w-full space-y-3.5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/60 pb-2.5 gap-1">
             <h2 className="text-base sm:text-lg font-bold tracking-wide text-white uppercase">
@@ -102,7 +99,7 @@ export default function Home() {
 
         {/* Main Workspace Layout */}
         <div className="w-full grid grid-cols-1 gap-8 xl:grid-cols-12 items-start">
-          {/* Main Analytics Content (Full width on tablet/mobile, 10 cols on wide desktop) */}
+          {/* Main Analytics Content */}
           <div className="xl:col-span-10 space-y-8">
             {/* Interactive Fan Chart */}
             <section className="w-full">
@@ -122,7 +119,7 @@ export default function Home() {
               />
             </section>
 
-            {/* Model Arena & Inflections - NO INTERNAL SCROLLBARS */}
+            {/* Model Arena & Inflections */}
             <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Model Arena */}
               <div className="rounded-2xl border border-slate-800 bg-[#0e1424] p-5 sm:p-6 shadow-md flex flex-col justify-between">
@@ -210,16 +207,19 @@ export default function Home() {
             </section>
           </div>
 
-          {/* Right Rail: TAKZEN DEV + Sponsorship Slots (Clean stack on mobile/tablet) */}
+          {/* Right Rail: TAKZEN DEV + Sponsorship Slots */}
           <div className="xl:col-span-2 w-full">
             <AdSidebar />
           </div>
         </div>
 
-        {/* Footer */}
-        <footer className="w-full mt-12 border-t border-slate-800/80 pt-8 pb-12 text-center text-xs sm:text-sm text-slate-400 space-y-2">
+        {/* Footer with Logo */}
+        <footer className="w-full mt-12 border-t border-slate-800/80 pt-8 pb-12 text-center text-xs sm:text-sm text-slate-400 space-y-3">
+          <div className="flex justify-center">
+            <Logo size="sm" />
+          </div>
           <p>
-            <strong>PulsWyborczy.pl</strong> • Projekt stworzony przez{" "}
+            Projekt stworzony przez{" "}
             <a
               href="https://takzendev.pl/"
               target="_blank"
