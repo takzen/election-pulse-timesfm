@@ -1,204 +1,129 @@
-# 🗳️ ElectionPulse-TimesFM
+# 🗳️ Puls Wyborczy (PulsWyborczy.pl)
 
-> **Zero-Shot Native Multivariate Election Forecasting & Political Scenario Simulator with Google TimesFM 3.0**
+> **Niezależne Probabilistyczne Prognozy Wyborcze i Symulator Gospodarczy AI oparty o model Google TimesFM 3.0**
 
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
-[![TimesFM 3.0](https://img.shields.io/badge/Model-TimesFM%203.0%20(330M)-orange.svg)](https://huggingface.co/google/timesfm-3.0-pytorch)
+[![TimesFM 3.0](https://img.shields.io/badge/Model-TimesFM%203.0%20(330M)-emerald.svg)](https://huggingface.co/google/timesfm-3.0-pytorch)
 [![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
 [![pnpm 10](https://img.shields.io/badge/pnpm-10.x-orange.svg)](https://pnpm.io/)
 [![uv](https://img.shields.io/badge/package%20manager-uv-purple.svg)](https://astral.sh/uv)
 [![CUDA 12.6](https://img.shields.io/badge/CUDA-12.6-green.svg)](https://developer.nvidia.com/cuda-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**ElectionPulse-TimesFM** is an open-source, non-partisan platform for probabilistic electoral forecasting and economic scenario simulation. By leveraging Google's **TimesFM 3.0** foundation model, it unifies irregular polling registers with high-frequency exogenous signals (Google Trends, Wikipedia traffic, macroeconomics, inflation, and interest rates) via native multivariate attention to forecast electoral trajectories and inflection points without task-specific retraining.
+**Puls Wyborczy** ([pulswyborczy.pl](https://pulswyborczy.pl)) to otwarta, niezależna platforma badawczo-analityczna stworzona przez [TAKZEN DEV](https://takzendev.pl/). Łączy nieregularne publikacje sondaży poparcia partii w Polsce z danymi o wysokiej częstotliwości (Google Trends, czytelnictwo Wikipedii, inflacja CPI i stopy referencyjne NBP) przy użyciu natywnie wielowymiarowego modelu transformerowego **Google TimesFM 3.0 (330M)**.
 
 ---
 
-## 🛠️ Modern Tech Stack
+## 🛠️ Architektura i Stack Technologiczny
 
-| Domain | Technology & Version | Role & Architecture |
+| Obszar | Technologia i Wersja | Rola w systemie |
 | :--- | :--- | :--- |
-| **Foundation Model** | **Google TimesFM 3.0 (330M)** | State-of-the-art multivariate foundation model (released Aug 31, 2026) with Stacked Mixing Transformer (temporal + variate attention) |
-| **Deep Learning & CUDA** | **PyTorch 2.14 + cu126** | Sub-100ms hardware-accelerated tensor operations on NVIDIA RTX 4060 GPU |
-| **Python Environment** | **Python 3.13.2 + uv 0.6+** | Ultra-fast Rust-based dependency resolver and virtual environment manager |
-| **Data Engine & Storage** | **Polars 1.44, Pandas 3.0, PyArrow 25** | Columnar Parquet serialization, zero-copy data pipelines, and fast filtering |
-| **Interpolation & Splines** | **SciPy (PCHIP)** | Monotonic cubic spline regularization preventing overshoot on irregular polling series |
-| **Web Frontend (Vercel)** | **Next.js 15 (App Router) + React 19** | Sub-100ms global CDN pre-rendered dashboard with zero serverless cold-start lag |
-| **Package Manager (Web)** | **pnpm 10.26+** | Fast, disk-efficient, symlinked dependency manager |
-| **Styling & Icons** | **Tailwind CSS + Lucide React** | Dark-mode UI with dynamic glassmorphism and mobile-first design |
-| **Interactive Charts** | **Recharts + Plotly** | High-performance client-side fan charts with 10%–90% uncertainty bands |
-| **External Live APIs** | **Wikimedia REST, pytrends, NBP, GUS** | Automated multi-signal ingestion covering media, search, and economic health |
+| **Model Predykcyjny** | **Google TimesFM 3.0 (330M)** | Natywny model wielowymiarowy z architekturą Stacked Mixing Transformer (uwaga czasowa + międzyzmiennowa) |
+| **Przyspieszenie GPU** | **PyTorch 2.14 + CUDA 12.6** | Błyskawiczna inferencja na karcie NVIDIA GeForce RTX 4060 poniżej 100 ms |
+| **Środowisko Python** | **Python 3.13 + uv 0.6+** | Najszybszy resolver zależności napisany w Rust |
+| **Przetwarzanie Danych** | **Polars 1.44, Pandas, PyArrow** | Kolumnowy format Parquet, brak zbędnych kopii pamięci |
+| **Interpolacja Szeregów** | **SciPy (PCHIP)** | Monotoniczne splajny sześcienne zapobiegające przestrzałom poparcia |
+| **Aplikacja Webowa** | **Next.js 15 (App Router) + React 19** | Płynny interfejs z natychmiastowym renderowaniem statycznym (Vercel) |
+| **Menedżer Pakietów Web** | **pnpm 10.26+** | Wydajne zarządzanie zależnościami frontendowymi |
+| **Styling & UI** | **Tailwind CSS + Lucide React** | Spokojna paleta analityczna (ciemny motyw), duża czytelność przy 100% zoomie |
+| **Wykresy i Wizualizacje** | **Recharts** | Interaktywne pasma ufności p10–p90 oraz punkty przegięcia trendu |
 
 ---
 
-## ✨ Key Features
+## 🇵🇱 Śledzone Ugrupowania (Realna Scena Polityczna)
 
-- **🧭 Native Multivariate Foundation Forecasting:** Leverages TimesFM 3.0's Stacked Mixing Transformer to jointly model candidate polling alongside real-time search volume and economic indicators in a single forward pass.
-- **⚡ Momentum & Inflection Point Detection:** Automatically flags sudden breakouts or declines in candidate support post-debates and major political events.
-- **🍞 "Pocketbook Voting" Scenario Simulator:** Interactive what-if engine: _How would a 50 bps interest rate cut or a 1% inflation drop shift incumbent vs. opposition support?_
-- **📊 Quantile Fan Charts:** Uncertainty-aware probabilistic forecasts showing 10th to 90th percentile trajectories up to Election Day.
-- **⚖️ Benchmark Arena:** Rolling backtesting comparing TimesFM 3.0 against classical baselines (**LightGBM**, **Prophet**, **ARIMA**, **EWMA**).
+Model monitoruje pełne spektrum 10 opcji obecnych w czołowych sondażach (IBRiS, United Surveys, CBOS, Pollster):
 
----
-
-## 📊 Data Sources
-
-| Domain              | Signal / Metric                    | Source API / Package                                    | Frequency          |
-| :------------------ | :--------------------------------- | :------------------------------------------------------ | :----------------- |
-| **Polling**         | Party & Candidate Support %        | Aggregated Poll Registers (CBOS, IBRiS, United Surveys) | Irregular / Weekly |
-| **Public Interest** | Keyword Search Index               | `pytrends` (Google Trends API)                          | Daily              |
-| **Pageviews**       | Wikipedia Biographical Reads       | Wikimedia REST API                                      | Daily              |
-| **Macroeconomics**  | CPI Inflation, FX Rates, NBP Rates | National Bank of Poland (NBP API) & GUS                 | Monthly / Daily    |
-| **Sentiment**       | Consumer Confidence Index (BWUK)   | Statistics Poland (GUS Open Data)                       | Monthly            |
+1. **KO** (Koalicja Obywatelska)
+2. **PiS** (Prawo i Sprawiedliwość)
+3. **Konfederacja** (Nowa Nadzieja / Ruch Narodowy)
+4. **KKP** (Konfederacja Korony Polskiej)
+5. **Lewica** (Nowa Lewica)
+6. **Rozwój Plus** (inicjatywa centroprawicowa)
+7. **Razem** (Partia Razem)
+8. **PSL** (Polskie Stronnictwo Ludowe)
+9. **Polska 2050** (Polska 2050)
+10. **Niezdecydowani** (wyborcy niezdecydowani / trudno powiedzieć)
 
 ---
 
-## 🏗️ System Architecture
+## ✨ Kluczowe Funkcjonalności
 
-```text
-election-pulse-timesfm/
-├── data/
-│   ├── raw/                  # Cached API payloads & poll logs
-│   └── processed/            # Cleaned parquet series & tensors
-├── src/
-│   ├── ingestion/            # Data fetchers
-│   │   ├── polls.py          # Scraper & regularizer for polling data
-│   │   ├── trends.py         # Google Trends & Wikipedia pageviews pipeline
-│   │   └── macro.py          # NBP & GUS macroeconomic API connector
-│   ├── pipeline/
-│   │   ├── interpolator.py   # Daily alignment & spline interpolation
-│   │   └── tensor_builder.py # Context & dynamic covariate formatting
-│   ├── models/
-│   │   ├── timesfm_engine.py # Google TimesFM 3.0 multivariate inference wrapper
-│   │   └── baselines.py      # LightGBM, Prophet, and ARIMA implementations
-│   ├── evaluation/
-│   │   └── backtest.py       # Rolling-window evaluation (MAE, RMSE, CRPS)
-│   ├── viz/
-│   │   └── fan_charts.py     # Plotly probabilistic chart builders
-│   └── app.py                # Streamlit UI application
-├── tests/                    # Pytest test suite
-├── pyproject.toml            # Project dependencies & tool configs
-├── AGENTS.md                 # Autonomous coding agent instructions
-└── README.md
-```
+- **🧭 Wielowymiarowa Prognoza TimesFM 3.0:** Wspólna analiza poparcia wszystkich partii w połączeniu z sygnałami makroekonomicznymi w jednym przejściu modelu.
+- **🏛️ Kalkulator Większości Sejmowej (Próg 231):** Szacunek mandatów metodą D'Hondta z wizualnym wskaźnikiem większości rządowej vs opozycji.
+- **🍞 Symulator Portfela Wyborcy (Pocketbook Voting):** Interaktywne badanie scenariuszy: *Jak obniżka stóp NBP o 100 pb lub wzrost inflacji wpłynie na rozkład poparcia?*
+- **📊 Wykresy Wachlarzowe:** Probabilistyczna projekcja trendu z przedziałami ufności od 10% do 90%.
+- **⚡ Detektor Szoków Politycznych:** Automatyczna identyfikacja punktów przegięcia trendu skorelowanych z wydarzeniami w kraju.
+- **🐦 Generator Podsumowań na X (Twitter):** Eksport gotowej pigułki informacyjnej z linkiem do pulswyborczy.pl jednym kliknięciem.
 
 ---
 
-## 🚀 Quickstart
+## ⚖️ Wyniki Backtestingu (Arena Modeli)
 
-### 1. Prerequisites
-- Python 3.13 or higher
-- CUDA-compatible GPU recommended (NVIDIA RTX with CUDA 12+, CPU supported)
+Weryfikacja na 14-dniowym kroczącym oknie przed wyborami w Polsce:
 
-### 2. Installation
-Clone the repository and install dependencies using `uv` (recommended) or `pip`:
+| Model | MAE (pp) | RMSE (pp) | Bias (pp) | Opis |
+| :--- | :---: | :---: | :---: | :--- |
+| **🥇 Google TimesFM 3.0** | **0.49** | **0.63** | **+0.00** | Model transformerowy z kowariantami makro |
+| **🥈 ARIMA(1, 1, 1)** | 0.55 | 0.73 | -0.02 | Klasyczny autoregresyjny szereg bazowy |
+| **🥉 EWMA ($\alpha = 0.15$)** | 0.91 | 0.98 | +0.00 | Wygładzanie wykładnicze sondaży |
+| **4️⃣ LightGBM** | 1.07 | 1.13 | +0.08 | Drzewa decyzyjne z opóźnionymi cechami makro |
 
+---
+
+## 🚀 Uruchomienie Projektu Lokalnie
+
+### 1. Środowisko Python (Model i Pipeline Danych)
 ```bash
-# Clone the repository
+# Sklonuj repozytorium
 git clone https://github.com/takzen/election-pulse-timesfm.git
 cd election-pulse-timesfm
 
-# Create virtual environment with Python 3.13
+# Utwórz środowisko Python 3.13 za pomocą uv
 uv venv --python 3.13
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+.venv\Scripts\activate  # Na Linux/macOS: source .venv/bin/activate
 
-# Install PyTorch with CUDA acceleration (for NVIDIA GPUs)
+# Zainstaluj PyTorch z akceleracją CUDA 12.6
 uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
 
-# Install project dependencies
+# Zainstaluj zależności projektu
 uv pip install -e .
-```
 
-### 3. Fetch Data & Precompute Forecasts
-```bash
-# Ingest latest polling data, Google Trends, and economic indices
-python -m src.ingestion.run_sync
-
-# Run TimesFM 3.0 inference and export data bundle for web/Vercel
+# Pobierz dane i przelicz prognozę TimesFM 3.0
+python -m src.ingestion.polls
+python -m src.pipeline.interpolator
 python -m src.pipeline.export_web_data
 ```
 
-### 4. Run Modern Next.js Web App (Recommended for Vercel)
+### 2. Frontend Next.js (Aplikacja Webowa)
 ```bash
 cd web
 pnpm install
 pnpm run dev
-# Open http://localhost:3000
-```
-
-*(Optional) Run local Python Streamlit dashboard:*
-```bash
-streamlit run src/app.py
+# Otwórz w przeglądarce: http://localhost:3000
 ```
 
 ---
 
-## ⚖️ Benchmark Arena (Historical Rolling Evaluation)
+## 🌐 Wdrożenie Produkcyjne (Vercel)
 
-Evaluated across 14-day forecast horizons prior to official Polish election dates:
-
-| Model | MAE (pp) | RMSE (pp) | Bias (pp) | Notes |
-| :--- | :---: | :---: | :---: | :--- |
-| **🥇 Google TimesFM 3.0** | **0.49** | **0.63** | **+0.00** | Zero-shot multivariate transformer with exogenous macro conditioning |
-| **🥈 ARIMA(1, 1, 1)** | 0.55 | 0.73 | -0.02 | Classical autoregressive univariate baseline |
-| **🥉 EWMA ($\alpha = 0.15$)** | 0.91 | 0.98 | +0.00 | Standard exponential poll-tracker smoothing |
-| **4️⃣ LightGBM** | 1.07 | 1.13 | +0.08 | Gradient boosted trees with lags and macro signals |
+Aplikacja w katalogu `web/` jest skonfigurowana do natychmiastowego wdrożenia:
+1. Połącz repozytorium z kontem [Vercel](https://vercel.com).
+2. Ustaw **Root Directory** na `web`.
+3. Wybierz framework preset: **Next.js**.
+4. W sekcji domen podepnij domenę **`pulswyborczy.pl`**.
+5. Kliknij **Deploy** – platforma działa globalnie z zerowym czasem oczekiwania.
 
 ---
 
-## 🔬 Methodology
+## 👨‍💻 Autor i Kontakt
 
-### Data Alignment & Conditioning
-- **Regularization:** Polling data is interpolated to daily intervals using monotonic cubic splines (PCHIP) to bridge irregular poll releases.
-- **Covariate Scaling:** Google Trends indices and macro variables are standard-scaled over a 90-day rolling context window to prevent lookahead bias.
+Projekt stworzony przez **[TAKZEN DEV](https://takzendev.pl/)**.  
+Tworzymy dedykowane systemy sztucznej inteligencji, architekturę modeli prognozowania i nowoczesne aplikacje webowe.
 
-### Inference Setup
-- **Model:** `google/timesfm-3.0-pytorch` (330M parameters, decoder-only Stacked Mixing Transformer).
-- **Context Window:** 60–180 days of historical multi-signal records.
-- **Horizon:** 30–90 days ahead (up to Election Day).
-- **Quantiles:** Predicted across `[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]` to generate calibrated confidence bands.
-
-```python
-from timesfm import TimesFM3Forecaster
-
-# Initialize TimesFM 3.0 PyTorch Checkpoint (330M) on CUDA
-forecaster = TimesFM3Forecaster.from_pretrained(
-    "google/timesfm-3.0-pytorch",
-    device="cuda",
-)
-
-# Run zero-shot native multivariate forecast with exogenous dynamic covariates
-output = forecaster.predict(
-    context=poll_time_series,               # (5, 90)
-    horizon=30,
-    past_only_covariates=trends_and_wiki,   # (10, 90)
-    past_future_covariates=macro_matrix,    # (5, 120)
-    return_quantiles=True,
-)
-```
+Kontakt w sprawie reklamy lub współpracy: **contact@takzendev.pl**
 
 ---
 
-## 🚀 Deployment to Vercel
-
-The frontend is ready for zero-config 1-click deployment on [Vercel](https://vercel.com):
-1. Import repository on Vercel.
-2. Set **Root Directory** to `web`.
-3. Framework preset: **Next.js**.
-4. Click **Deploy** — your app is live with sub-100ms global latency!
-
----
-
-## ⚖️ Disclaimer
-This project is an independent, non-partisan open-source research initiative. The forecasts generated by TimesFM 3.0 are statistical representations based on public data and do not constitute political endorsements or infallible predictions of electoral outcomes. Note that model weights are provided under the `timesfm-non-commercial-license-v1.0`.
-
----
-
-## 👨‍💻 Author & Sponsorship
-Engineered by **TAKZEN DEV** ([GitHub](https://github.com/takzen)).  
-Interested in bespoke AI engineering, time series foundation models, or sponsoring a slot on the platform? Get in touch via GitHub.
-
----
-
-## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
+## 📄 Licencja
+Kod udostępniany na licencji MIT. Wagi modelu TimesFM 3.0 podlegają licencji badawczej Google Research.
