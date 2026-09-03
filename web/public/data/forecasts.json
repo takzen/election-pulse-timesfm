@@ -1,0 +1,2708 @@
+{
+  "metadata": {
+    "generated_at": "2026-09-03T10:38:43.268711",
+    "model_name": "Google TimesFM 3.0 (330M)",
+    "architecture": "Stacked Mixing Transformer (Temporal & Variate Attention)",
+    "context_days": 90,
+    "horizon_days": 30,
+    "cutoff_date": "2026-08-28",
+    "target_date": "2026-09-27"
+  },
+  "parties_meta": {
+    "KO": {
+      "name": "Koalicja Obywatelska",
+      "leader": "Donald Tusk",
+      "color": "#f97316",
+      "current": 32.6,
+      "forecast": 32.63,
+      "p10": 31.78,
+      "p90": 33.31
+    },
+    "PiS": {
+      "name": "Prawo i Sprawiedliwość",
+      "leader": "Jarosław Kaczyński",
+      "color": "#3b82f6",
+      "current": 26.4,
+      "forecast": 26.68,
+      "p10": 25.62,
+      "p90": 27.67
+    },
+    "Konfederacja": {
+      "name": "Konfederacja",
+      "leader": "Sławomir Mentzen / Krzysztof Bosak",
+      "color": "#14b8a6",
+      "current": 24.3,
+      "forecast": 24.21,
+      "p10": 22.99,
+      "p90": 25.5
+    },
+    "Trzecia_Droga": {
+      "name": "Trzecia Droga (PSL + PL2050)",
+      "leader": "Szymon Hołownia / Władysław Kosiniak-Kamysz",
+      "color": "#eab308",
+      "current": 6.5,
+      "forecast": 6.55,
+      "p10": 6.03,
+      "p90": 7.11
+    },
+    "Lewica": {
+      "name": "Lewica",
+      "leader": "Włodzimierz Czarzasty / Robert Biedroń",
+      "color": "#ec4899",
+      "current": 10.2,
+      "forecast": 9.92,
+      "p10": 9.15,
+      "p90": 10.79
+    }
+  },
+  "history": [
+    {
+      "date": "2026-03-02",
+      "KO": 33.45,
+      "PiS": 27.83,
+      "Trzecia_Droga": 6.88,
+      "Lewica": 9.48,
+      "Konfederacja": 22.35
+    },
+    {
+      "date": "2026-03-03",
+      "KO": 33.72,
+      "PiS": 27.9,
+      "Trzecia_Droga": 6.78,
+      "Lewica": 9.42,
+      "Konfederacja": 22.18
+    },
+    {
+      "date": "2026-03-04",
+      "KO": 33.97,
+      "PiS": 27.95,
+      "Trzecia_Droga": 6.69,
+      "Lewica": 9.36,
+      "Konfederacja": 22.03
+    },
+    {
+      "date": "2026-03-05",
+      "KO": 34.14,
+      "PiS": 27.97,
+      "Trzecia_Droga": 6.64,
+      "Lewica": 9.31,
+      "Konfederacja": 21.93
+    },
+    {
+      "date": "2026-03-06",
+      "KO": 34.19,
+      "PiS": 27.97,
+      "Trzecia_Droga": 6.65,
+      "Lewica": 9.27,
+      "Konfederacja": 21.92
+    },
+    {
+      "date": "2026-03-07",
+      "KO": 34.08,
+      "PiS": 27.92,
+      "Trzecia_Droga": 6.73,
+      "Lewica": 9.26,
+      "Konfederacja": 22.01
+    },
+    {
+      "date": "2026-03-08",
+      "KO": 33.84,
+      "PiS": 27.84,
+      "Trzecia_Droga": 6.88,
+      "Lewica": 9.26,
+      "Konfederacja": 22.19
+    },
+    {
+      "date": "2026-03-09",
+      "KO": 33.5,
+      "PiS": 27.71,
+      "Trzecia_Droga": 7.09,
+      "Lewica": 9.27,
+      "Konfederacja": 22.43
+    },
+    {
+      "date": "2026-03-10",
+      "KO": 33.11,
+      "PiS": 27.56,
+      "Trzecia_Droga": 7.31,
+      "Lewica": 9.29,
+      "Konfederacja": 22.72
+    },
+    {
+      "date": "2026-03-11",
+      "KO": 32.78,
+      "PiS": 27.4,
+      "Trzecia_Droga": 7.52,
+      "Lewica": 9.31,
+      "Konfederacja": 22.99
+    },
+    {
+      "date": "2026-03-12",
+      "KO": 32.55,
+      "PiS": 27.24,
+      "Trzecia_Droga": 7.66,
+      "Lewica": 9.37,
+      "Konfederacja": 23.19
+    },
+    {
+      "date": "2026-03-13",
+      "KO": 32.46,
+      "PiS": 27.07,
+      "Trzecia_Droga": 7.71,
+      "Lewica": 9.43,
+      "Konfederacja": 23.33
+    },
+    {
+      "date": "2026-03-14",
+      "KO": 32.51,
+      "PiS": 26.91,
+      "Trzecia_Droga": 7.67,
+      "Lewica": 9.51,
+      "Konfederacja": 23.4
+    },
+    {
+      "date": "2026-03-15",
+      "KO": 32.67,
+      "PiS": 26.74,
+      "Trzecia_Droga": 7.54,
+      "Lewica": 9.63,
+      "Konfederacja": 23.42
+    },
+    {
+      "date": "2026-03-16",
+      "KO": 32.91,
+      "PiS": 26.58,
+      "Trzecia_Droga": 7.36,
+      "Lewica": 9.75,
+      "Konfederacja": 23.4
+    },
+    {
+      "date": "2026-03-17",
+      "KO": 33.14,
+      "PiS": 26.45,
+      "Trzecia_Droga": 7.18,
+      "Lewica": 9.86,
+      "Konfederacja": 23.37
+    },
+    {
+      "date": "2026-03-18",
+      "KO": 33.32,
+      "PiS": 26.39,
+      "Trzecia_Droga": 7.05,
+      "Lewica": 9.92,
+      "Konfederacja": 23.32
+    },
+    {
+      "date": "2026-03-19",
+      "KO": 33.41,
+      "PiS": 26.44,
+      "Trzecia_Droga": 6.99,
+      "Lewica": 9.91,
+      "Konfederacja": 23.25
+    },
+    {
+      "date": "2026-03-20",
+      "KO": 33.4,
+      "PiS": 26.62,
+      "Trzecia_Droga": 7.02,
+      "Lewica": 9.8,
+      "Konfederacja": 23.15
+    },
+    {
+      "date": "2026-03-21",
+      "KO": 33.3,
+      "PiS": 26.94,
+      "Trzecia_Droga": 7.13,
+      "Lewica": 9.6,
+      "Konfederacja": 23.03
+    },
+    {
+      "date": "2026-03-22",
+      "KO": 33.14,
+      "PiS": 27.36,
+      "Trzecia_Droga": 7.29,
+      "Lewica": 9.32,
+      "Konfederacja": 22.88
+    },
+    {
+      "date": "2026-03-23",
+      "KO": 32.96,
+      "PiS": 27.82,
+      "Trzecia_Droga": 7.47,
+      "Lewica": 9.02,
+      "Konfederacja": 22.73
+    },
+    {
+      "date": "2026-03-24",
+      "KO": 32.79,
+      "PiS": 28.24,
+      "Trzecia_Droga": 7.63,
+      "Lewica": 8.75,
+      "Konfederacja": 22.59
+    },
+    {
+      "date": "2026-03-25",
+      "KO": 32.67,
+      "PiS": 28.55,
+      "Trzecia_Droga": 7.72,
+      "Lewica": 8.57,
+      "Konfederacja": 22.48
+    },
+    {
+      "date": "2026-03-26",
+      "KO": 32.61,
+      "PiS": 28.73,
+      "Trzecia_Droga": 7.7,
+      "Lewica": 8.53,
+      "Konfederacja": 22.42
+    },
+    {
+      "date": "2026-03-27",
+      "KO": 32.62,
+      "PiS": 28.78,
+      "Trzecia_Droga": 7.56,
+      "Lewica": 8.64,
+      "Konfederacja": 22.4
+    },
+    {
+      "date": "2026-03-28",
+      "KO": 32.69,
+      "PiS": 28.73,
+      "Trzecia_Droga": 7.3,
+      "Lewica": 8.88,
+      "Konfederacja": 22.4
+    },
+    {
+      "date": "2026-03-29",
+      "KO": 32.79,
+      "PiS": 28.62,
+      "Trzecia_Droga": 6.97,
+      "Lewica": 9.2,
+      "Konfederacja": 22.42
+    },
+    {
+      "date": "2026-03-30",
+      "KO": 32.9,
+      "PiS": 28.49,
+      "Trzecia_Droga": 6.65,
+      "Lewica": 9.52,
+      "Konfederacja": 22.44
+    },
+    {
+      "date": "2026-03-31",
+      "KO": 33.0,
+      "PiS": 28.36,
+      "Trzecia_Droga": 6.37,
+      "Lewica": 9.79,
+      "Konfederacja": 22.49
+    },
+    {
+      "date": "2026-04-01",
+      "KO": 33.05,
+      "PiS": 28.24,
+      "Trzecia_Droga": 6.19,
+      "Lewica": 9.98,
+      "Konfederacja": 22.53
+    },
+    {
+      "date": "2026-04-02",
+      "KO": 33.09,
+      "PiS": 28.14,
+      "Trzecia_Droga": 6.1,
+      "Lewica": 10.07,
+      "Konfederacja": 22.59
+    },
+    {
+      "date": "2026-04-03",
+      "KO": 33.11,
+      "PiS": 28.06,
+      "Trzecia_Droga": 6.08,
+      "Lewica": 10.1,
+      "Konfederacja": 22.65
+    },
+    {
+      "date": "2026-04-04",
+      "KO": 33.11,
+      "PiS": 27.97,
+      "Trzecia_Droga": 6.1,
+      "Lewica": 10.09,
+      "Konfederacja": 22.73
+    },
+    {
+      "date": "2026-04-05",
+      "KO": 33.09,
+      "PiS": 27.9,
+      "Trzecia_Droga": 6.15,
+      "Lewica": 10.05,
+      "Konfederacja": 22.81
+    },
+    {
+      "date": "2026-04-06",
+      "KO": 33.07,
+      "PiS": 27.82,
+      "Trzecia_Droga": 6.21,
+      "Lewica": 10.01,
+      "Konfederacja": 22.89
+    },
+    {
+      "date": "2026-04-07",
+      "KO": 33.04,
+      "PiS": 27.74,
+      "Trzecia_Droga": 6.28,
+      "Lewica": 9.96,
+      "Konfederacja": 22.98
+    },
+    {
+      "date": "2026-04-08",
+      "KO": 33.0,
+      "PiS": 27.67,
+      "Trzecia_Droga": 6.35,
+      "Lewica": 9.91,
+      "Konfederacja": 23.07
+    },
+    {
+      "date": "2026-04-09",
+      "KO": 32.96,
+      "PiS": 27.6,
+      "Trzecia_Droga": 6.43,
+      "Lewica": 9.85,
+      "Konfederacja": 23.16
+    },
+    {
+      "date": "2026-04-10",
+      "KO": 32.91,
+      "PiS": 27.54,
+      "Trzecia_Droga": 6.52,
+      "Lewica": 9.8,
+      "Konfederacja": 23.23
+    },
+    {
+      "date": "2026-04-11",
+      "KO": 32.86,
+      "PiS": 27.48,
+      "Trzecia_Droga": 6.61,
+      "Lewica": 9.74,
+      "Konfederacja": 23.31
+    },
+    {
+      "date": "2026-04-12",
+      "KO": 32.8,
+      "PiS": 27.44,
+      "Trzecia_Droga": 6.7,
+      "Lewica": 9.68,
+      "Konfederacja": 23.38
+    },
+    {
+      "date": "2026-04-13",
+      "KO": 32.74,
+      "PiS": 27.4,
+      "Trzecia_Droga": 6.8,
+      "Lewica": 9.62,
+      "Konfederacja": 23.43
+    },
+    {
+      "date": "2026-04-14",
+      "KO": 32.65,
+      "PiS": 27.39,
+      "Trzecia_Droga": 6.91,
+      "Lewica": 9.57,
+      "Konfederacja": 23.48
+    },
+    {
+      "date": "2026-04-15",
+      "KO": 32.55,
+      "PiS": 27.38,
+      "Trzecia_Droga": 7.04,
+      "Lewica": 9.52,
+      "Konfederacja": 23.51
+    },
+    {
+      "date": "2026-04-16",
+      "KO": 32.41,
+      "PiS": 27.38,
+      "Trzecia_Droga": 7.2,
+      "Lewica": 9.47,
+      "Konfederacja": 23.53
+    },
+    {
+      "date": "2026-04-17",
+      "KO": 32.25,
+      "PiS": 27.4,
+      "Trzecia_Droga": 7.37,
+      "Lewica": 9.42,
+      "Konfederacja": 23.55
+    },
+    {
+      "date": "2026-04-18",
+      "KO": 32.07,
+      "PiS": 27.43,
+      "Trzecia_Droga": 7.54,
+      "Lewica": 9.38,
+      "Konfederacja": 23.57
+    },
+    {
+      "date": "2026-04-19",
+      "KO": 31.91,
+      "PiS": 27.45,
+      "Trzecia_Droga": 7.7,
+      "Lewica": 9.34,
+      "Konfederacja": 23.59
+    },
+    {
+      "date": "2026-04-20",
+      "KO": 31.82,
+      "PiS": 27.44,
+      "Trzecia_Droga": 7.82,
+      "Lewica": 9.31,
+      "Konfederacja": 23.61
+    },
+    {
+      "date": "2026-04-21",
+      "KO": 31.8,
+      "PiS": 27.38,
+      "Trzecia_Droga": 7.87,
+      "Lewica": 9.3,
+      "Konfederacja": 23.65
+    },
+    {
+      "date": "2026-04-22",
+      "KO": 31.9,
+      "PiS": 27.26,
+      "Trzecia_Droga": 7.87,
+      "Lewica": 9.29,
+      "Konfederacja": 23.69
+    },
+    {
+      "date": "2026-04-23",
+      "KO": 32.1,
+      "PiS": 27.06,
+      "Trzecia_Droga": 7.8,
+      "Lewica": 9.29,
+      "Konfederacja": 23.74
+    },
+    {
+      "date": "2026-04-24",
+      "KO": 32.35,
+      "PiS": 26.84,
+      "Trzecia_Droga": 7.69,
+      "Lewica": 9.3,
+      "Konfederacja": 23.81
+    },
+    {
+      "date": "2026-04-25",
+      "KO": 32.62,
+      "PiS": 26.62,
+      "Trzecia_Droga": 7.56,
+      "Lewica": 9.32,
+      "Konfederacja": 23.87
+    },
+    {
+      "date": "2026-04-26",
+      "KO": 32.84,
+      "PiS": 26.45,
+      "Trzecia_Droga": 7.41,
+      "Lewica": 9.38,
+      "Konfederacja": 23.92
+    },
+    {
+      "date": "2026-04-27",
+      "KO": 32.98,
+      "PiS": 26.37,
+      "Trzecia_Droga": 7.23,
+      "Lewica": 9.49,
+      "Konfederacja": 23.94
+    },
+    {
+      "date": "2026-04-28",
+      "KO": 33.02,
+      "PiS": 26.36,
+      "Trzecia_Droga": 7.02,
+      "Lewica": 9.67,
+      "Konfederacja": 23.93
+    },
+    {
+      "date": "2026-04-29",
+      "KO": 32.98,
+      "PiS": 26.42,
+      "Trzecia_Droga": 6.79,
+      "Lewica": 9.93,
+      "Konfederacja": 23.87
+    },
+    {
+      "date": "2026-04-30",
+      "KO": 32.89,
+      "PiS": 26.52,
+      "Trzecia_Droga": 6.57,
+      "Lewica": 10.23,
+      "Konfederacja": 23.79
+    },
+    {
+      "date": "2026-05-01",
+      "KO": 32.79,
+      "PiS": 26.61,
+      "Trzecia_Droga": 6.38,
+      "Lewica": 10.5,
+      "Konfederacja": 23.71
+    },
+    {
+      "date": "2026-05-02",
+      "KO": 32.7,
+      "PiS": 26.68,
+      "Trzecia_Droga": 6.25,
+      "Lewica": 10.72,
+      "Konfederacja": 23.65
+    },
+    {
+      "date": "2026-05-03",
+      "KO": 32.64,
+      "PiS": 26.7,
+      "Trzecia_Droga": 6.22,
+      "Lewica": 10.84,
+      "Konfederacja": 23.6
+    },
+    {
+      "date": "2026-05-04",
+      "KO": 32.6,
+      "PiS": 26.68,
+      "Trzecia_Droga": 6.29,
+      "Lewica": 10.84,
+      "Konfederacja": 23.58
+    },
+    {
+      "date": "2026-05-05",
+      "KO": 32.59,
+      "PiS": 26.61,
+      "Trzecia_Droga": 6.45,
+      "Lewica": 10.76,
+      "Konfederacja": 23.58
+    },
+    {
+      "date": "2026-05-06",
+      "KO": 32.59,
+      "PiS": 26.53,
+      "Trzecia_Droga": 6.66,
+      "Lewica": 10.62,
+      "Konfederacja": 23.6
+    },
+    {
+      "date": "2026-05-07",
+      "KO": 32.58,
+      "PiS": 26.43,
+      "Trzecia_Droga": 6.88,
+      "Lewica": 10.47,
+      "Konfederacja": 23.63
+    },
+    {
+      "date": "2026-05-08",
+      "KO": 32.57,
+      "PiS": 26.36,
+      "Trzecia_Droga": 7.05,
+      "Lewica": 10.35,
+      "Konfederacja": 23.66
+    },
+    {
+      "date": "2026-05-09",
+      "KO": 32.54,
+      "PiS": 26.31,
+      "Trzecia_Droga": 7.16,
+      "Lewica": 10.28,
+      "Konfederacja": 23.71
+    },
+    {
+      "date": "2026-05-10",
+      "KO": 32.48,
+      "PiS": 26.29,
+      "Trzecia_Droga": 7.2,
+      "Lewica": 10.27,
+      "Konfederacja": 23.76
+    },
+    {
+      "date": "2026-05-11",
+      "KO": 32.41,
+      "PiS": 26.3,
+      "Trzecia_Droga": 7.17,
+      "Lewica": 10.3,
+      "Konfederacja": 23.82
+    },
+    {
+      "date": "2026-05-12",
+      "KO": 32.31,
+      "PiS": 26.33,
+      "Trzecia_Droga": 7.11,
+      "Lewica": 10.36,
+      "Konfederacja": 23.89
+    },
+    {
+      "date": "2026-05-13",
+      "KO": 32.21,
+      "PiS": 26.37,
+      "Trzecia_Droga": 7.02,
+      "Lewica": 10.44,
+      "Konfederacja": 23.96
+    },
+    {
+      "date": "2026-05-14",
+      "KO": 32.13,
+      "PiS": 26.43,
+      "Trzecia_Droga": 6.93,
+      "Lewica": 10.5,
+      "Konfederacja": 24.01
+    },
+    {
+      "date": "2026-05-15",
+      "KO": 32.1,
+      "PiS": 26.51,
+      "Trzecia_Droga": 6.84,
+      "Lewica": 10.54,
+      "Konfederacja": 24.02
+    },
+    {
+      "date": "2026-05-16",
+      "KO": 32.12,
+      "PiS": 26.62,
+      "Trzecia_Droga": 6.76,
+      "Lewica": 10.55,
+      "Konfederacja": 23.95
+    },
+    {
+      "date": "2026-05-17",
+      "KO": 32.25,
+      "PiS": 26.77,
+      "Trzecia_Droga": 6.68,
+      "Lewica": 10.53,
+      "Konfederacja": 23.77
+    },
+    {
+      "date": "2026-05-18",
+      "KO": 32.46,
+      "PiS": 26.96,
+      "Trzecia_Droga": 6.6,
+      "Lewica": 10.46,
+      "Konfederacja": 23.52
+    },
+    {
+      "date": "2026-05-19",
+      "KO": 32.71,
+      "PiS": 27.17,
+      "Trzecia_Droga": 6.53,
+      "Lewica": 10.38,
+      "Konfederacja": 23.21
+    },
+    {
+      "date": "2026-05-20",
+      "KO": 32.97,
+      "PiS": 27.37,
+      "Trzecia_Droga": 6.48,
+      "Lewica": 10.28,
+      "Konfederacja": 22.9
+    },
+    {
+      "date": "2026-05-21",
+      "KO": 33.18,
+      "PiS": 27.53,
+      "Trzecia_Droga": 6.45,
+      "Lewica": 10.19,
+      "Konfederacja": 22.65
+    },
+    {
+      "date": "2026-05-22",
+      "KO": 33.3,
+      "PiS": 27.64,
+      "Trzecia_Droga": 6.46,
+      "Lewica": 10.11,
+      "Konfederacja": 22.5
+    },
+    {
+      "date": "2026-05-23",
+      "KO": 33.33,
+      "PiS": 27.68,
+      "Trzecia_Droga": 6.51,
+      "Lewica": 10.05,
+      "Konfederacja": 22.43
+    },
+    {
+      "date": "2026-05-24",
+      "KO": 33.28,
+      "PiS": 27.68,
+      "Trzecia_Droga": 6.59,
+      "Lewica": 9.99,
+      "Konfederacja": 22.46
+    },
+    {
+      "date": "2026-05-25",
+      "KO": 33.19,
+      "PiS": 27.65,
+      "Trzecia_Droga": 6.7,
+      "Lewica": 9.95,
+      "Konfederacja": 22.51
+    },
+    {
+      "date": "2026-05-26",
+      "KO": 33.08,
+      "PiS": 27.6,
+      "Trzecia_Droga": 6.81,
+      "Lewica": 9.92,
+      "Konfederacja": 22.59
+    },
+    {
+      "date": "2026-05-27",
+      "KO": 32.99,
+      "PiS": 27.55,
+      "Trzecia_Droga": 6.89,
+      "Lewica": 9.89,
+      "Konfederacja": 22.68
+    },
+    {
+      "date": "2026-05-28",
+      "KO": 32.91,
+      "PiS": 27.5,
+      "Trzecia_Droga": 6.95,
+      "Lewica": 9.86,
+      "Konfederacja": 22.78
+    },
+    {
+      "date": "2026-05-29",
+      "KO": 32.86,
+      "PiS": 27.45,
+      "Trzecia_Droga": 6.98,
+      "Lewica": 9.84,
+      "Konfederacja": 22.87
+    },
+    {
+      "date": "2026-05-30",
+      "KO": 32.83,
+      "PiS": 27.41,
+      "Trzecia_Droga": 6.98,
+      "Lewica": 9.82,
+      "Konfederacja": 22.96
+    },
+    {
+      "date": "2026-05-31",
+      "KO": 32.82,
+      "PiS": 27.37,
+      "Trzecia_Droga": 6.97,
+      "Lewica": 9.81,
+      "Konfederacja": 23.04
+    },
+    {
+      "date": "2026-06-01",
+      "KO": 32.8,
+      "PiS": 27.33,
+      "Trzecia_Droga": 6.95,
+      "Lewica": 9.78,
+      "Konfederacja": 23.14
+    },
+    {
+      "date": "2026-06-02",
+      "KO": 32.79,
+      "PiS": 27.3,
+      "Trzecia_Droga": 6.91,
+      "Lewica": 9.77,
+      "Konfederacja": 23.22
+    },
+    {
+      "date": "2026-06-03",
+      "KO": 32.78,
+      "PiS": 27.26,
+      "Trzecia_Droga": 6.88,
+      "Lewica": 9.76,
+      "Konfederacja": 23.31
+    },
+    {
+      "date": "2026-06-04",
+      "KO": 32.77,
+      "PiS": 27.23,
+      "Trzecia_Droga": 6.86,
+      "Lewica": 9.74,
+      "Konfederacja": 23.4
+    },
+    {
+      "date": "2026-06-05",
+      "KO": 32.76,
+      "PiS": 27.19,
+      "Trzecia_Droga": 6.83,
+      "Lewica": 9.73,
+      "Konfederacja": 23.48
+    },
+    {
+      "date": "2026-06-06",
+      "KO": 32.77,
+      "PiS": 27.15,
+      "Trzecia_Droga": 6.8,
+      "Lewica": 9.72,
+      "Konfederacja": 23.56
+    },
+    {
+      "date": "2026-06-07",
+      "KO": 32.76,
+      "PiS": 27.12,
+      "Trzecia_Droga": 6.78,
+      "Lewica": 9.71,
+      "Konfederacja": 23.62
+    },
+    {
+      "date": "2026-06-08",
+      "KO": 32.77,
+      "PiS": 27.08,
+      "Trzecia_Droga": 6.78,
+      "Lewica": 9.7,
+      "Konfederacja": 23.67
+    },
+    {
+      "date": "2026-06-09",
+      "KO": 32.78,
+      "PiS": 27.05,
+      "Trzecia_Droga": 6.79,
+      "Lewica": 9.7,
+      "Konfederacja": 23.69
+    },
+    {
+      "date": "2026-06-10",
+      "KO": 32.79,
+      "PiS": 27.0,
+      "Trzecia_Droga": 6.82,
+      "Lewica": 9.69,
+      "Konfederacja": 23.7
+    },
+    {
+      "date": "2026-06-11",
+      "KO": 32.8,
+      "PiS": 26.95,
+      "Trzecia_Droga": 6.9,
+      "Lewica": 9.68,
+      "Konfederacja": 23.67
+    },
+    {
+      "date": "2026-06-12",
+      "KO": 32.81,
+      "PiS": 26.89,
+      "Trzecia_Droga": 7.02,
+      "Lewica": 9.67,
+      "Konfederacja": 23.61
+    },
+    {
+      "date": "2026-06-13",
+      "KO": 32.81,
+      "PiS": 26.82,
+      "Trzecia_Droga": 7.16,
+      "Lewica": 9.67,
+      "Konfederacja": 23.53
+    },
+    {
+      "date": "2026-06-14",
+      "KO": 32.82,
+      "PiS": 26.76,
+      "Trzecia_Droga": 7.3,
+      "Lewica": 9.66,
+      "Konfederacja": 23.45
+    },
+    {
+      "date": "2026-06-15",
+      "KO": 32.84,
+      "PiS": 26.72,
+      "Trzecia_Droga": 7.4,
+      "Lewica": 9.65,
+      "Konfederacja": 23.39
+    },
+    {
+      "date": "2026-06-16",
+      "KO": 32.87,
+      "PiS": 26.7,
+      "Trzecia_Droga": 7.43,
+      "Lewica": 9.63,
+      "Konfederacja": 23.36
+    },
+    {
+      "date": "2026-06-17",
+      "KO": 32.93,
+      "PiS": 26.72,
+      "Trzecia_Droga": 7.38,
+      "Lewica": 9.6,
+      "Konfederacja": 23.36
+    },
+    {
+      "date": "2026-06-18",
+      "KO": 33.01,
+      "PiS": 26.76,
+      "Trzecia_Droga": 7.26,
+      "Lewica": 9.58,
+      "Konfederacja": 23.4
+    },
+    {
+      "date": "2026-06-19",
+      "KO": 33.1,
+      "PiS": 26.83,
+      "Trzecia_Droga": 7.08,
+      "Lewica": 9.54,
+      "Konfederacja": 23.46
+    },
+    {
+      "date": "2026-06-20",
+      "KO": 33.19,
+      "PiS": 26.9,
+      "Trzecia_Droga": 6.87,
+      "Lewica": 9.51,
+      "Konfederacja": 23.53
+    },
+    {
+      "date": "2026-06-21",
+      "KO": 33.26,
+      "PiS": 26.98,
+      "Trzecia_Droga": 6.69,
+      "Lewica": 9.48,
+      "Konfederacja": 23.6
+    },
+    {
+      "date": "2026-06-22",
+      "KO": 33.29,
+      "PiS": 27.05,
+      "Trzecia_Droga": 6.53,
+      "Lewica": 9.45,
+      "Konfederacja": 23.67
+    },
+    {
+      "date": "2026-06-23",
+      "KO": 33.25,
+      "PiS": 27.15,
+      "Trzecia_Droga": 6.43,
+      "Lewica": 9.44,
+      "Konfederacja": 23.73
+    },
+    {
+      "date": "2026-06-24",
+      "KO": 33.14,
+      "PiS": 27.22,
+      "Trzecia_Droga": 6.39,
+      "Lewica": 9.45,
+      "Konfederacja": 23.8
+    },
+    {
+      "date": "2026-06-25",
+      "KO": 32.96,
+      "PiS": 27.31,
+      "Trzecia_Droga": 6.38,
+      "Lewica": 9.48,
+      "Konfederacja": 23.87
+    },
+    {
+      "date": "2026-06-26",
+      "KO": 32.72,
+      "PiS": 27.42,
+      "Trzecia_Droga": 6.38,
+      "Lewica": 9.54,
+      "Konfederacja": 23.95
+    },
+    {
+      "date": "2026-06-27",
+      "KO": 32.46,
+      "PiS": 27.52,
+      "Trzecia_Droga": 6.4,
+      "Lewica": 9.6,
+      "Konfederacja": 24.02
+    },
+    {
+      "date": "2026-06-28",
+      "KO": 32.21,
+      "PiS": 27.62,
+      "Trzecia_Droga": 6.4,
+      "Lewica": 9.66,
+      "Konfederacja": 24.12
+    },
+    {
+      "date": "2026-06-29",
+      "KO": 31.97,
+      "PiS": 27.7,
+      "Trzecia_Droga": 6.39,
+      "Lewica": 9.73,
+      "Konfederacja": 24.21
+    },
+    {
+      "date": "2026-06-30",
+      "KO": 31.77,
+      "PiS": 27.75,
+      "Trzecia_Droga": 6.35,
+      "Lewica": 9.8,
+      "Konfederacja": 24.33
+    },
+    {
+      "date": "2026-07-01",
+      "KO": 31.62,
+      "PiS": 27.81,
+      "Trzecia_Droga": 6.26,
+      "Lewica": 9.88,
+      "Konfederacja": 24.44
+    },
+    {
+      "date": "2026-07-02",
+      "KO": 31.49,
+      "PiS": 27.85,
+      "Trzecia_Droga": 6.13,
+      "Lewica": 9.95,
+      "Konfederacja": 24.59
+    },
+    {
+      "date": "2026-07-03",
+      "KO": 31.41,
+      "PiS": 27.87,
+      "Trzecia_Droga": 5.98,
+      "Lewica": 10.01,
+      "Konfederacja": 24.73
+    },
+    {
+      "date": "2026-07-04",
+      "KO": 31.36,
+      "PiS": 27.91,
+      "Trzecia_Droga": 5.82,
+      "Lewica": 10.07,
+      "Konfederacja": 24.85
+    },
+    {
+      "date": "2026-07-05",
+      "KO": 31.31,
+      "PiS": 27.92,
+      "Trzecia_Droga": 5.69,
+      "Lewica": 10.12,
+      "Konfederacja": 24.96
+    },
+    {
+      "date": "2026-07-06",
+      "KO": 31.31,
+      "PiS": 27.93,
+      "Trzecia_Droga": 5.61,
+      "Lewica": 10.14,
+      "Konfederacja": 25.02
+    },
+    {
+      "date": "2026-07-07",
+      "KO": 31.32,
+      "PiS": 27.92,
+      "Trzecia_Droga": 5.58,
+      "Lewica": 10.15,
+      "Konfederacja": 25.04
+    },
+    {
+      "date": "2026-07-08",
+      "KO": 31.36,
+      "PiS": 27.88,
+      "Trzecia_Droga": 5.59,
+      "Lewica": 10.15,
+      "Konfederacja": 25.02
+    },
+    {
+      "date": "2026-07-09",
+      "KO": 31.41,
+      "PiS": 27.83,
+      "Trzecia_Droga": 5.63,
+      "Lewica": 10.14,
+      "Konfederacja": 24.99
+    },
+    {
+      "date": "2026-07-10",
+      "KO": 31.49,
+      "PiS": 27.76,
+      "Trzecia_Droga": 5.69,
+      "Lewica": 10.12,
+      "Konfederacja": 24.94
+    },
+    {
+      "date": "2026-07-11",
+      "KO": 31.58,
+      "PiS": 27.68,
+      "Trzecia_Droga": 5.76,
+      "Lewica": 10.11,
+      "Konfederacja": 24.88
+    },
+    {
+      "date": "2026-07-12",
+      "KO": 31.68,
+      "PiS": 27.59,
+      "Trzecia_Droga": 5.84,
+      "Lewica": 10.08,
+      "Konfederacja": 24.82
+    },
+    {
+      "date": "2026-07-13",
+      "KO": 31.78,
+      "PiS": 27.49,
+      "Trzecia_Droga": 5.93,
+      "Lewica": 10.06,
+      "Konfederacja": 24.75
+    },
+    {
+      "date": "2026-07-14",
+      "KO": 31.88,
+      "PiS": 27.39,
+      "Trzecia_Droga": 6.03,
+      "Lewica": 10.03,
+      "Konfederacja": 24.68
+    },
+    {
+      "date": "2026-07-15",
+      "KO": 31.99,
+      "PiS": 27.28,
+      "Trzecia_Droga": 6.12,
+      "Lewica": 10.01,
+      "Konfederacja": 24.61
+    },
+    {
+      "date": "2026-07-16",
+      "KO": 32.08,
+      "PiS": 27.18,
+      "Trzecia_Droga": 6.22,
+      "Lewica": 9.98,
+      "Konfederacja": 24.54
+    },
+    {
+      "date": "2026-07-17",
+      "KO": 32.17,
+      "PiS": 27.09,
+      "Trzecia_Droga": 6.32,
+      "Lewica": 9.95,
+      "Konfederacja": 24.48
+    },
+    {
+      "date": "2026-07-18",
+      "KO": 32.24,
+      "PiS": 27.01,
+      "Trzecia_Droga": 6.41,
+      "Lewica": 9.92,
+      "Konfederacja": 24.43
+    },
+    {
+      "date": "2026-07-19",
+      "KO": 32.29,
+      "PiS": 26.93,
+      "Trzecia_Droga": 6.5,
+      "Lewica": 9.9,
+      "Konfederacja": 24.39
+    },
+    {
+      "date": "2026-07-20",
+      "KO": 32.33,
+      "PiS": 26.87,
+      "Trzecia_Droga": 6.58,
+      "Lewica": 9.87,
+      "Konfederacja": 24.35
+    },
+    {
+      "date": "2026-07-21",
+      "KO": 32.35,
+      "PiS": 26.81,
+      "Trzecia_Droga": 6.67,
+      "Lewica": 9.84,
+      "Konfederacja": 24.33
+    },
+    {
+      "date": "2026-07-22",
+      "KO": 32.37,
+      "PiS": 26.77,
+      "Trzecia_Droga": 6.75,
+      "Lewica": 9.81,
+      "Konfederacja": 24.31
+    },
+    {
+      "date": "2026-07-23",
+      "KO": 32.38,
+      "PiS": 26.72,
+      "Trzecia_Droga": 6.82,
+      "Lewica": 9.78,
+      "Konfederacja": 24.29
+    },
+    {
+      "date": "2026-07-24",
+      "KO": 32.4,
+      "PiS": 26.69,
+      "Trzecia_Droga": 6.88,
+      "Lewica": 9.76,
+      "Konfederacja": 24.27
+    },
+    {
+      "date": "2026-07-25",
+      "KO": 32.42,
+      "PiS": 26.67,
+      "Trzecia_Droga": 6.92,
+      "Lewica": 9.75,
+      "Konfederacja": 24.24
+    },
+    {
+      "date": "2026-07-26",
+      "KO": 32.45,
+      "PiS": 26.66,
+      "Trzecia_Droga": 6.94,
+      "Lewica": 9.77,
+      "Konfederacja": 24.19
+    },
+    {
+      "date": "2026-07-27",
+      "KO": 32.49,
+      "PiS": 26.67,
+      "Trzecia_Droga": 6.92,
+      "Lewica": 9.82,
+      "Konfederacja": 24.11
+    },
+    {
+      "date": "2026-07-28",
+      "KO": 32.55,
+      "PiS": 26.68,
+      "Trzecia_Droga": 6.87,
+      "Lewica": 9.89,
+      "Konfederacja": 24.01
+    },
+    {
+      "date": "2026-07-29",
+      "KO": 32.63,
+      "PiS": 26.71,
+      "Trzecia_Droga": 6.8,
+      "Lewica": 9.99,
+      "Konfederacja": 23.88
+    },
+    {
+      "date": "2026-07-30",
+      "KO": 32.71,
+      "PiS": 26.74,
+      "Trzecia_Droga": 6.72,
+      "Lewica": 10.09,
+      "Konfederacja": 23.74
+    },
+    {
+      "date": "2026-07-31",
+      "KO": 32.76,
+      "PiS": 26.76,
+      "Trzecia_Droga": 6.65,
+      "Lewica": 10.19,
+      "Konfederacja": 23.63
+    },
+    {
+      "date": "2026-08-01",
+      "KO": 32.8,
+      "PiS": 26.77,
+      "Trzecia_Droga": 6.61,
+      "Lewica": 10.24,
+      "Konfederacja": 23.57
+    },
+    {
+      "date": "2026-08-02",
+      "KO": 32.8,
+      "PiS": 26.77,
+      "Trzecia_Droga": 6.6,
+      "Lewica": 10.24,
+      "Konfederacja": 23.58
+    },
+    {
+      "date": "2026-08-03",
+      "KO": 32.75,
+      "PiS": 26.75,
+      "Trzecia_Droga": 6.64,
+      "Lewica": 10.18,
+      "Konfederacja": 23.69
+    },
+    {
+      "date": "2026-08-04",
+      "KO": 32.65,
+      "PiS": 26.69,
+      "Trzecia_Droga": 6.71,
+      "Lewica": 10.07,
+      "Konfederacja": 23.88
+    },
+    {
+      "date": "2026-08-05",
+      "KO": 32.53,
+      "PiS": 26.64,
+      "Trzecia_Droga": 6.8,
+      "Lewica": 9.92,
+      "Konfederacja": 24.11
+    },
+    {
+      "date": "2026-08-06",
+      "KO": 32.42,
+      "PiS": 26.57,
+      "Trzecia_Droga": 6.89,
+      "Lewica": 9.77,
+      "Konfederacja": 24.35
+    },
+    {
+      "date": "2026-08-07",
+      "KO": 32.35,
+      "PiS": 26.51,
+      "Trzecia_Droga": 6.96,
+      "Lewica": 9.66,
+      "Konfederacja": 24.52
+    },
+    {
+      "date": "2026-08-08",
+      "KO": 32.32,
+      "PiS": 26.45,
+      "Trzecia_Droga": 6.99,
+      "Lewica": 9.64,
+      "Konfederacja": 24.6
+    },
+    {
+      "date": "2026-08-09",
+      "KO": 32.36,
+      "PiS": 26.39,
+      "Trzecia_Droga": 6.98,
+      "Lewica": 9.71,
+      "Konfederacja": 24.56
+    },
+    {
+      "date": "2026-08-10",
+      "KO": 32.45,
+      "PiS": 26.33,
+      "Trzecia_Droga": 6.94,
+      "Lewica": 9.87,
+      "Konfederacja": 24.41
+    },
+    {
+      "date": "2026-08-11",
+      "KO": 32.58,
+      "PiS": 26.27,
+      "Trzecia_Droga": 6.86,
+      "Lewica": 10.09,
+      "Konfederacja": 24.19
+    },
+    {
+      "date": "2026-08-12",
+      "KO": 32.72,
+      "PiS": 26.21,
+      "Trzecia_Droga": 6.78,
+      "Lewica": 10.34,
+      "Konfederacja": 23.94
+    },
+    {
+      "date": "2026-08-13",
+      "KO": 32.85,
+      "PiS": 26.17,
+      "Trzecia_Droga": 6.7,
+      "Lewica": 10.57,
+      "Konfederacja": 23.71
+    },
+    {
+      "date": "2026-08-14",
+      "KO": 32.95,
+      "PiS": 26.13,
+      "Trzecia_Droga": 6.63,
+      "Lewica": 10.75,
+      "Konfederacja": 23.53
+    },
+    {
+      "date": "2026-08-15",
+      "KO": 33.02,
+      "PiS": 26.12,
+      "Trzecia_Droga": 6.58,
+      "Lewica": 10.86,
+      "Konfederacja": 23.41
+    },
+    {
+      "date": "2026-08-16",
+      "KO": 33.06,
+      "PiS": 26.11,
+      "Trzecia_Droga": 6.55,
+      "Lewica": 10.92,
+      "Konfederacja": 23.35
+    },
+    {
+      "date": "2026-08-17",
+      "KO": 33.08,
+      "PiS": 26.12,
+      "Trzecia_Droga": 6.53,
+      "Lewica": 10.94,
+      "Konfederacja": 23.33
+    },
+    {
+      "date": "2026-08-18",
+      "KO": 33.08,
+      "PiS": 26.12,
+      "Trzecia_Droga": 6.51,
+      "Lewica": 10.94,
+      "Konfederacja": 23.35
+    },
+    {
+      "date": "2026-08-19",
+      "KO": 33.06,
+      "PiS": 26.13,
+      "Trzecia_Droga": 6.5,
+      "Lewica": 10.92,
+      "Konfederacja": 23.38
+    },
+    {
+      "date": "2026-08-20",
+      "KO": 33.05,
+      "PiS": 26.15,
+      "Trzecia_Droga": 6.5,
+      "Lewica": 10.88,
+      "Konfederacja": 23.42
+    },
+    {
+      "date": "2026-08-21",
+      "KO": 33.02,
+      "PiS": 26.17,
+      "Trzecia_Droga": 6.49,
+      "Lewica": 10.84,
+      "Konfederacja": 23.48
+    },
+    {
+      "date": "2026-08-22",
+      "KO": 32.98,
+      "PiS": 26.19,
+      "Trzecia_Droga": 6.48,
+      "Lewica": 10.78,
+      "Konfederacja": 23.56
+    },
+    {
+      "date": "2026-08-23",
+      "KO": 32.94,
+      "PiS": 26.22,
+      "Trzecia_Droga": 6.47,
+      "Lewica": 10.7,
+      "Konfederacja": 23.66
+    },
+    {
+      "date": "2026-08-24",
+      "KO": 32.87,
+      "PiS": 26.26,
+      "Trzecia_Droga": 6.47,
+      "Lewica": 10.6,
+      "Konfederacja": 23.8
+    },
+    {
+      "date": "2026-08-25",
+      "KO": 32.8,
+      "PiS": 26.31,
+      "Trzecia_Droga": 6.47,
+      "Lewica": 10.47,
+      "Konfederacja": 23.95
+    },
+    {
+      "date": "2026-08-26",
+      "KO": 32.73,
+      "PiS": 26.34,
+      "Trzecia_Droga": 6.46,
+      "Lewica": 10.36,
+      "Konfederacja": 24.1
+    },
+    {
+      "date": "2026-08-27",
+      "KO": 32.67,
+      "PiS": 26.37,
+      "Trzecia_Droga": 6.46,
+      "Lewica": 10.26,
+      "Konfederacja": 24.23
+    },
+    {
+      "date": "2026-08-28",
+      "KO": 32.62,
+      "PiS": 26.4,
+      "Trzecia_Droga": 6.46,
+      "Lewica": 10.17,
+      "Konfederacja": 24.34
+    }
+  ],
+  "forecast_chart": [
+    {
+      "date": "2026-08-29",
+      "KO_p50": 32.58,
+      "KO_p10": 32.58,
+      "KO_p90": 32.59,
+      "PiS_p50": 26.43,
+      "PiS_p10": 26.41,
+      "PiS_p90": 26.45,
+      "Trzecia_Droga_p50": 6.47,
+      "Trzecia_Droga_p10": 6.45,
+      "Trzecia_Droga_p90": 6.49,
+      "Lewica_p50": 10.11,
+      "Lewica_p10": 10.08,
+      "Lewica_p90": 10.13,
+      "Konfederacja_p50": 24.41,
+      "Konfederacja_p10": 24.36,
+      "Konfederacja_p90": 24.44
+    },
+    {
+      "date": "2026-08-30",
+      "KO_p50": 32.57,
+      "KO_p10": 32.56,
+      "KO_p90": 32.59,
+      "PiS_p50": 26.44,
+      "PiS_p10": 26.4,
+      "PiS_p90": 26.48,
+      "Trzecia_Droga_p50": 6.47,
+      "Trzecia_Droga_p10": 6.43,
+      "Trzecia_Droga_p90": 6.5,
+      "Lewica_p50": 10.06,
+      "Lewica_p10": 10.01,
+      "Lewica_p90": 10.1,
+      "Konfederacja_p50": 24.45,
+      "Konfederacja_p10": 24.34,
+      "Konfederacja_p90": 24.53
+    },
+    {
+      "date": "2026-08-31",
+      "KO_p50": 32.58,
+      "KO_p10": 32.53,
+      "KO_p90": 32.61,
+      "PiS_p50": 26.46,
+      "PiS_p10": 26.38,
+      "PiS_p90": 26.52,
+      "Trzecia_Droga_p50": 6.48,
+      "Trzecia_Droga_p10": 6.42,
+      "Trzecia_Droga_p90": 6.55,
+      "Lewica_p50": 10.01,
+      "Lewica_p10": 9.93,
+      "Lewica_p90": 10.1,
+      "Konfederacja_p50": 24.47,
+      "Konfederacja_p10": 24.28,
+      "Konfederacja_p90": 24.62
+    },
+    {
+      "date": "2026-09-01",
+      "KO_p50": 32.58,
+      "KO_p10": 32.49,
+      "KO_p90": 32.65,
+      "PiS_p50": 26.48,
+      "PiS_p10": 26.36,
+      "PiS_p90": 26.56,
+      "Trzecia_Droga_p50": 6.5,
+      "Trzecia_Droga_p10": 6.4,
+      "Trzecia_Droga_p90": 6.6,
+      "Lewica_p50": 9.97,
+      "Lewica_p10": 9.84,
+      "Lewica_p90": 10.11,
+      "Konfederacja_p50": 24.47,
+      "Konfederacja_p10": 24.18,
+      "Konfederacja_p90": 24.72
+    },
+    {
+      "date": "2026-09-02",
+      "KO_p50": 32.59,
+      "KO_p10": 32.44,
+      "KO_p90": 32.7,
+      "PiS_p50": 26.49,
+      "PiS_p10": 26.32,
+      "PiS_p90": 26.62,
+      "Trzecia_Droga_p50": 6.51,
+      "Trzecia_Droga_p10": 6.38,
+      "Trzecia_Droga_p90": 6.65,
+      "Lewica_p50": 9.94,
+      "Lewica_p10": 9.75,
+      "Lewica_p90": 10.14,
+      "Konfederacja_p50": 24.47,
+      "Konfederacja_p10": 24.05,
+      "Konfederacja_p90": 24.82
+    },
+    {
+      "date": "2026-09-03",
+      "KO_p50": 32.61,
+      "KO_p10": 32.4,
+      "KO_p90": 32.76,
+      "PiS_p50": 26.51,
+      "PiS_p10": 26.28,
+      "PiS_p90": 26.68,
+      "Trzecia_Droga_p50": 6.52,
+      "Trzecia_Droga_p10": 6.36,
+      "Trzecia_Droga_p90": 6.7,
+      "Lewica_p50": 9.91,
+      "Lewica_p10": 9.66,
+      "Lewica_p90": 10.17,
+      "Konfederacja_p50": 24.45,
+      "Konfederacja_p10": 23.92,
+      "Konfederacja_p90": 24.93
+    },
+    {
+      "date": "2026-09-04",
+      "KO_p50": 32.62,
+      "KO_p10": 32.34,
+      "KO_p90": 32.83,
+      "PiS_p50": 26.52,
+      "PiS_p10": 26.24,
+      "PiS_p90": 26.75,
+      "Trzecia_Droga_p50": 6.53,
+      "Trzecia_Droga_p10": 6.33,
+      "Trzecia_Droga_p90": 6.75,
+      "Lewica_p50": 9.89,
+      "Lewica_p10": 9.58,
+      "Lewica_p90": 10.22,
+      "Konfederacja_p50": 24.44,
+      "Konfederacja_p10": 23.8,
+      "Konfederacja_p90": 25.02
+    },
+    {
+      "date": "2026-09-05",
+      "KO_p50": 32.63,
+      "KO_p10": 32.28,
+      "KO_p90": 32.9,
+      "PiS_p50": 26.53,
+      "PiS_p10": 26.19,
+      "PiS_p90": 26.81,
+      "Trzecia_Droga_p50": 6.54,
+      "Trzecia_Droga_p10": 6.31,
+      "Trzecia_Droga_p90": 6.8,
+      "Lewica_p50": 9.87,
+      "Lewica_p10": 9.5,
+      "Lewica_p90": 10.27,
+      "Konfederacja_p50": 24.43,
+      "Konfederacja_p10": 23.66,
+      "Konfederacja_p90": 25.12
+    },
+    {
+      "date": "2026-09-06",
+      "KO_p50": 32.64,
+      "KO_p10": 32.22,
+      "KO_p90": 32.97,
+      "PiS_p50": 26.55,
+      "PiS_p10": 26.14,
+      "PiS_p90": 26.89,
+      "Trzecia_Droga_p50": 6.54,
+      "Trzecia_Droga_p10": 6.28,
+      "Trzecia_Droga_p90": 6.84,
+      "Lewica_p50": 9.86,
+      "Lewica_p10": 9.44,
+      "Lewica_p90": 10.32,
+      "Konfederacja_p50": 24.41,
+      "Konfederacja_p10": 23.54,
+      "Konfederacja_p90": 25.2
+    },
+    {
+      "date": "2026-09-07",
+      "KO_p50": 32.65,
+      "KO_p10": 32.17,
+      "KO_p90": 33.03,
+      "PiS_p50": 26.55,
+      "PiS_p10": 26.09,
+      "PiS_p90": 26.95,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.26,
+      "Trzecia_Droga_p90": 6.88,
+      "Lewica_p50": 9.86,
+      "Lewica_p10": 9.38,
+      "Lewica_p90": 10.37,
+      "Konfederacja_p50": 24.38,
+      "Konfederacja_p10": 23.44,
+      "Konfederacja_p90": 25.27
+    },
+    {
+      "date": "2026-09-08",
+      "KO_p50": 32.66,
+      "KO_p10": 32.12,
+      "KO_p90": 33.09,
+      "PiS_p50": 26.55,
+      "PiS_p10": 26.03,
+      "PiS_p90": 27.01,
+      "Trzecia_Droga_p50": 6.56,
+      "Trzecia_Droga_p10": 6.23,
+      "Trzecia_Droga_p90": 6.91,
+      "Lewica_p50": 9.86,
+      "Lewica_p10": 9.32,
+      "Lewica_p90": 10.43,
+      "Konfederacja_p50": 24.36,
+      "Konfederacja_p10": 23.36,
+      "Konfederacja_p90": 25.32
+    },
+    {
+      "date": "2026-09-09",
+      "KO_p50": 32.68,
+      "KO_p10": 32.05,
+      "KO_p90": 33.17,
+      "PiS_p50": 26.56,
+      "PiS_p10": 25.98,
+      "PiS_p90": 27.07,
+      "Trzecia_Droga_p50": 6.56,
+      "Trzecia_Droga_p10": 6.21,
+      "Trzecia_Droga_p90": 6.93,
+      "Lewica_p50": 9.86,
+      "Lewica_p10": 9.28,
+      "Lewica_p90": 10.47,
+      "Konfederacja_p50": 24.35,
+      "Konfederacja_p10": 23.29,
+      "Konfederacja_p90": 25.36
+    },
+    {
+      "date": "2026-09-10",
+      "KO_p50": 32.69,
+      "KO_p10": 32.0,
+      "KO_p90": 33.22,
+      "PiS_p50": 26.56,
+      "PiS_p10": 25.93,
+      "PiS_p90": 27.13,
+      "Trzecia_Droga_p50": 6.56,
+      "Trzecia_Droga_p10": 6.19,
+      "Trzecia_Droga_p90": 6.95,
+      "Lewica_p50": 9.86,
+      "Lewica_p10": 9.25,
+      "Lewica_p90": 10.5,
+      "Konfederacja_p50": 24.33,
+      "Konfederacja_p10": 23.23,
+      "Konfederacja_p90": 25.37
+    },
+    {
+      "date": "2026-09-11",
+      "KO_p50": 32.68,
+      "KO_p10": 31.95,
+      "KO_p90": 33.26,
+      "PiS_p50": 26.56,
+      "PiS_p10": 25.89,
+      "PiS_p90": 27.17,
+      "Trzecia_Droga_p50": 6.57,
+      "Trzecia_Droga_p10": 6.17,
+      "Trzecia_Droga_p90": 6.98,
+      "Lewica_p50": 9.86,
+      "Lewica_p10": 9.23,
+      "Lewica_p90": 10.53,
+      "Konfederacja_p50": 24.33,
+      "Konfederacja_p10": 23.21,
+      "Konfederacja_p90": 25.41
+    },
+    {
+      "date": "2026-09-12",
+      "KO_p50": 32.68,
+      "KO_p10": 31.94,
+      "KO_p90": 33.26,
+      "PiS_p50": 26.56,
+      "PiS_p10": 25.84,
+      "PiS_p90": 27.23,
+      "Trzecia_Droga_p50": 6.57,
+      "Trzecia_Droga_p10": 6.16,
+      "Trzecia_Droga_p90": 7.0,
+      "Lewica_p50": 9.87,
+      "Lewica_p10": 9.2,
+      "Lewica_p90": 10.57,
+      "Konfederacja_p50": 24.32,
+      "Konfederacja_p10": 23.17,
+      "Konfederacja_p90": 25.44
+    },
+    {
+      "date": "2026-09-13",
+      "KO_p50": 32.68,
+      "KO_p10": 31.94,
+      "KO_p90": 33.25,
+      "PiS_p50": 26.56,
+      "PiS_p10": 25.82,
+      "PiS_p90": 27.26,
+      "Trzecia_Droga_p50": 6.58,
+      "Trzecia_Droga_p10": 6.15,
+      "Trzecia_Droga_p90": 7.03,
+      "Lewica_p50": 9.87,
+      "Lewica_p10": 9.19,
+      "Lewica_p90": 10.59,
+      "Konfederacja_p50": 24.32,
+      "Konfederacja_p10": 23.16,
+      "Konfederacja_p90": 25.46
+    },
+    {
+      "date": "2026-09-14",
+      "KO_p50": 32.67,
+      "KO_p10": 31.9,
+      "KO_p90": 33.28,
+      "PiS_p50": 26.57,
+      "PiS_p10": 25.77,
+      "PiS_p90": 27.31,
+      "Trzecia_Droga_p50": 6.58,
+      "Trzecia_Droga_p10": 6.13,
+      "Trzecia_Droga_p90": 7.05,
+      "Lewica_p50": 9.87,
+      "Lewica_p10": 9.17,
+      "Lewica_p90": 10.62,
+      "Konfederacja_p50": 24.31,
+      "Konfederacja_p10": 23.14,
+      "Konfederacja_p90": 25.48
+    },
+    {
+      "date": "2026-09-15",
+      "KO_p50": 32.66,
+      "KO_p10": 31.88,
+      "KO_p90": 33.29,
+      "PiS_p50": 26.57,
+      "PiS_p10": 25.74,
+      "PiS_p90": 27.35,
+      "Trzecia_Droga_p50": 6.58,
+      "Trzecia_Droga_p10": 6.12,
+      "Trzecia_Droga_p90": 7.07,
+      "Lewica_p50": 9.88,
+      "Lewica_p10": 9.15,
+      "Lewica_p90": 10.65,
+      "Konfederacja_p50": 24.31,
+      "Konfederacja_p10": 23.12,
+      "Konfederacja_p90": 25.49
+    },
+    {
+      "date": "2026-09-16",
+      "KO_p50": 32.67,
+      "KO_p10": 31.86,
+      "KO_p90": 33.3,
+      "PiS_p50": 26.57,
+      "PiS_p10": 25.72,
+      "PiS_p90": 27.38,
+      "Trzecia_Droga_p50": 6.58,
+      "Trzecia_Droga_p10": 6.1,
+      "Trzecia_Droga_p90": 7.09,
+      "Lewica_p50": 9.88,
+      "Lewica_p10": 9.15,
+      "Lewica_p90": 10.67,
+      "Konfederacja_p50": 24.3,
+      "Konfederacja_p10": 23.1,
+      "Konfederacja_p90": 25.5
+    },
+    {
+      "date": "2026-09-17",
+      "KO_p50": 32.66,
+      "KO_p10": 31.84,
+      "KO_p90": 33.31,
+      "PiS_p50": 26.58,
+      "PiS_p10": 25.7,
+      "PiS_p90": 27.42,
+      "Trzecia_Droga_p50": 6.58,
+      "Trzecia_Droga_p10": 6.09,
+      "Trzecia_Droga_p90": 7.1,
+      "Lewica_p50": 9.89,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.69,
+      "Konfederacja_p50": 24.28,
+      "Konfederacja_p10": 23.08,
+      "Konfederacja_p90": 25.5
+    },
+    {
+      "date": "2026-09-18",
+      "KO_p50": 32.66,
+      "KO_p10": 31.83,
+      "KO_p90": 33.31,
+      "PiS_p50": 26.59,
+      "PiS_p10": 25.67,
+      "PiS_p90": 27.45,
+      "Trzecia_Droga_p50": 6.57,
+      "Trzecia_Droga_p10": 6.07,
+      "Trzecia_Droga_p90": 7.11,
+      "Lewica_p50": 9.9,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.72,
+      "Konfederacja_p50": 24.27,
+      "Konfederacja_p10": 23.06,
+      "Konfederacja_p90": 25.5
+    },
+    {
+      "date": "2026-09-19",
+      "KO_p50": 32.67,
+      "KO_p10": 31.82,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.61,
+      "PiS_p10": 25.65,
+      "PiS_p90": 27.48,
+      "Trzecia_Droga_p50": 6.56,
+      "Trzecia_Droga_p10": 6.06,
+      "Trzecia_Droga_p90": 7.1,
+      "Lewica_p50": 9.9,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.73,
+      "Konfederacja_p50": 24.26,
+      "Konfederacja_p10": 23.03,
+      "Konfederacja_p90": 25.5
+    },
+    {
+      "date": "2026-09-20",
+      "KO_p50": 32.67,
+      "KO_p10": 31.81,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.61,
+      "PiS_p10": 25.63,
+      "PiS_p90": 27.51,
+      "Trzecia_Droga_p50": 6.56,
+      "Trzecia_Droga_p10": 6.05,
+      "Trzecia_Droga_p90": 7.11,
+      "Lewica_p50": 9.91,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.74,
+      "Konfederacja_p50": 24.25,
+      "Konfederacja_p10": 23.03,
+      "Konfederacja_p90": 25.49
+    },
+    {
+      "date": "2026-09-21",
+      "KO_p50": 32.66,
+      "KO_p10": 31.8,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.63,
+      "PiS_p10": 25.62,
+      "PiS_p90": 27.54,
+      "Trzecia_Droga_p50": 6.56,
+      "Trzecia_Droga_p10": 6.04,
+      "Trzecia_Droga_p90": 7.1,
+      "Lewica_p50": 9.91,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.75,
+      "Konfederacja_p50": 24.24,
+      "Konfederacja_p10": 23.01,
+      "Konfederacja_p90": 25.48
+    },
+    {
+      "date": "2026-09-22",
+      "KO_p50": 32.66,
+      "KO_p10": 31.8,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.64,
+      "PiS_p10": 25.62,
+      "PiS_p90": 27.57,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.03,
+      "Trzecia_Droga_p90": 7.1,
+      "Lewica_p50": 9.92,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.76,
+      "Konfederacja_p50": 24.23,
+      "Konfederacja_p10": 23.0,
+      "Konfederacja_p90": 25.48
+    },
+    {
+      "date": "2026-09-23",
+      "KO_p50": 32.66,
+      "KO_p10": 31.79,
+      "KO_p90": 33.33,
+      "PiS_p50": 26.65,
+      "PiS_p10": 25.61,
+      "PiS_p90": 27.59,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.01,
+      "Trzecia_Droga_p90": 7.11,
+      "Lewica_p50": 9.92,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.77,
+      "Konfederacja_p50": 24.23,
+      "Konfederacja_p10": 23.0,
+      "Konfederacja_p90": 25.49
+    },
+    {
+      "date": "2026-09-24",
+      "KO_p50": 32.65,
+      "KO_p10": 31.78,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.66,
+      "PiS_p10": 25.61,
+      "PiS_p90": 27.61,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.02,
+      "Trzecia_Droga_p90": 7.1,
+      "Lewica_p50": 9.92,
+      "Lewica_p10": 9.14,
+      "Lewica_p90": 10.77,
+      "Konfederacja_p50": 24.23,
+      "Konfederacja_p10": 23.0,
+      "Konfederacja_p90": 25.49
+    },
+    {
+      "date": "2026-09-25",
+      "KO_p50": 32.64,
+      "KO_p10": 31.78,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.67,
+      "PiS_p10": 25.62,
+      "PiS_p90": 27.63,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.01,
+      "Trzecia_Droga_p90": 7.11,
+      "Lewica_p50": 9.92,
+      "Lewica_p10": 9.15,
+      "Lewica_p90": 10.78,
+      "Konfederacja_p50": 24.22,
+      "Konfederacja_p10": 22.99,
+      "Konfederacja_p90": 25.5
+    },
+    {
+      "date": "2026-09-26",
+      "KO_p50": 32.64,
+      "KO_p10": 31.78,
+      "KO_p90": 33.32,
+      "PiS_p50": 26.67,
+      "PiS_p10": 25.62,
+      "PiS_p90": 27.65,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.02,
+      "Trzecia_Droga_p90": 7.11,
+      "Lewica_p50": 9.93,
+      "Lewica_p10": 9.15,
+      "Lewica_p90": 10.79,
+      "Konfederacja_p50": 24.21,
+      "Konfederacja_p10": 22.99,
+      "Konfederacja_p90": 25.5
+    },
+    {
+      "date": "2026-09-27",
+      "KO_p50": 32.63,
+      "KO_p10": 31.78,
+      "KO_p90": 33.31,
+      "PiS_p50": 26.68,
+      "PiS_p10": 25.62,
+      "PiS_p90": 27.67,
+      "Trzecia_Droga_p50": 6.55,
+      "Trzecia_Droga_p10": 6.03,
+      "Trzecia_Droga_p90": 7.11,
+      "Lewica_p50": 9.92,
+      "Lewica_p10": 9.15,
+      "Lewica_p90": 10.79,
+      "Konfederacja_p50": 24.21,
+      "Konfederacja_p10": 22.99,
+      "Konfederacja_p90": 25.5
+    }
+  ],
+  "baselines_comparison": {
+    "KO": {
+      "EWMA": 32.81,
+      "ARIMA": 32.09,
+      "LightGBM": 31.91,
+      "TimesFM_3": 32.63
+    },
+    "PiS": {
+      "EWMA": 26.29,
+      "ARIMA": 26.87,
+      "LightGBM": 26.24,
+      "TimesFM_3": 26.68
+    },
+    "Trzecia_Droga": {
+      "EWMA": 6.51,
+      "ARIMA": 6.41,
+      "LightGBM": 6.0,
+      "TimesFM_3": 6.55
+    },
+    "Lewica": {
+      "EWMA": 10.49,
+      "ARIMA": 9.45,
+      "LightGBM": 10.57,
+      "TimesFM_3": 9.92
+    },
+    "Konfederacja": {
+      "EWMA": 23.9,
+      "ARIMA": 25.42,
+      "LightGBM": 24.6,
+      "TimesFM_3": 24.21
+    }
+  },
+  "scenarios_grid": [
+    {
+      "name": "NBP -1.00% | CPI -1.50%",
+      "cpi_delta": -1.5,
+      "rate_delta": -1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -1.00% | CPI -0.75%",
+      "cpi_delta": -0.75,
+      "rate_delta": -1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -1.00% | CPI +0.00%",
+      "cpi_delta": 0.0,
+      "rate_delta": -1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -1.00% | CPI +0.75%",
+      "cpi_delta": 0.75,
+      "rate_delta": -1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -1.00% | CPI +1.50%",
+      "cpi_delta": 1.5,
+      "rate_delta": -1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -0.50% | CPI -1.50%",
+      "cpi_delta": -1.5,
+      "rate_delta": -0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -0.50% | CPI -0.75%",
+      "cpi_delta": -0.75,
+      "rate_delta": -0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -0.50% | CPI +0.00%",
+      "cpi_delta": 0.0,
+      "rate_delta": -0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -0.50% | CPI +0.75%",
+      "cpi_delta": 0.75,
+      "rate_delta": -0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP -0.50% | CPI +1.50%",
+      "cpi_delta": 1.5,
+      "rate_delta": -0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.00% | CPI -1.50%",
+      "cpi_delta": -1.5,
+      "rate_delta": 0.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.00% | CPI -0.75%",
+      "cpi_delta": -0.75,
+      "rate_delta": 0.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.00% | CPI +0.00%",
+      "cpi_delta": 0.0,
+      "rate_delta": 0.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.00% | CPI +0.75%",
+      "cpi_delta": 0.75,
+      "rate_delta": 0.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.00% | CPI +1.50%",
+      "cpi_delta": 1.5,
+      "rate_delta": 0.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.50% | CPI -1.50%",
+      "cpi_delta": -1.5,
+      "rate_delta": 0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.50% | CPI -0.75%",
+      "cpi_delta": -0.75,
+      "rate_delta": 0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.50% | CPI +0.00%",
+      "cpi_delta": 0.0,
+      "rate_delta": 0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.50% | CPI +0.75%",
+      "cpi_delta": 0.75,
+      "rate_delta": 0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +0.50% | CPI +1.50%",
+      "cpi_delta": 1.5,
+      "rate_delta": 0.5,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +1.00% | CPI -1.50%",
+      "cpi_delta": -1.5,
+      "rate_delta": 1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +1.00% | CPI -0.75%",
+      "cpi_delta": -0.75,
+      "rate_delta": 1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +1.00% | CPI +0.00%",
+      "cpi_delta": 0.0,
+      "rate_delta": 1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +1.00% | CPI +0.75%",
+      "cpi_delta": 0.75,
+      "rate_delta": 1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    },
+    {
+      "name": "NBP +1.00% | CPI +1.50%",
+      "cpi_delta": 1.5,
+      "rate_delta": 1.0,
+      "final_support": {
+        "KO": 32.58,
+        "PiS": 26.64,
+        "Trzecia_Droga": 6.54,
+        "Lewica": 9.91,
+        "Konfederacja": 24.33
+      },
+      "delta_from_baseline": {
+        "KO": -0.05,
+        "PiS": -0.04,
+        "Trzecia_Droga": -0.01,
+        "Lewica": -0.01,
+        "Konfederacja": 0.12
+      },
+      "coalition_total": 49.03,
+      "opposition_total": 50.97
+    }
+  ],
+  "inflections": [
+    {
+      "date": "2023-02-22",
+      "party": "KO",
+      "shift_magnitude": -1.15,
+      "velocity": -0.315,
+      "event_label": null
+    },
+    {
+      "date": "2023-05-01",
+      "party": "KO",
+      "shift_magnitude": 1.11,
+      "velocity": 0.235,
+      "event_label": null
+    },
+    {
+      "date": "2023-05-22",
+      "party": "KO",
+      "shift_magnitude": 2.47,
+      "velocity": 0.385,
+      "event_label": null
+    },
+    {
+      "date": "2023-07-30",
+      "party": "KO",
+      "shift_magnitude": -0.6,
+      "velocity": -0.1,
+      "event_label": null
+    },
+    {
+      "date": "2023-08-29",
+      "party": "KO",
+      "shift_magnitude": 1.01,
+      "velocity": 0.17,
+      "event_label": null
+    },
+    {
+      "date": "2023-10-30",
+      "party": "KO",
+      "shift_magnitude": 0.94,
+      "velocity": 0.225,
+      "event_label": null
+    },
+    {
+      "date": "2023-12-27",
+      "party": "KO",
+      "shift_magnitude": 1.02,
+      "velocity": 0.37,
+      "event_label": null
+    },
+    {
+      "date": "2024-09-27",
+      "party": "KO",
+      "shift_magnitude": -1.21,
+      "velocity": -0.48,
+      "event_label": null
+    },
+    {
+      "date": "2024-12-30",
+      "party": "KO",
+      "shift_magnitude": 0.81,
+      "velocity": 0.31,
+      "event_label": null
+    },
+    {
+      "date": "2025-01-23",
+      "party": "KO",
+      "shift_magnitude": 0.46,
+      "velocity": 0.13,
+      "event_label": null
+    },
+    {
+      "date": "2025-04-10",
+      "party": "KO",
+      "shift_magnitude": 0.63,
+      "velocity": 0.185,
+      "event_label": null
+    },
+    {
+      "date": "2025-06-02",
+      "party": "KO",
+      "shift_magnitude": 0.96,
+      "velocity": 0.345,
+      "event_label": null
+    },
+    {
+      "date": "2026-01-10",
+      "party": "KO",
+      "shift_magnitude": 0.46,
+      "velocity": 0.11,
+      "event_label": null
+    },
+    {
+      "date": "2026-04-24",
+      "party": "KO",
+      "shift_magnitude": 0.54,
+      "velocity": 0.26,
+      "event_label": null
+    },
+    {
+      "date": "2026-05-18",
+      "party": "KO",
+      "shift_magnitude": 0.78,
+      "velocity": 0.23,
+      "event_label": null
+    }
+  ]
+}
