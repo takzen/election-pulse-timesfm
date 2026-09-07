@@ -52,12 +52,21 @@ export const metadata: Metadata = {
     siteName: "Puls Wyborczy",
     locale: "pl_PL",
     type: "website",
+    images: [
+      {
+        url: "https://pulswyborczy.pl/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Puls Wyborczy | Niezależne Prognozy i Sondaże",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Puls Wyborczy | Sondaże i Prognozy Wyborcze",
     description: "Model statystyczny oparty o Google TimesFM 3.0 badający sondaże, trendy i gospodarkę.",
     creator: "@takzendev",
+    images: ["https://pulswyborczy.pl/og-image.png"],
   },
 };
 
