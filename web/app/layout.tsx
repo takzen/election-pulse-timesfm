@@ -63,6 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@takzendev",
     title: "Puls Wyborczy | Sondaże i Prognozy Wyborcze",
     description: "Model statystyczny oparty o Google TimesFM 3.0 badający sondaże, trendy i gospodarkę.",
     creator: "@takzendev",
