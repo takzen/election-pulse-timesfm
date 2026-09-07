@@ -10,8 +10,6 @@ import {
   RotateCcw,
   Sparkles,
   Share2,
-  Users,
-  Info,
 } from "lucide-react";
 
 interface PartyMeta {
@@ -83,7 +81,6 @@ export function CoalitionSimulator({
   const [selectedParties, setSelectedParties] = useState<Set<string>>(
     () => new Set(["KO", "PSL", "Polska_2050", "Lewica"])
   );
-  const [copiedShare, setCopiedShare] = useState(false);
 
   // List of parties eligible for the Sejm (excluding non-partisan options and parties below 5%)
   const parliamentParties = useMemo(() => {
@@ -259,15 +256,14 @@ https://pulswyborczy.pl`;
             return (
               <button
                 key={party.key}
-                onClick={() => canGovern && toggleParty(party.key)}
-                disabled={!canGovern}
-                className={`relative flex flex-col justify-between p-3.5 rounded-xl border text-left transition select-none ${
-                  !canGovern
-                    ? "opacity-40 border-slate-800/40 bg-slate-950/40 cursor-not-allowed"
-                    : isSelected
-                    ? "border-emerald-500/80 bg-[#0c1e28] shadow-lg shadow-emerald-950/40 ring-1 ring-emerald-500/40"
-                    : "border-slate-800 bg-[#070b14] hover:border-slate-700 hover:bg-slate-900/80 cursor-pointer"
-                }`}
+                onClick={() => toggleParty(party.key)}
+                className={`relative flex flex-col justify-between p-3.5 rounded-xl border text-left transition select-none cursor-pointer ${
+                  isSelected
+                    ? canGovern
+                      ? "border-emerald-500/80 bg-[#0c1e28] shadow-lg shadow-emerald-950/40 ring-1 ring-emerald-500/40"
+                      : "border-amber-600/60 bg-[#1a1508] shadow-md ring-1 ring-amber-600/30"
+                    : "border-slate-800 bg-[#070b14] hover:border-slate-700 hover:bg-slate-900/80"
+                }${!canGovern ? " opacity-70" : ""}`}
               >
                 {/* Top: Status Pill + Indicator */}
                 <div className="flex items-center justify-between gap-1 w-full">
@@ -278,13 +274,21 @@ https://pulswyborczy.pl`;
                   <span
                     className={`text-[10px] font-bold px-1.5 py-0.5 rounded border uppercase tracking-wider ${
                       !canGovern
-                        ? "bg-slate-900 text-slate-500 border-slate-800"
+                        ? isSelected
+                          ? "bg-amber-900/60 text-amber-300 border-amber-700/60"
+                          : "bg-slate-900 text-slate-500 border-slate-800"
                         : isSelected
                         ? "bg-emerald-900/60 text-emerald-300 border-emerald-700/60"
                         : "bg-slate-800 text-slate-400 border-slate-700"
                     }`}
                   >
-                    {!canGovern ? "Poza Sejmem" : isSelected ? "W rządzie" : "W opozycji"}
+                    {!canGovern
+                      ? isSelected
+                        ? "Poniżej progu 5%"
+                        : "Poza Sejmem"
+                      : isSelected
+                      ? "W rządzie"
+                      : "W opozycji"}
                   </span>
                 </div>
 
@@ -301,7 +305,9 @@ https://pulswyborczy.pl`;
                   <span className="text-xs font-mono text-slate-400">
                     {party.forecast.toFixed(1)}%
                   </span>
-                  <span className="text-xs sm:text-sm font-bold font-mono text-white">
+                  <span className={`text-xs sm:text-sm font-bold font-mono ${
+                    !canGovern ? "text-slate-500" : "text-white"
+                  }`}>
                     {party.inSejm ? `${party.seats} m.` : "0 m."}
                   </span>
                 </div>
