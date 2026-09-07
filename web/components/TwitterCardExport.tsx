@@ -96,28 +96,47 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
   const partyDisplay: Record<string, { emoji: string; label: string }> = {
     KO: { emoji: "🟠", label: "KO" },
     PiS: { emoji: "🔵", label: "PiS" },
-    Konfederacja: { emoji: "⚫", label: "Konfederacja" },
+    Konfederacja: { emoji: "⚫", label: "Konf" },
     KKP: { emoji: "🟤", label: "KKP" },
     Lewica: { emoji: "🔴", label: "Lewica" },
-    Rozwoj_Plus: { emoji: "🟪", label: "Rozwoj Plus" },
+    Rozwoj_Plus: { emoji: "🟣", label: "Rozwój+" },
     PSL: { emoji: "🟢", label: "PSL" },
     Razem: { emoji: "🟣", label: "Razem" },
-    Polska_2050: { emoji: "🟡", label: "Polska 2050" },
+    Polska_2050: { emoji: "🟡", label: "PL2050" },
   };
 
   // All parties (excluding Niezdecydowani which is shown separately)
   const allPartyKeys = Object.keys(partyDisplay);
 
-  const dailyLines = allPartyKeys
-    .map((k) => `${partyDisplay[k].emoji} ${partyDisplay[k].label}: ${p(k)}% (${seats[k] || 0} m.)`)
-    .join("\n");
+  // Compact party strings: only show mandates if party won seats
+  const formatParty = (k: string) => {
+    const s = seats[k] || 0;
+    return s > 0
+      ? `${partyDisplay[k].emoji} ${partyDisplay[k].label} ${p(k)}% (${s}m)`
+      : `${partyDisplay[k].emoji} ${partyDisplay[k].label} ${p(k)}%`;
+  };
 
-  const dailyText = `🗳️ Prognoza wyborcza na dzień ${formattedDate}:
+  const aboveParties = allPartyKeys.filter((k) => (seats[k] || 0) > 0);
+  const belowParties = allPartyKeys.filter((k) => (seats[k] || 0) === 0);
 
-${dailyLines}
-⚪ Niezdecydowani: ${p("Niezdecydowani")}%
+  // Group parties with seats into pairs
+  const pairedLines: string[] = [];
+  for (let i = 0; i < aboveParties.length; i += 2) {
+    if (i + 1 < aboveParties.length) {
+      pairedLines.push(`${formatParty(aboveParties[i])} | ${formatParty(aboveParties[i + 1])}`);
+    } else {
+      pairedLines.push(formatParty(aboveParties[i]));
+    }
+  }
 
-🏛️ Mandaty Sejmu i symulacja rządu:`;
+  // Parties below threshold on a single compact line
+  const belowLine = belowParties.map((k) => formatParty(k)).join(" | ");
+
+  const dailyText = `🗳️ Prognoza (${formattedDateShort}):
+${pairedLines.join("\n")}${belowLine ? `\n${belowLine}` : ""}
+⚪ Niezd: ${p("Niezdecydowani")}%
+
+🏛️ Mandaty i koalicje:`;
 
   const weekendLines = allPartyKeys
     .map((k) => `${partyDisplay[k].label} (${p(k)}%)`)
@@ -335,20 +354,16 @@ Symulator koalicji na żywo:`;
         ctx.stroke();
       }
 
-      // Top colored stripe
+      // Party color dot (round circle matching PartyCard.tsx and bottom row)
+      ctx.beginPath();
+      ctx.arc(x + 26, topY + 34, 6, 0, Math.PI * 2);
       ctx.fillStyle = color;
-      if (ctx.roundRect) {
-        ctx.beginPath();
-        ctx.roundRect(x, topY, cardW, 6, [12, 12, 0, 0]);
-        ctx.fill();
-      } else {
-        ctx.fillRect(x, topY, cardW, 6);
-      }
+      ctx.fill();
 
       // Party Name
       ctx.font = "800 20px sans-serif";
       ctx.fillStyle = "#ffffff";
-      ctx.fillText(key.replace("_", " "), x + 16, topY + 36);
+      ctx.fillText(key.replace("_", " "), x + 40, topY + 41);
 
       // Percentage
       ctx.font = "900 36px sans-serif";
