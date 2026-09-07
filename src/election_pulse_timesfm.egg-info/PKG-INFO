@@ -2,8 +2,11 @@ Metadata-Version: 2.4
 Name: election-pulse-timesfm
 Version: 0.1.0
 Summary: Zero-Shot Native Multivariate Election Forecasting & Political Scenario Simulator with Google TimesFM 3.0
+Author-email: Krzysztof Pika <takzen.app@gmail.com>
+License: MIT
 Requires-Python: >=3.13
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: torch>=2.14.0
 Requires-Dist: timesfm>=3.0.1
 Requires-Dist: pytrends>=4.9.2
@@ -19,6 +22,7 @@ Requires-Dist: plotly>=7.0.0
 Requires-Dist: streamlit>=1.63.0
 Provides-Extra: dev
 Requires-Dist: pytest>=9.0.0; extra == "dev"
+Dynamic: license-file
 
 # 🗳️ Puls Wyborczy (pulswyborczy.pl)
 

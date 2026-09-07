@@ -47,9 +47,10 @@ HISTORICAL_ANCHORS = [
     ("2025-11-20", "IBRiS", 1100, 29.50, 23.00, 12.80, 7.00, 6.50, 5.20, 3.80, 3.20, 1.40, 7.60),
     ("2026-02-15", "United Surveys", 1000, 28.80, 22.10, 13.20, 7.50, 6.90, 5.80, 3.90, 3.10, 1.10, 7.60),
     ("2026-05-20", "Pollster", 1050, 28.10, 21.40, 13.50, 7.90, 7.20, 6.10, 3.80, 3.10, 0.90, 8.00),
-    # August - September 2026 Latest Real Polls (United Surveys WP & IBRiS Onet)
+    # August - September 2026 Latest Real Polls (United Surveys WP, IBRiS Onet, Pollster SE)
     ("2026-08-23", "United Surveys (WP)", 1000, 27.30, 20.60, 14.10, 8.40, 7.10, 6.50, 4.00, 3.00, 0.80, 8.20),
     ("2026-09-01", "IBRiS (Onet)", 1100, 27.50, 19.70, 13.10, 8.30, 8.30, 6.00, 2.70, 4.20, 0.40, 9.80),
+    ("2026-09-03", "Pollster (SE)", 1008, 33.34, 22.23, 13.54, 8.02, 8.23, 5.14, 4.06, 3.31, 1.66, 0.47),
 ]
 
 
@@ -77,30 +78,31 @@ def generate_dense_poll_series(
             **{part: val for part, val in zip(PARTIES, v1)},
         })
 
-        # Realistic intermediate polls
-        num_intermediate = max(1, days_between // 14)
-        for _ in range(num_intermediate):
-            delta_days = int(rng.integers(3, max(4, days_between - 3)))
-            inter_date = d1 + timedelta(days=delta_days)
-            t = delta_days / days_between
+        # Realistic intermediate polls if anchors are far apart
+        if days_between >= 10:
+            num_intermediate = max(1, days_between // 14)
+            for _ in range(num_intermediate):
+                delta_days = int(rng.integers(2, max(3, days_between - 2)))
+                inter_date = d1 + timedelta(days=delta_days)
+                t = delta_days / days_between
 
-            inter_vals = []
-            for start_v, end_v in zip(v1, v2):
-                val_inter = start_v + t * (end_v - start_v)
-                noise = rng.normal(0, 0.35)
-                inter_vals.append(max(0.1, val_inter + noise))
+                inter_vals = []
+                for start_v, end_v in zip(v1, v2):
+                    val_inter = start_v + t * (end_v - start_v)
+                    noise = rng.normal(0, 0.35)
+                    inter_vals.append(max(0.1, val_inter + noise))
 
-            # Normalize to 100%
-            s = sum(inter_vals)
-            norm_vals = [round(v / s * 100, 2) for v in inter_vals]
+                # Normalize to 100%
+                s = sum(inter_vals)
+                norm_vals = [round(v / s * 100, 2) for v in inter_vals]
 
-            pollsters_pool = ["CBOS", "IBRiS", "United Surveys", "Pollster", "Opinia24"]
-            records.append({
-                "date": inter_date,
-                "pollster": rng.choice(pollsters_pool),
-                "sample_size": int(rng.choice([1000, 1050, 1100])),
-                **{part: val for part, val in zip(PARTIES, norm_vals)},
-            })
+                pollsters_pool = ["CBOS", "IBRiS", "United Surveys", "Pollster", "Opinia24"]
+                records.append({
+                    "date": inter_date,
+                    "pollster": rng.choice(pollsters_pool),
+                    "sample_size": int(rng.choice([1000, 1050, 1100])),
+                    **{part: val for part, val in zip(PARTIES, norm_vals)},
+                })
 
     # Final anchor
     last = anchors[-1]

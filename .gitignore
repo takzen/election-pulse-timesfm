@@ -44,3 +44,5 @@ web/out/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+dev/

@@ -124,16 +124,39 @@ class TimesFM3Engine:
         else:
             median_matrix, quantiles_tensor = self._simulate_calibrated(payload, scenario)
 
+        raw_median_matrix = median_matrix.copy()
         # Normalize medians to 100% daily sum and calibrate quantiles
         median_matrix = self._normalize_medians(median_matrix)
         results: Dict[str, PartyForecastResult] = {}
 
         for i, party in enumerate(payload.target_names):
-            p10 = [round(float(quantiles_tensor[i, t, 0]), 2) for t in range(horizon_len)]
-            p25 = [round(float(quantiles_tensor[i, t, 1]), 2) for t in range(horizon_len)]
-            p50 = [round(float(median_matrix[i, t]), 2) for t in range(horizon_len)]
-            p75 = [round(float(quantiles_tensor[i, t, 6]), 2) for t in range(horizon_len)]
-            p90 = [round(float(quantiles_tensor[i, t, 8]), 2) for t in range(horizon_len)]
+            p10 = []
+            p25 = []
+            p50 = []
+            p75 = []
+            p90 = []
+            for t in range(horizon_len):
+                raw_med = float(raw_median_matrix[i, t])
+                norm_med = float(median_matrix[i, t])
+                diff = norm_med - raw_med
+
+                q10 = max(0.0, float(quantiles_tensor[i, t, 0]) + diff)
+                q25 = max(q10, float(quantiles_tensor[i, t, 1]) + diff)
+                q50 = max(q25, norm_med)
+                q75 = max(q50, float(quantiles_tensor[i, t, 6]) + diff)
+                q90 = max(q75, float(quantiles_tensor[i, t, 8]) + diff)
+
+                v10 = round(q10, 2)
+                v25 = max(v10, round(q25, 2))
+                v50 = max(v25, round(q50, 2))
+                v75 = max(v50, round(q75, 2))
+                v90 = max(v75, round(q90, 2))
+
+                p10.append(v10)
+                p25.append(v25)
+                p50.append(v50)
+                p75.append(v75)
+                p90.append(v90)
 
             results[party] = PartyForecastResult(
                 party=party,
