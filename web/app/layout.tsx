@@ -4,17 +4,16 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://pulswyborczy.pl"),
   title: {
-    default: "Puls Wyborczy | Niezależne Prognozy i Sondaże AI",
+    default: "Puls Wyborczy | Niezależne Prognozy i Sondaże",
     template: "%s | Puls Wyborczy",
   },
-  description: "Niezależna platforma prognozująca poparcie partii politycznych w Polsce oraz interaktywny symulator wpływu stóp NBP i inflacji. Model AI: Google TimesFM 3.0.",
+  description: "Niezależna platforma prognozująca poparcie partii politycznych w Polsce oraz interaktywny symulator wpływu stóp NBP i inflacji. Model statystyczny: Google TimesFM 3.0.",
   keywords: [
     "wybory",
     "sondaże",
     "prognoza wyborcza",
     "Puls Wyborczy",
     "pulswyborczy.pl",
-    "sztuczna inteligencja",
     "symulator NBP",
     "stopy procentowe",
     "Sejm RP",
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Puls Wyborczy | Niezależne Prognozy i Sondaże AI",
+    title: "Puls Wyborczy | Niezależne Prognozy i Sondaże",
     description: "Zobacz najnowsze prognozy poparcia partii i zbadaj wpływ stóp procentowych oraz inflacji na wynik wyborów.",
     url: "https://pulswyborczy.pl",
     siteName: "Puls Wyborczy",
@@ -56,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Puls Wyborczy | Sondaże i Prognozy Wyborcze AI",
-    description: "Zaawansowany model analityczny oparty o Google TimesFM 3.0 badający sondaże, trendy i gospodarkę.",
+    title: "Puls Wyborczy | Sondaże i Prognozy Wyborcze",
+    description: "Model statystyczny oparty o Google TimesFM 3.0 badający sondaże, trendy i gospodarkę.",
     creator: "@takzendev",
   },
 };

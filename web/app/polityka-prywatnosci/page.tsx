@@ -108,7 +108,7 @@ export default function PrivacyPolicy() {
           <section className="rounded-2xl border border-slate-800 bg-[#0e1424] p-6 sm:p-10 shadow-md space-y-4">
             <div className="flex items-center gap-3 text-white font-extrabold text-xl sm:text-2xl">
               <Scale className="h-6 w-6 text-purple-400 flex-shrink-0" />
-              <h2>4. Nota prawna i status modelu AI</h2>
+              <h2>4. Nota prawna i status modelu statystycznego</h2>
             </div>
             <p>
               Wszystkie wykresy, estymacje poparcia, wachlarze kwantyli (p10–p90) oraz symulacje gospodarcze prezentowane w serwisie <strong>Puls Wyborczy</strong> mają charakter <strong className="text-white">wyłącznie analityczno-badawczy i edukacyjny</strong>:

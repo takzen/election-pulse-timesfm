@@ -83,7 +83,7 @@ export default function Home() {
         <section className="w-full space-y-3.5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/60 pb-2.5 gap-1">
             <h2 className="text-base sm:text-lg font-bold tracking-wide text-white uppercase">
-              Prognoza AI na 30 dni w przód (horyzont do {metadata.target_date})
+              Prognoza wyborcza na 30 dni w przód (horyzont do {metadata.target_date})
             </h2>
             <p className="text-xs sm:text-sm text-slate-400">
               Punkt wyjściowy: sondaże z {metadata.cutoff_date} • 9 partii + niezdecydowani • Symulacja mandatów D&apos;Hondta (próg 5%, model przybliżony w skali kraju)
@@ -149,7 +149,7 @@ export default function Home() {
             >
               TAKZEN DEV <ExternalLink className="h-3.5 w-3.5" />
             </a>{" "}
-            • Silnik AI: <strong>Google TimesFM 3.0</strong> (PyTorch CUDA)
+            • Model: <strong>Google TimesFM 3.0</strong> (PyTorch CUDA)
           </p>
           <p className="text-xs text-slate-400">
             Źródła: IBRiS, United Surveys, CBOS, Opinia24, Pollster | Wskaźniki: Google Trends, Wikimedia REST, NBP, GUS

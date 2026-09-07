@@ -85,7 +85,7 @@ export function PartyCard({ partyKey, meta, seats = 0, isAboveThreshold = false 
         <div className="flex items-baseline justify-between">
           <div>
             <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              Prognoza AI
+              Prognoza modelu
             </span>
             <div className="text-4xl sm:text-5xl font-black text-white tracking-tight mt-1">
               {meta.forecast.toFixed(1)}%

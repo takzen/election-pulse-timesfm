@@ -28,13 +28,13 @@ export function AdSidebar() {
             <ArrowUpRight className="h-4 w-4 text-slate-400" />
           </a>
           <p className="mt-1.5 text-sm text-slate-300 leading-relaxed">
-            Dedykowane systemy AI, architektura modeli predykcyjnych i nowoczesne aplikacje Next.js.
+            Architektura modeli predykcyjnych, inżynieria danych i nowoczesne aplikacje Next.js.
           </p>
         </div>
 
         <div className="mt-3.5 flex flex-wrap gap-1.5">
           <span className="rounded-md bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-300">
-            Systemy AI
+            Machine Learning
           </span>
           <span className="rounded-md bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-300">
             Fullstack Web
@@ -67,7 +67,7 @@ export function AdSidebar() {
         <div className="mt-2.5">
           <h4 className="text-sm font-bold text-slate-200">Twój projekt lub marka</h4>
           <p className="mt-1 text-xs sm:text-sm text-slate-400 leading-relaxed">
-            Dotrzyj bezpośrednio do analityków, dziennikarzy i entuzjastów AI śledzących polskie wybory.
+            Dotrzyj bezpośrednio do analityków, dziennikarzy i pasjonatów danych śledzących polskie wybory.
           </p>
         </div>
 
