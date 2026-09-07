@@ -4,6 +4,7 @@ import forecastsData from "../public/data/forecasts.json";
 import { Logo } from "@/components/Logo";
 import { PartyCard } from "@/components/PartyCard";
 import { MajorityBar } from "@/components/MajorityBar";
+import { CoalitionSimulator } from "@/components/CoalitionSimulator";
 import { FanChart } from "@/components/FanChart";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
@@ -107,6 +108,15 @@ export default function Home() {
         <div className="w-full grid grid-cols-1 gap-8 xl:grid-cols-12 items-start">
           {/* Main Analytics Content */}
           <div className="xl:col-span-10 space-y-8">
+            {/* Interactive Government & Coalition Simulator */}
+            <section className="w-full">
+              <CoalitionSimulator
+                partiesMeta={parties_meta as any}
+                seatsByParty={parliament.seatsByParty}
+                isAboveThreshold={parliament.isAboveThreshold}
+              />
+            </section>
+
             {/* Interactive Fan Chart */}
             <section className="w-full">
               <FanChart
