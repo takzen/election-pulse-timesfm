@@ -92,23 +92,40 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
     (partiesMeta["Razem"]?.forecast || 0)
   ).toFixed(1);
 
-  // 1. Presets for Twitter text
+  // Party display config for text presets (emoji + short label)
+  const partyDisplay: Record<string, { emoji: string; label: string }> = {
+    KO: { emoji: "🟠", label: "KO" },
+    PiS: { emoji: "🔵", label: "PiS" },
+    Konfederacja: { emoji: "⚫", label: "Konfederacja" },
+    KKP: { emoji: "🟤", label: "KKP" },
+    Lewica: { emoji: "🔴", label: "Lewica" },
+    Rozwoj_Plus: { emoji: "🟪", label: "Rozwoj Plus" },
+    PSL: { emoji: "🟢", label: "PSL" },
+    Razem: { emoji: "🟣", label: "Razem" },
+    Polska_2050: { emoji: "🟡", label: "Polska 2050" },
+  };
+
+  // All parties (excluding Niezdecydowani which is shown separately)
+  const allPartyKeys = Object.keys(partyDisplay);
+
+  const dailyLines = allPartyKeys
+    .map((k) => `${partyDisplay[k].emoji} ${partyDisplay[k].label}: ${p(k)}% (${seats[k] || 0} m.)`)
+    .join("\n");
+
   const dailyText = `🗳️ Prognoza wyborcza na dzień ${formattedDate}:
 
-🔴 KO: ${p("KO")}% (${seats.KO || 0} m.)
-🔵 PiS: ${p("PiS")}% (${seats.PiS || 0} m.)
-⚫ Konf.: ${p("Konfederacja")}% (${seats.Konfederacja || 0} m.)
-🟤 KKP: ${p("KKP")}% (${seats.KKP || 0} m.)
-🟣 Lewica: ${p("Lewica")}% (${seats.Lewica || 0} m.)
-🟡 PSL: ${p("PSL")}% | 🔴 Razem: ${p("Razem")}%
+${dailyLines}
 ⚪ Niezdecydowani: ${p("Niezdecydowani")}%
 
 🏛️ Mandaty Sejmu i symulacja rządu:`;
 
+  const weekendLines = allPartyKeys
+    .map((k) => `${partyDisplay[k].label} (${p(k)}%)`)
+    .join(" | ");
+
   const weekendText = `📊 Prognoza wyborcza na koniec tygodnia (${formattedDateShort}):
 
-Liderzy: KO (${p("KO")}%) vs PiS (${p("PiS")}%)
-Trzecia siła: Konfederacja (${p("Konfederacja")}%) + KKP (${p("KKP")}%)
+${weekendLines}
 
 🏛️ Układ Sejmu (D'Hondt):
 Koalicja: ${parliament.coalitionSeats} m. (${coalitionTotal}%)
@@ -116,6 +133,10 @@ Opozycja: ${parliament.oppositionSeats} m. (${oppositionTotal}%)
 (Próg większości do rządu: 231)
 
 Interaktywne wykresy i mandaty:`;
+
+  const sejmLines = allPartyKeys
+    .map((k) => `${partyDisplay[k].label}: ${seats[k] || 0}`)
+    .join(" | ");
 
   const sejmText = `🏛️ Kto ma większość w Sejmie? (Stan na ${formattedDate}):
 
@@ -126,8 +147,7 @@ ${
     : `⚠️ Koalicja traci większość (${parliament.coalitionSeats} / 231 mandatów)`
 }
 
-KO: ${seats.KO || 0} | PiS: ${seats.PiS || 0} | Konf: ${seats.Konfederacja || 0}
-KKP: ${seats.KKP || 0} | Lewica: ${seats.Lewica || 0} | Rozwój+: ${seats.Rozwoj_Plus || 0}
+${sejmLines}
 
 Symulator koalicji na żywo:`;
 
