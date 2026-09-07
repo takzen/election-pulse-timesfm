@@ -27,7 +27,7 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
   const p = (key: string) => (partiesMeta[key]?.forecast ?? 0).toFixed(1);
 
   // Standard format (compact 2-column list) - guaranteed < 280 characters with URL
-  const standardText = `🗳️ Prognoza wyborcza (PulsWyborczy.pl):
+  const standardText = `🗳️ Prognoza wyborcza:
 
 KO ${p("KO")}% | PiS ${p("PiS")}%
 Konf. ${p("Konfederacja")}% | Korona ${p("KKP")}%
@@ -38,7 +38,7 @@ PL2050 ${p("Polska_2050")}% | Niezdec. ${p("Niezdecydowani")}%
 Wykresy i mandaty Sejmu:`;
 
   // Compact format (top 5 + rest) - extra short
-  const compactText = `📊 Prognoza modelu TimesFM 3.0 (PulsWyborczy.pl):
+  const compactText = `📊 Prognoza modelu TimesFM 3.0:
 KO ${p("KO")}% | PiS ${p("PiS")}% | Konf ${p("Konfederacja")}% | Korona ${p("KKP")}% | Lewica ${p("Lewica")}%
 Pozostałe + Niezdecydowani: ${(
     (partiesMeta["Rozwoj_Plus"]?.forecast ?? 0) +
