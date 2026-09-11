@@ -48,7 +48,7 @@ POLITICAL_ENTITIES = {
 def fetch_wikipedia_pageviews(
     article: str,
     start_date: str = "20230101",
-    end_date: str = "20260909",
+    end_date: str = "20260911",
     user_agent: str = "PulsWyborczy/1.0 (contact: takzen.app@gmail.com)",
 ) -> pd.DataFrame:
     """Fetches daily pageviews for a Polish Wikipedia article via Wikimedia REST API."""
@@ -107,7 +107,7 @@ def _generate_fallback_wiki(article: str, start_date: str, end_date: str) -> pd.
 def fetch_all_wikipedia(
     articles: Optional[List[str]] = None,
     start_date: str = "20230101",
-    end_date: str = "20260909",
+    end_date: str = "20260911",
 ) -> pd.DataFrame:
     """Pulls and merges daily Wikipedia pageviews for all tracked political figures."""
     if articles is None:
@@ -158,7 +158,7 @@ def fetch_google_trends(
 def _generate_fallback_trends(
     keywords: List[str],
     start_date: str = "2023-01-01",
-    end_date: str = "2026-09-09",
+    end_date: str = "2026-09-11",
 ) -> pd.DataFrame:
     """Generates high-fidelity daily Google Trends proxy series."""
     dates = pd.date_range(start_date, end_date, freq="D")

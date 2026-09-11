@@ -62,7 +62,7 @@ GUS_BWUK_MONTHLY: List[Tuple[str, float]] = [
 def fetch_nbp_currency_rates(
     code: str = "usd",
     start_date: str = "2023-01-01",
-    end_date: str = "2026-09-09",
+    end_date: str = "2026-09-11",
 ) -> pd.DataFrame:
     """Fetches historical exchange rates from NBP REST API using 90-day chunking."""
     start_dt = datetime.strptime(start_date, "%Y-%m-%d")
@@ -117,7 +117,7 @@ def _generate_fallback_fx(code: str, start_date: str, end_date: str) -> pd.DataF
 
 def build_macro_dataframe(
     start_date: str = "2023-01-01",
-    end_date: str = "2026-09-09",
+    end_date: str = "2026-09-11",
 ) -> pd.DataFrame:
     """Combines NBP exchange rates, NBP interest rates, GUS inflation CPI,
 

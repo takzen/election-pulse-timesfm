@@ -58,13 +58,20 @@ export default function Home() {
 
             {/* Quick specs pill */}
             <div className="flex flex-wrap gap-2.5 text-xs sm:text-sm shrink-0">
+              <div className="flex items-center gap-2 rounded-xl border border-emerald-800/50 bg-[#0e1f1c] px-3.5 py-2 text-emerald-300 shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <span>Aktualizacja: <strong className="text-white">11.09.2026</strong></span>
+              </div>
               <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0e1424] px-3.5 py-2 text-slate-200 shadow-sm">
-                <Activity className="h-4 w-4 text-emerald-400 flex-shrink-0" />
-                <span>Ostatnie sondaże: <strong className="text-white">{metadata.cutoff_date}</strong></span>
+                <Activity className="h-4 w-4 text-orange-400 flex-shrink-0" />
+                <span>Ostatni sondaż: <strong className="text-white">{metadata.cutoff_date}</strong> (Opinia24)</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0e1424] px-3.5 py-2 text-slate-200 shadow-sm">
                 <Calendar className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <span>Prognoza modelu: <strong className="text-white">+{metadata.horizon_days} dni</strong> (do {metadata.target_date})</span>
+                <span>Prognoza: <strong className="text-white">+{metadata.horizon_days} dni</strong> (do {metadata.target_date})</span>
               </div>
             </div>
           </div>
