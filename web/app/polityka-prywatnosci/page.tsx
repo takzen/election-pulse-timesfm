@@ -108,7 +108,7 @@ export default function PrivacyPolicy() {
           <section className="rounded-2xl border border-slate-800 bg-[#0e1424] p-6 sm:p-10 shadow-md space-y-4">
             <div className="flex items-center gap-3 text-white font-extrabold text-xl sm:text-2xl">
               <Scale className="h-6 w-6 text-purple-400 flex-shrink-0" />
-              <h2>4. Nota prawna i status modelu statystycznego</h2>
+              <h2>4. Nota prawna i status systemu AI</h2>
             </div>
             <p>
               Wszystkie wykresy, estymacje poparcia, wachlarze kwantyli (p10–p90) oraz symulacje gospodarcze prezentowane w serwisie <strong>Puls Wyborczy</strong> mają charakter <strong className="text-white">wyłącznie analityczno-badawczy i edukacyjny</strong>:
@@ -118,7 +118,7 @@ export default function PrivacyPolicy() {
                 <strong>Źródła danych:</strong> Analizy bazują na oficjalnych sondażach pracowni badawczych (IBRiS, United Surveys, CBOS, Pollster, Opinia24), wskaźnikach Narodowego Banku Polskiego (NBP), Głównego Urzędu Statystycznego (GUS) oraz trendach zapytań Google Trends.
               </li>
               <li>
-                <strong>Model Google TimesFM 3.0:</strong> Trajektorie są generowane przez model transformerowy <em>TimesFM 3.0</em> od Google Research. Nie stanowią one oficjalnych wyników wyborów, badań socjologicznych w rozumieniu prawa prasowego ani gwarancji przyszłego wyniku.
+                <strong>System AI — Google TimesFM 3.0:</strong> Trajektorie są generowane przez system sztucznej inteligencji (AI) oparty na modelu transformerowym <em>TimesFM 3.0</em> od Google Research. Nie stanowią one oficjalnych wyników wyborów, badań socjologicznych w rozumieniu prawa prasowego ani gwarancji przyszłego wyniku.
               </li>
               <li>
                 <strong>Brak skutków prawnych:</strong> Model nie podejmuje żadnych zautomatyzowanych decyzji wywołujących skutki prawne wobec osób fizycznych.
@@ -135,6 +135,40 @@ export default function PrivacyPolicy() {
             <p>
               W przypadku bezpośredniego kontaktu e-mailowego przysługuje Ci pełne prawo dostępu do treści swoich danych, ich poprawienia, usunięcia lub ograniczenia przetwarzania. Wszelkie zapytania można kierować na adres: <strong className="text-white">takzen.app@gmail.com</strong>.
             </p>
+          </section>
+
+          {/* Section 6: AI Act Transparency */}
+          <section className="rounded-2xl border border-slate-800 bg-[#0e1424] p-6 sm:p-10 shadow-md space-y-4">
+            <div className="flex items-center gap-3 text-white font-extrabold text-xl sm:text-2xl">
+              <Scale className="h-6 w-6 text-emerald-400 flex-shrink-0" />
+              <h2>6. Przejrzystość systemu AI (Rozporządzenie UE 2024/1689 — AI Act)</h2>
+            </div>
+            <p>
+              Zgodnie z <strong className="text-white">Art. 50 Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2024/1689</strong> (tzw. AI Act) informujemy, że serwis Puls Wyborczy wykorzystuje <strong className="text-white">system sztucznej inteligencji</strong> do generowania prognoz wyborczych.
+            </p>
+            <ul className="list-disc list-inside space-y-2.5 pl-2 text-slate-200">
+              <li>
+                <strong>Nazwa modelu:</strong> Google TimesFM 3.0 (330M parametrów), architektura Stacked Mixing Transformer, checkpoint <em>google/timesfm-3.0-pytorch</em>.
+              </li>
+              <li>
+                <strong>Dostawca modelu:</strong> Google Research. Wagi modelu udostępniane na licencji badawczej (non-commercial research license).
+              </li>
+              <li>
+                <strong>Operator (deployer):</strong> TAKZEN DEV (<a href="https://takzendev.pl" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">takzendev.pl</a>).
+              </li>
+              <li>
+                <strong>Przeznaczenie:</strong> Generowanie probabilistycznych prognoz poparcia partii politycznych na podstawie danych sondażowych, makroekonomicznych i behawioralnych. Wyniki mają charakter wyłącznie analityczno-badawczy i edukacyjny.
+              </li>
+              <li>
+                <strong>Klasyfikacja ryzyka:</strong> System nie jest klasyfikowany jako system AI wysokiego ryzyka w rozumieniu Załącznika III do AI Act. Nie podejmuje zautomatyzowanych decyzji wywołujących skutki prawne wobec osób fizycznych, nie profiluje wyborców ani nie generuje treści syntetycznych (deepfake).
+              </li>
+              <li>
+                <strong>Dane wejściowe:</strong> Publicznie dostępne sondaże pracowni badawczych, wskaźniki NBP i GUS, indeksy Google Trends oraz statystyki Wikimedia. System nie przetwarza danych osobowych użytkowników serwisu.
+              </li>
+              <li>
+                <strong>Ograniczenia:</strong> Prognozy są obarczone niepewnością statystyczną (prezentowaną jako przedziały kwantylowe p10–p90). Model może nie uwzględniać nagłych wydarzeń politycznych, które nie mają precedensu w danych historycznych.
+              </li>
+            </ul>
           </section>
         </div>
 
