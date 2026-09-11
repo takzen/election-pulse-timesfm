@@ -1,7 +1,8 @@
 # Local private planning & notes (requested to stay local)
 PLAN.md
 INSTRUKCJA.md
-/wpis.txt
+wpis.txt
+data/wpis.txt
 
 # Virtual environment
 .venv/
