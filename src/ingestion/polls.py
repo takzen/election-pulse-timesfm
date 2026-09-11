@@ -54,6 +54,71 @@ HISTORICAL_ANCHORS = [
     ("2026-09-11", "Opinia24 (Onet)", 1001, 31.40, 17.50, 12.60, 6.90, 7.20, 5.70, 4.20, 2.20, 1.40, 10.90),
 ]
 
+# House effects correction: polls with Niezdecydowani below this threshold
+# are treated as "decided voters only" (e.g., Pollster/SE allocates undecided
+# proportionally to parties, inflating their shares vs IBRiS/United Surveys/Opinia24
+# which keep undecided as a separate category).
+UNDECIDED_FLOOR = 3.0
+
+
+def correct_house_effects(df: pd.DataFrame) -> pd.DataFrame:
+    """Corrects house effects for pollsters reporting 'decided voters only'.
+
+    Some pollsters (e.g., Pollster/SE) allocate nearly all undecided voters
+    proportionally to parties, resulting in inflated party shares and near-zero
+    Niezdecydowani. This function detects such polls (Niezdecydowani < UNDECIDED_FLOOR)
+    and rescales party shares down, restoring a comparable undecided level
+    derived from the median of polls that report undecided normally.
+
+    This prevents artificial jumps in party support caused by mixing two
+    incompatible reporting methodologies.
+    """
+    df = df.copy()
+    party_cols = [p for p in PARTIES if p != "Niezdecydowani"]
+
+    # Calculate target undecided level from polls that report undecided normally
+    normal_mask = df["Niezdecydowani"] >= UNDECIDED_FLOOR
+    if not normal_mask.any():
+        logger.warning("No polls with Niezdecydowani >= %.1f%% found, skipping house effect correction", UNDECIDED_FLOOR)
+        return df
+
+    target_undecided = round(float(df.loc[normal_mask, "Niezdecydowani"].median()), 2)
+
+    # Identify and correct polls where undecided is suspiciously low
+    low_mask = df["Niezdecydowani"] < UNDECIDED_FLOOR
+    if not low_mask.any():
+        return df
+
+    for idx in df[low_mask].index:
+        old_undecided = df.loc[idx, "Niezdecydowani"]
+        old_party_sum = df.loc[idx, party_cols].sum()
+        new_party_sum = 100.0 - target_undecided
+        scale_factor = new_party_sum / old_party_sum
+
+        # Scale down all party shares proportionally
+        for p in party_cols:
+            df.loc[idx, p] = round(df.loc[idx, p] * scale_factor, 2)
+
+        # Set undecided to target level
+        df.loc[idx, "Niezdecydowani"] = target_undecided
+
+        # Re-normalize to exactly 100.0%
+        total = df.loc[idx, PARTIES].sum()
+        for p in PARTIES:
+            df.loc[idx, p] = round(df.loc[idx, p] / total * 100.0, 2)
+
+        logger.info(
+            "House effect correction: %s (%s) — Niezdecydowani %.2f%% -> %.2f%%, "
+            "party scale factor=%.4f",
+            df.loc[idx, "date"],
+            df.loc[idx, "pollster"],
+            old_undecided,
+            df.loc[idx, "Niezdecydowani"],
+            scale_factor,
+        )
+
+    return df
+
 
 def generate_dense_poll_series(
     anchors: list[tuple] = HISTORICAL_ANCHORS,
@@ -115,6 +180,10 @@ def generate_dense_poll_series(
     })
 
     df = pd.DataFrame(records).drop_duplicates(subset=["date", "pollster"]).sort_values("date").reset_index(drop=True)
+
+    # Apply house effects correction before returning
+    df = correct_house_effects(df)
+
     return df
 
 
