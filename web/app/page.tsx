@@ -52,7 +52,7 @@ export default function Home() {
               </div>
 
               <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-4xl leading-relaxed">
-                Niezależny model probabilistyczny prognozujący poparcie 9 partii i grupy niezdecydowanych. Silnik <strong>Google TimesFM 3.0</strong> (system AI) analizuje równolegle sondaże (IBRiS, United Surveys, CBOS), trendy wyszukiwań w sieci, inflację CPI i decyzje RPP o stopach referencyjnych NBP.
+                Niezależny model probabilistyczny prognozujący poparcie 9 partii i grupy niezdecydowanych. Silnik <strong>AI (wersja beta)</strong> analizuje równolegle sondaże (IBRiS, United Surveys, CBOS), trendy wyszukiwań w sieci, inflację CPI i decyzje RPP o stopach referencyjnych NBP.
               </p>
             </div>
 
@@ -166,7 +166,7 @@ export default function Home() {
             >
               TAKZEN DEV <ExternalLink className="h-3.5 w-3.5" />
             </a>{" "}
-            • Model: <strong>Google TimesFM 3.0</strong> (PyTorch CUDA)
+            • Model: <strong>AI (beta)</strong>
           </p>
           <p className="text-xs text-slate-400">
             Źródła: IBRiS, United Surveys, CBOS, Opinia24, Pollster | Wskaźniki: Google Trends, Wikimedia REST, NBP, GUS

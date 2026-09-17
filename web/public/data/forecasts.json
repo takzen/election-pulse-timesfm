@@ -1,8 +1,8 @@
 {
   "metadata": {
     "generated_at": "2026-09-11T09:47:48.788583",
-    "model_name": "Google TimesFM 3.0 (330M)",
-    "architecture": "Stacked Mixing Transformer (Temporal & Variate Attention)",
+    "model_name": "AI (beta)",
+    "architecture": "Multivariate Transformer (beta)",
     "context_days": 90,
     "horizon_days": 30,
     "cutoff_date": "2026-09-11",
@@ -3439,61 +3439,61 @@
       "EWMA": 31.67,
       "ARIMA": 30.15,
       "LightGBM": 28.76,
-      "TimesFM_3": 28.67
+      "AI_Beta": 28.67
     },
     "PiS": {
       "EWMA": 20.56,
       "ARIMA": 14.21,
       "LightGBM": 20.37,
-      "TimesFM_3": 19.2
+      "AI_Beta": 19.2
     },
     "Konfederacja": {
       "EWMA": 13.35,
       "ARIMA": 12.05,
       "LightGBM": 13.42,
-      "TimesFM_3": 13.25
+      "AI_Beta": 13.25
     },
     "KKP": {
       "EWMA": 7.62,
       "ARIMA": 5.89,
       "LightGBM": 7.91,
-      "TimesFM_3": 7.47
+      "AI_Beta": 7.47
     },
     "Lewica": {
       "EWMA": 7.77,
       "ARIMA": 6.3,
       "LightGBM": 7.68,
-      "TimesFM_3": 7.3
+      "AI_Beta": 7.3
     },
     "Rozwoj_Plus": {
       "EWMA": 5.58,
       "ARIMA": 5.92,
       "LightGBM": 5.8,
-      "TimesFM_3": 6.08
+      "AI_Beta": 6.08
     },
     "Razem": {
       "EWMA": 3.99,
       "ARIMA": 4.33,
       "LightGBM": 4.04,
-      "TimesFM_3": 4.09
+      "AI_Beta": 4.09
     },
     "PSL": {
       "EWMA": 2.79,
       "ARIMA": 1.98,
       "LightGBM": 2.99,
-      "TimesFM_3": 2.62
+      "AI_Beta": 2.62
     },
     "Polska_2050": {
       "EWMA": 1.35,
       "ARIMA": 1.22,
       "LightGBM": 1.23,
-      "TimesFM_3": 0.95
+      "AI_Beta": 0.95
     },
     "Niezdecydowani": {
       "EWMA": 5.32,
       "ARIMA": 14.25,
       "LightGBM": 6.96,
-      "TimesFM_3": 10.36
+      "AI_Beta": 10.36
     }
   },
   "scenarios_grid": [

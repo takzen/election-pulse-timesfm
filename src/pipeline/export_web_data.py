@@ -61,7 +61,7 @@ def export_complete_web_payload(
             "EWMA": round(float(base_preds["EWMA"][-1]), 2),
             "ARIMA": round(float(base_preds["ARIMA"][-1]), 2),
             "LightGBM": round(float(base_preds["LightGBM"][-1]), 2),
-            "TimesFM_3": round(float(tfm_output.parties[party].p50[-1]), 2),
+            "AI_Beta": round(float(tfm_output.parties[party].p50[-1]), 2),
         }
 
     # 4. Scenario simulation grid for instant frontend slider reactivity
@@ -190,8 +190,8 @@ def export_complete_web_payload(
     export_data = {
         "metadata": {
             "generated_at": pd.Timestamp.now().isoformat(),
-            "model_name": "Google TimesFM 3.0 (330M)",
-            "architecture": "Stacked Mixing Transformer (Temporal & Variate Attention)",
+            "model_name": "AI (beta)",
+            "architecture": "Multivariate Transformer (beta)",
             "context_days": context_len,
             "horizon_days": horizon_len,
             "cutoff_date": payload.context_dates[-1],

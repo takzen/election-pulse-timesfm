@@ -62,7 +62,7 @@ const svg = `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http:/
       <rect width="360" height="46" rx="23" fill="#0c1930" stroke="#1d4ed8" stroke-width="1.5" />
       <circle cx="32" cy="23" r="5" fill="#10b981" />
       <text x="195" y="29" fill="#93c5fd" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle" letter-spacing="0.5">
-        Model: Google TimesFM 3.0
+        Model: AI (beta)
       </text>
     </g>
   </g>

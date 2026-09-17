@@ -118,7 +118,7 @@ export default function PrivacyPolicy() {
                 <strong>Źródła danych:</strong> Analizy bazują na oficjalnych sondażach pracowni badawczych (IBRiS, United Surveys, CBOS, Pollster, Opinia24), wskaźnikach Narodowego Banku Polskiego (NBP), Głównego Urzędu Statystycznego (GUS) oraz trendach zapytań Google Trends.
               </li>
               <li>
-                <strong>System AI — Google TimesFM 3.0:</strong> Trajektorie są generowane przez system sztucznej inteligencji (AI) oparty na modelu transformerowym <em>TimesFM 3.0</em> od Google Research. Nie stanowią one oficjalnych wyników wyborów, badań socjologicznych w rozumieniu prawa prasowego ani gwarancji przyszłego wyniku.
+                <strong>System AI (wersja beta):</strong> Trajektorie są generowane przez system sztucznej inteligencji (AI) w wersji beta. Nie stanowią one oficjalnych wyników wyborów, badań socjologicznych w rozumieniu prawa prasowego ani gwarancji przyszłego wyniku.
               </li>
               <li>
                 <strong>Brak skutków prawnych:</strong> Model nie podejmuje żadnych zautomatyzowanych decyzji wywołujących skutki prawne wobec osób fizycznych.
@@ -148,10 +148,7 @@ export default function PrivacyPolicy() {
             </p>
             <ul className="list-disc list-inside space-y-2.5 pl-2 text-slate-200">
               <li>
-                <strong>Nazwa modelu:</strong> Google TimesFM 3.0 (330M parametrów), architektura Stacked Mixing Transformer, checkpoint <em>google/timesfm-3.0-pytorch</em>.
-              </li>
-              <li>
-                <strong>Dostawca modelu:</strong> Google Research. Wagi modelu udostępniane na licencji badawczej (non-commercial research license).
+                <strong>Nazwa i wersja modelu:</strong> Model analityczny AI (wersja beta).
               </li>
               <li>
                 <strong>Operator (deployer):</strong> TAKZEN DEV (<a href="https://takzendev.pl" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">takzendev.pl</a>).

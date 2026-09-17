@@ -272,7 +272,7 @@ Symulator koalicji na żywo:`;
 
     ctx.font = "600 14px sans-serif";
     ctx.fillStyle = "#94a3b8";
-    ctx.fillText("Model statystyczny: Google TimesFM 3.0", W - 65, 100);
+    ctx.fillText("Model statystyczny: AI (beta)", W - 65, 100);
     ctx.textAlign = "left";
 
     // 3. Section Title Bar
