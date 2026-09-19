@@ -8,76 +8,123 @@ import { CoalitionSimulator } from "@/components/CoalitionSimulator";
 import { FanChart } from "@/components/FanChart";
 import { TwitterCardExport } from "@/components/TwitterCardExport";
 import { AdSidebar } from "@/components/AdSidebar";
-import { Activity, Calendar, ExternalLink } from "lucide-react";
+import { HouseEffects } from "@/components/HouseEffects";
+import { PollSources } from "@/components/PollSources";
+import { Activity, Calendar, ExternalLink, Info } from "lucide-react";
 import { calculateDhondtSeats } from "@/lib/dhondt";
 
 export default function Home() {
-  const { metadata, parties_meta, history, forecast_chart } = forecastsData;
+  const {
+    metadata,
+    parties_meta,
+    history,
+    forecast_chart,
+    undecided,
+    house_effects,
+    recent_polls,
+    validation,
+  } = forecastsData;
 
-  // Parliamentary seat distribution (D'Hondt method, 5% statutory threshold)
+  // Shares are already on the decided-voter base, so the 5% threshold applies directly.
   const parliament = calculateDhondtSeats(parties_meta as any);
 
-  // Governing coalition: KO + PSL + Polska 2050 + Nowa Lewica
   const coalitionTotal = roundOne(
     (parties_meta["KO"]?.forecast || 0) +
-    (parties_meta["PSL"]?.forecast || 0) +
-    (parties_meta["Polska_2050"]?.forecast || 0) +
-    (parties_meta["Lewica"]?.forecast || 0)
+      (parties_meta["PSL"]?.forecast || 0) +
+      (parties_meta["Polska_2050"]?.forecast || 0) +
+      (parties_meta["Lewica"]?.forecast || 0)
   );
 
-  // Parliamentary opposition: PiS + Konfederacja + KKP + Rozwój Plus + Razem
   const oppositionTotal = roundOne(
     (parties_meta["PiS"]?.forecast || 0) +
-    (parties_meta["Konfederacja"]?.forecast || 0) +
-    (parties_meta["KKP"]?.forecast || 0) +
-    (parties_meta["Rozwoj_Plus"]?.forecast || 0) +
-    (parties_meta["Razem"]?.forecast || 0)
+      (parties_meta["Konfederacja"]?.forecast || 0) +
+      (parties_meta["KKP"]?.forecast || 0) +
+      (parties_meta["Rozwoj_Plus"]?.forecast || 0) +
+      (parties_meta["Razem"]?.forecast || 0)
   );
 
   function roundOne(n: number) {
     return Math.round(n * 10) / 10;
   }
 
+  const partyList = Object.entries(parties_meta).map(([key, meta]) => ({
+    key,
+    name: (meta as any).name as string,
+    color: (meta as any).color as string,
+  }));
+
+  const updated = metadata.generated_at?.slice(0, 10) ?? metadata.cutoff_date;
+
   return (
     <div className="min-h-screen w-full bg-[#090d16] text-slate-100 antialiased selection:bg-slate-700 selection:text-white">
-      {/* Full width container spanning edge-to-edge with responsive margins */}
       <main className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-6 sm:py-8 space-y-8">
-        {/* Top Header Bar - Editorial Style with Official Logo */}
         <header className="w-full border-b border-slate-800/80 pb-5 sm:pb-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0 flex-1">
-              {/* Official Brand Logo */}
               <div className="shrink-0">
                 <Logo size="lg" />
               </div>
 
               <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-4xl leading-relaxed">
-                Niezależny model probabilistyczny prognozujący poparcie 9 partii i grupy niezdecydowanych. Silnik <strong>AI (wersja beta)</strong> analizuje równolegle sondaże (IBRiS, United Surveys, CBOS), trendy wyszukiwań w sieci, inflację CPI i decyzje RPP o stopach referencyjnych NBP.
+                Niezależny agregator sondaży wyborczych. Model łączy{" "}
+                <strong>{metadata.n_polls} opublikowanych sondaży</strong> z{" "}
+                <strong>{metadata.n_pollsters} pracowni</strong>, oddziela realne zmiany
+                poparcia od błędu próby i od systematycznych odchyleń poszczególnych
+                pracowni, i podaje przedział niepewności zamiast jednej liczby.
               </p>
             </div>
 
-            {/* Quick specs pill */}
             <div className="flex flex-wrap gap-2.5 text-xs sm:text-sm shrink-0">
               <div className="flex items-center gap-2 rounded-xl border border-emerald-800/50 bg-[#0e1f1c] px-3.5 py-2 text-emerald-300 shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
                 </span>
-                <span>Aktualizacja: <strong className="text-white">11.09.2026</strong></span>
+                <span>
+                  Aktualizacja: <strong className="text-white">{updated}</strong>
+                </span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0e1424] px-3.5 py-2 text-slate-200 shadow-sm">
                 <Activity className="h-4 w-4 text-orange-400 flex-shrink-0" />
-                <span>Ostatni sondaż: <strong className="text-white">{metadata.cutoff_date}</strong> (Opinia24)</span>
+                <span>
+                  Ostatni sondaż:{" "}
+                  <strong className="text-white">{metadata.cutoff_date}</strong>
+                  {metadata.cutoff_pollster ? ` (${metadata.cutoff_pollster})` : null}
+                </span>
               </div>
               <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0e1424] px-3.5 py-2 text-slate-200 shadow-sm">
                 <Calendar className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <span>Prognoza: <strong className="text-white">+{metadata.horizon_days} dni</strong> (do {metadata.target_date})</span>
+                <span>
+                  Prognoza: <strong className="text-white">+{metadata.horizon_days} dni</strong> (do{" "}
+                  {metadata.target_date})
+                </span>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Parliamentary Majority Bar - Full Width */}
+        {/* What the percentages mean, and the undecided group kept off the same axis. */}
+        <section className="w-full rounded-2xl border border-slate-800 bg-[#0e1424]/70 px-5 py-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="flex items-start gap-2.5 text-sm text-slate-300 leading-relaxed">
+              <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+              <span>
+                Wszystkie wyniki podane jako{" "}
+                <strong className="text-white">{metadata.basis_label}</strong> — tak samo
+                jak w mediach, więc liczby są porównywalne z tym, co czytasz w prasie.
+              </span>
+            </p>
+            <div className="shrink-0 rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2 text-sm">
+              <span className="text-slate-400">Niezdecydowani: </span>
+              <strong className="text-white">{undecided.mean}%</strong>
+              <span className="text-slate-400">
+                {" "}
+                ({undecided.p10}–{undecided.p90})
+              </span>
+            </div>
+          </div>
+        </section>
+
         <section className="w-full">
           <MajorityBar
             coalitionTotal={coalitionTotal}
@@ -87,14 +134,14 @@ export default function Home() {
           />
         </section>
 
-        {/* 10 Entities Cards - Spacious Responsive Grid */}
         <section className="w-full space-y-3.5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/60 pb-2.5 gap-1">
             <h2 className="text-base sm:text-lg font-bold tracking-wide text-white uppercase">
-              Prognoza wyborcza na 30 dni w przód (horyzont do {metadata.target_date})
+              Prognoza na {metadata.horizon_days} dni (do {metadata.target_date})
             </h2>
             <p className="text-xs sm:text-sm text-slate-400">
-              Punkt wyjściowy: sondaże z {metadata.cutoff_date} • 9 partii + niezdecydowani • Symulacja mandatów D&apos;Hondta (próg 5%, model przybliżony w skali kraju)
+              Stan na {metadata.cutoff_date} • {metadata.basis_label} • mandaty metodą
+              D&apos;Hondta, próg 5%, przybliżenie ogólnokrajowe
             </p>
           </div>
 
@@ -111,11 +158,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Main Workspace Layout */}
         <div className="w-full grid grid-cols-1 gap-8 xl:grid-cols-12 items-start">
-          {/* Main Analytics Content */}
           <div className="xl:col-span-10 space-y-8">
-            {/* Interactive Government & Coalition Simulator */}
             <section className="w-full">
               <CoalitionSimulator
                 partiesMeta={parties_meta as any}
@@ -124,7 +168,6 @@ export default function Home() {
               />
             </section>
 
-            {/* Interactive Fan Chart */}
             <section className="w-full">
               <FanChart
                 history={history}
@@ -134,24 +177,31 @@ export default function Home() {
               />
             </section>
 
+            <HouseEffects
+              houseEffects={house_effects as any}
+              parties={partyList}
+            />
 
+            <PollSources
+              polls={recent_polls as any}
+              attribution={metadata.attribution}
+              parties={partyList}
+            />
 
-            {/* Public Twitter / X Generator */}
             <section className="w-full">
               <TwitterCardExport
                 metadata={metadata}
+                undecided={undecided as any}
                 partiesMeta={parties_meta as any}
               />
             </section>
           </div>
 
-          {/* Right Rail: TAKZEN DEV + Sponsorship Slots */}
           <div className="xl:col-span-2 w-full">
             <AdSidebar />
           </div>
         </div>
 
-        {/* Footer with Logo */}
         <footer className="w-full mt-12 border-t border-slate-800/80 pt-8 pb-12 text-center text-xs sm:text-sm text-slate-400 space-y-3">
           <div className="flex justify-center">
             <Logo size="sm" />
@@ -166,11 +216,31 @@ export default function Home() {
             >
               TAKZEN DEV <ExternalLink className="h-3.5 w-3.5" />
             </a>{" "}
-            • Model: <strong>AI (beta)</strong>
+            • Model: <strong>{metadata.model_short}</strong>
           </p>
-          <p className="text-xs text-slate-400">
-            Źródła: IBRiS, United Surveys, CBOS, Opinia24, Pollster | Wskaźniki: Google Trends, Wikimedia REST, NBP, GUS
-          </p>
+
+          {/* Accuracy is stated only where it has been measured out of sample. */}
+          {validation && (validation as any).coverage_80 ? (
+            <p className="mx-auto max-w-3xl text-xs text-slate-400 leading-relaxed">
+              Sprawdzone na {(validation as any).n_evaluations} sondażach, których model
+              nie widział: przedział 80% objął rzeczywisty wynik w{" "}
+              <strong className="text-slate-200">
+                {((validation as any).coverage_80 * 100).toFixed(0)}%
+              </strong>{" "}
+              przypadków, średni błąd{" "}
+              <strong className="text-slate-200">
+                {(validation as any).mae_model.toFixed(2)} pp
+              </strong>
+              {(validation as any).advantage_is_significant
+                ? " — istotnie mniej niż naiwna średnia z trzech ostatnich sondaży."
+                : `. Różnica wobec naiwnej średniej z trzech ostatnich sondaży (${(validation as any).mae_random_walk.toFixed(
+                    2
+                  )} pp) nie jest istotna statystycznie — przewagą modelu jest skalibrowana niepewność i korekta efektów pracowni, nie sam punktowy wynik.`}
+            </p>
+          ) : null}
+
+          <p className="text-xs text-slate-400">{metadata.attribution}</p>
+
           <div className="pt-2">
             <Link
               href="/polityka-prywatnosci"

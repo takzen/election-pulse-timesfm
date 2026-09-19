@@ -1,9 +1,17 @@
 /**
- * D'Hondt seat allocation algorithm for Polish parliamentary elections (Sejm RP).
- * - Total seats: 460 (231 needed for absolute majority).
- * - Statutory threshold: 5.0% for individual political parties.
- * - Non-partisan options (e.g. Niezdecydowani) do not participate in seat distribution.
+ * D'Hondt seat allocation for the Sejm: 460 seats, 231 for a majority, 5% threshold.
+ *
+ * The percentages handed in must already be shares of **decided voters**, which is how
+ * the payload exports them. That matters for the threshold: it is set on valid votes
+ * cast, and undecided respondents cast none. Computing it on a base that still included
+ * them would understate every party by roughly a tenth of its own value and could zero
+ * out a party sitting just under 5%.
+ *
+ * Excluded from the allocation: the undecided group (not a party) and the aggregate of
+ * remaining parties, which is several parties summed and so can never be awarded seats
+ * as though it were one list.
  */
+const NON_ALLOCATABLE = new Set(["Niezdecydowani", "Inne_partie"]);
 
 export interface ParliamentSimulation {
   seatsByParty: Record<string, number>;
@@ -23,7 +31,7 @@ export function calculateDhondtSeats(
   threshold: number = 5.0
 ): ParliamentSimulation {
   const eligibleParties = Object.entries(partiesMeta).filter(
-    ([key, p]) => key !== "Niezdecydowani" && p.forecast >= threshold
+    ([key, p]) => !NON_ALLOCATABLE.has(key) && p.forecast >= threshold
   );
 
   const seatsByParty: Record<string, number> = {};
@@ -31,7 +39,7 @@ export function calculateDhondtSeats(
 
   for (const [key, p] of Object.entries(partiesMeta)) {
     seatsByParty[key] = 0;
-    isAboveThreshold[key] = key !== "Niezdecydowani" && p.forecast >= threshold;
+    isAboveThreshold[key] = !NON_ALLOCATABLE.has(key) && p.forecast >= threshold;
   }
 
   if (eligibleParties.length > 0) {

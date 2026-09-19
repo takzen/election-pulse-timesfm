@@ -11,6 +11,7 @@ venv/
 ENV/
 
 # Python cache & artifacts
+*.egg-info/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -47,3 +48,4 @@ Desktop.ini
 .DS_Store
 
 dev/
+data/cache/

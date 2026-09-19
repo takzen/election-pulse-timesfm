@@ -1,118 +1,202 @@
 # 🗳️ Puls Wyborczy (pulswyborczy.pl)
 
-> **Zero-shot probabilistic election forecasting powered by Google TimesFM 3.0**
+> **Agregator sondaży wyborczych: oddziela realną zmianę poparcia od błędu próby i od odchyleń pracowni**
 
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
-[![TimesFM 3.0](https://img.shields.io/badge/Model-TimesFM%203.0%20(330M)-emerald.svg)](https://huggingface.co/google/timesfm-3.0-pytorch)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
-[![pnpm 10](https://img.shields.io/badge/pnpm-10.x-orange.svg)](https://pnpm.io/)
-[![uv](https://img.shields.io/badge/package%20manager-uv-purple.svg)](https://astral.sh/uv)
-[![CUDA 12.6](https://img.shields.io/badge/CUDA-12.6-green.svg)](https://developer.nvidia.com/cuda-toolkit)
-[![Release](https://img.shields.io/github/v/release/takzen/election-pulse-timesfm?color=purple)](https://github.com/takzen/election-pulse-timesfm/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Dane: CC BY-SA 4.0](https://img.shields.io/badge/dane-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-**Puls Wyborczy** ([pulswyborczy.pl](https://pulswyborczy.pl)) is an independent, non-partisan research and analytics platform engineered by [TAKZEN DEV](https://takzendev.pl/). It unifies irregular polling registers across Poland with high-frequency exogenous signals (Google Trends search velocity, Wikipedia biographical traffic, CPI inflation, and NBP policy interest rates) using Google Research's foundation time-series model **TimesFM 3.0 (330M)**.
+**Puls Wyborczy** ([pulswyborczy.pl](https://pulswyborczy.pl)) agreguje opublikowane sondaże
+poparcia partii w Polsce. Zamiast rysować krzywą przez punkty, traktuje sondaż jako to, czym
+jest: **zaszumiony i obciążony pomiar** nieobserwowalnego stanu.
 
----
-
-## 🛠️ Architecture and modern tech stack
-
-| Domain | Technology & version | System role & architecture |
-| :--- | :--- | :--- |
-| **Foundation model** | **Google TimesFM 3.0 (330M)** | Multivariate Stacked Mixing Transformer (alternating temporal and variate attention) |
-| **Hardware acceleration** | **PyTorch 2.14 + CUDA 12.6** | Sub-100ms hardware-accelerated tensor operations on NVIDIA RTX 4060 GPU |
-| **Python runtime** | **Python 3.13 + uv 0.6+** | Ultra-fast Rust-based package resolver and virtual environment manager |
-| **Data engine & storage** | **Polars 1.44, Pandas, PyArrow** | Columnar Parquet serialization, zero-copy data pipelines |
-| **Interpolation & splines** | **SciPy (PCHIP)** | Monotonic cubic spline regularization preventing overshoot on irregular polling series |
-| **Web frontend** | **Next.js 16 (Turbopack) + React 19** | Pre-rendered static dashboard with sub-100ms global latency on Vercel |
-| **Package manager (web)** | **pnpm 10.26+** | Fast, disk-efficient, symlinked dependency manager |
-| **Design & styling** | **Tailwind CSS v4 + Lucide React** | Calm data-analyst palette (charcoal matte dark theme), large readable typography at 100% zoom |
-| **Interactive charts** | **Recharts 3** | Client-side fan charts with calibrated 10%–90% uncertainty intervals |
+Projekt [TAKZEN DEV](https://takzendev.pl/).
 
 ---
 
-## 🇵🇱 Tracked political landscape (10 entities)
+## Dlaczego nie „kolejna średnia sondaży"
 
-The platform models the complete spectrum of options present in official Polish pollsters (IBRiS, United Surveys, CBOS, Pollster):
+Trzy rzeczy, których nie robi żaden inny publiczny polski tracker:
 
-1. **KO** (Civic Coalition)
-2. **PiS** (Law and Justice)
-3. **Konfederacja** (Confederation)
-4. **KKP** (Crown of the Polish King - Braun)
-5. **Lewica** (New Left)
-6. **Rozwój Plus** (Center-right political initiative)
-7. **Razem** (Left Together)
-8. **PSL** (Polish People's Party)
-9. **Polska 2050** (Poland 2050 - Hołownia)
-10. **Niezdecydowani** (Undecided voters)
+1. **Efekty pracowni estymowane z danych.** Model wylicza, o ile każda pracownia systematycznie
+   zawyża lub zaniża poparcie względem pozostałych — i publikuje te liczby. Dzięki temu widać,
+   że „skok" w kolejnym sondażu danej pracowni to często jej stała cecha, nie zmiana nastrojów.
+2. **Niepewność wyliczona, nie przyjęta.** Pasmo p10–p90 wynika z modelu błędu pomiaru:
+   z liczebności próby, z estymowanego efektu planu próby i ze zmienności poparcia.
+3. **Sprawdzona trafność, także gdy wypada niekorzystnie.** Walidacja krocząca na sondażach,
+   których model nie widział, a wyniki — w tym porównanie z metodami naiwnymi — są publikowane
+   na stronie.
 
 ---
 
-## ✨ Key features
+## Jak to działa
 
-- **🧭 Multivariate foundation forecasting:** TimesFM 3.0 jointly attends to polling trajectories alongside macroeconomic signals in a single forward pass without task-specific fine-tuning.
-- **🏛️ Parliamentary majority tracker (threshold 231):** Seat allocation estimator comparing governing coalition vs. parliamentary opposition.
-- **📊 Probabilistic fan charts:** Calibrated confidence bands ranging from p10 to p90 (Recharts 3).
-- **📱 Responsive & tablet-optimized:** Charcoal matte dark theme with fluid typography, frameless animated pulse emblem, and clean UI without clutter.
-- **🐦 1-Click share on X:** Generates formatted polling summaries strictly verified under the 280-character limit with live counter.
+Model przestrzeni stanów na udziałach poparcia:
+
+```
+stan:        theta_t = theta_{t-1} + eps_t,                    eps_t ~ N(0, Q)
+obserwacja:  z_i     = theta_{t(i)} + delta_{h(i)} + eta_i,    eta_i ~ N(0, V_i)
+```
+
+`theta` to **additive log-ratio** (ALR) prawdziwych udziałów względem kategorii odniesienia,
+`delta_h` to efekt pracowni *h*, a `V_i` to kowariancja pomiaru sondażu *i*.
+
+Praca w przestrzeni ALR daje trzy konkretne rzeczy:
+
+| Własność | Dlaczego to ma znaczenie |
+| :--- | :--- |
+| Udziały sumują się do 100% **z konstrukcji** | Transformata odwrotna to softmax. Żaden kwantyl nie może złamać więzu, bo nic nie jest dzielone po fakcie. |
+| Log-ratio **nie zależy** od tego, czy sondaż podaje niezdecydowanych | Sondaże „wśród zdecydowanych" używane wprost, bez heurystyki przeskalowania. |
+| Obserwacja jest **liniowa** w nieznanych | Stosuje się dokładny filtr i wygładzanie Kalmana: bez MCMC, bez błędu próbkowania, poniżej sekundy na CPU. |
+
+Kowariancja pomiaru pochodzi z teorii wielomianowej (metoda delty):
+
+```
+V_kl = (1/n) * (delta_kl / p_k + 1 / p_ref)
+```
+
+Wzór jest **zweryfikowany numerycznie** na losowaniach wielomianowych (`tests/test_poll_aggregator.py`).
+Mnożymy go przez **efekt planu próby estymowany z danych**, bo realne sondaże mają większy błąd,
+niż wynika z prostego losowania — klastrowanie, ważenie, brak odpowiedzi.
+
+Wariancje i efekt planu próby dopasowywane są metodą największej wiarygodności; efekty pracowni
+iteracyjnie, z więzem sumy zero — bez tego nie są identyfikowalne względem stanu ukrytego.
+
+### Czego model nie potrafi
+
+Prognoza to ekstrapolacja błądzeniem losowym, więc **jest niemal płaska, z rosnącym pasmem**.
+To nie usterka — przy braku przyszłych sondaży to statystycznie poprawna odpowiedź. Model nie
+przewiduje kampanii, debat ani skandali. Każdy model rysujący tam wyraźny trend dorysowuje
+momentum, którego w danych nie ma.
 
 ---
 
-## ⚖️ Benchmark evaluation (14-day rolling backtesting)
+## Dane
 
-Evaluated via `python -m src.evaluation.backtest` across historical rolling windows prior to Polish parliamentary and presidential elections:
+Zestawienie sondaży pobieramy przez **MediaWiki API** z artykułu
+[*Opinion polling for the next Polish parliamentary election*](https://en.wikipedia.org/wiki/Opinion_polling_for_the_next_Polish_parliamentary_election)
+(licencja **CC BY-SA 4.0**) — bez scrapingu HTML i bez pobierania z portali informacyjnych.
 
-| Model | MAE (pp) | RMSE (pp) | Bias (pp) | Architecture description |
-| :--- | :---: | :---: | :---: | :--- |
-| **🥇 Google TimesFM 3.0** | **0.49** | **0.63** | **+0.00** | Multivariate foundation transformer conditioned on macro signals |
-| **🥈 ARIMA(1, 1, 1)** | 0.55 | 0.73 | -0.02 | Classical autoregressive univariate baseline |
-| **🥉 EWMA ($\alpha = 0.15$)** | 0.91 | 0.98 | +0.00 | Exponential weighted moving average poll tracker |
-| **4️⃣ LightGBM** | 1.07 | 1.13 | +0.08 | Gradient boosted regression trees with lagged macro features |
+Każdy rekord ma zapisaną proweniencję: pracownię, zleceniodawcę, liczebność próby, datę końca
+badania i **odnośnik do publikacji źródłowej**, pokazywany na stronie.
+
+Obecnie: **330 sondaży, 13 pracowni**, od października 2023 r.
+
+Braki danych są traktowane jako braki, nie jako zera: gdy pracownia nie podaje partii osobno
+(np. raportuje Lewicę i Razem łącznie), filtr Kalmana obsługuje to jako brakującą obserwację —
+nie wstawiamy zmyślonej liczby.
+
+**Serwis nie prowadzi własnych badań opinii.** Publikowane „efekty pracowni" to wynik estymacji
+statystycznej, a nie zarzut błędu metodologicznego wobec którejkolwiek pracowni.
 
 ---
 
-## 🚀 Local installation and development
+## Prezentacja procentów
 
-### 1. Python environment (models and data pipelines)
+Procenty podajemy jako **odsetek głosów ważnych** (bez niezdecydowanych) — tak jak media, więc
+liczby są porównywalne z prasą. Udział niezdecydowanych podajemy osobno, bo dotyczy odsetka
+ankietowanych, a nie głosów.
+
+Ma to znaczenie także dla **progu 5%**: ustawowy próg liczy się od głosów ważnych, a osoby
+niezdecydowane żadnego głosu nie oddają. Przeliczenie na tę bazę odbywa się **na losowaniach
+przed wyznaczeniem kwantyli** — przeskalowanie gotowego kwantyla dałoby zły przedział, bo
+dzielnik też jest niepewny.
+
+Podział mandatów (D'Hondt, próg 5%) to **uproszczenie ogólnokrajowe**. Realny podział zależy od
+41 okręgów i może się istotnie różnić — liczenie ogólnokrajowe zwykle zawyża największą partię.
+
+---
+
+## Stack
+
+| Warstwa | Technologia |
+| :--- | :--- |
+| Model | `numpy` + `scipy` — dokładny filtr Kalmana, MLE. Bez GPU, bez wag modeli, poniżej sekundy |
+| Dane | `pandas` + `pyarrow` (Parquet), `requests` (MediaWiki API) |
+| Frontend | Next.js 16 + React 19, Recharts 3, Tailwind CSS v4 |
+| Hosting | Vercel (strona statyczna) |
+
+Cztery zależności runtime. Dashboard lokalny (`streamlit`, `plotly`) to opcjonalne extra —
+pipeline produkcyjny wypluwa JSON i nie potrzebuje żadnego z nich.
+
+---
+
+## Uruchomienie
+
 ```bash
-# Clone the repository
-git clone https://github.com/takzen/election-pulse-timesfm.git
-cd election-pulse-timesfm
+git clone https://github.com/takzen/puls-wyborczy.git
+cd puls-wyborczy
 
-# Create Python 3.13 virtual environment using uv
 uv venv --python 3.13
-.venv\Scripts\activate  # On Linux/macOS: source .venv/bin/activate
-
-# Install PyTorch with CUDA 12.6 acceleration
-uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
-
-# Install project dependencies
+.venv\Scripts\activate          # Linux/macOS: source .venv/bin/activate
 uv pip install -e .
 
-# Sync raw polls, interpolate daily paths, and run GPU inference export
-python -m src.ingestion.polls
-python -m src.pipeline.interpolator
-python -m src.pipeline.export_web_data
+# Pobierz sondaże, dopasuj model, wyeksportuj payload — jedna komenda
+python -m src.ingestion.run_sync
+
+# To samo plus walidacja out-of-sample (wolniejsze)
+python -m src.ingestion.run_sync --validate
 ```
 
-### 2. Next.js 16 web application
+Ingest, dopasowanie i eksport są celowo za **jednym** wejściem. Rozdzielenie ich raz
+doprowadziło do tego, że poprawka trafiła do kodu, nikt nie przeliczył pipeline'u, a strona
+tygodniami podawała liczby sprzed poprawki.
+
 ```bash
-cd web
-pnpm install
-pnpm run dev
-# Open http://localhost:3000 in your browser
+# Lokalny inspektor payloadu (wykres, partie, efekty pracowni, sondaże źródłowe)
+uv pip install -e ".[dashboard]"
+streamlit run src/app.py
+
+# Frontend
+cd web && pnpm install && pnpm run dev
 ```
 
 ---
 
-## 👨‍💻 Author and commercial inquiries
+## Testy i walidacja
 
-Engineered by **[TAKZEN DEV](https://takzendev.pl/)**.  
-Specialized in custom AI systems, time-series foundation architectures, and modern full-stack web platforms.
+```bash
+pytest -q                                  # testy jednostkowe
+python -m src.evaluation.validation        # trafność out-of-sample
+```
 
-For advertising, sponsorship, or consulting inquiries: **takzen.app@gmail.com**
+Testy celują w błędy, które faktycznie wystąpiły, nie w kształty tablic. Najważniejszy —
+`test_recovers_known_state_and_house_effects` — generuje dane z modelu o znanych parametrach
+i wymaga ich odtworzenia; to on pilnuje poprawności estymatora.
+
+Walidacja jest **krocząca**: przy każdym punkcie model dopasowuje się wyłącznie do wcześniejszych
+sondaży, potem przewiduje kolejny, nieznany. Hiperparametry przeliczane są na bieżącym oknie
+treningowym, nigdy raz na starcie. Mierzymy dwie rzeczy:
+
+- **Pokrycie** — przedział 80% powinien obejmować rzeczywisty wynik w ~80% przypadków. Zbyt małe
+  pokrycie oznacza, że pasma kłamią o pewności; zbyt duże, że są bezużytecznie szerokie.
+- **Trafność punktową względem metod naiwnych** — średniej z trzech ostatnich sondaży i ostatniego
+  sondażu, z **parowanym bootstrapem po sondażach**. Losowanie po sondażach, nie po obserwacjach,
+  bo błędy kategorii w jednym sondażu są skorelowane; traktowanie ich jako niezależnych zawyżałoby
+  istotność.
+
+Aktualne wyniki są publikowane w stopce strony i w `dev/walidacja_pelna.json`. **Jeśli przewaga
+nad metodą naiwną nie jest istotna statystycznie, strona to wprost pisze** — przewagą modelu jest
+wtedy skalibrowana niepewność i korekta efektów pracowni, nie sam punktowy wynik.
 
 ---
 
-## 📄 License
-Source code distributed under the MIT License. Google TimesFM 3.0 weights are provided under the Google Research non-commercial research license.
+## Licencje
+
+Kod źródłowy: **MIT**.
+
+Dane sondażowe pochodzą z Wikipedii i objęte są licencją **CC BY-SA 4.0** — atrybucja znajduje się
+na stronie głównej, w liście sondaży i w nocie prawnej.
+
+> **Nota historyczna.** Wcześniejsze wersje tego projektu korzystały z wag Google TimesFM 3.0,
+> udostępnianych na `timesfm-non-commercial-license-v1.0`, która zabrania użycia zarobkowego
+> i produkcyjnego. Publiczna, monetyzowana strona naruszała oba warunki. Model został zastąpiony
+> własnym agregatorem — bez zewnętrznych wag i bez ograniczeń licencyjnych. Repozytorium zostało przemianowane
+> z `election-pulse-timesfm` na `puls-wyborczy`.
+
+---
+
+## Kontakt
+
+Reklama, sponsoring, konsultacje: **takzen.app@gmail.com** · [takzendev.pl](https://takzendev.pl/)

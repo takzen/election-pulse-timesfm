@@ -1,1 +1,1 @@
-# Preprocessing and tensor builders for TimesFM 3.0
+# Export pipeline: fitted model -> frontend JSON payload

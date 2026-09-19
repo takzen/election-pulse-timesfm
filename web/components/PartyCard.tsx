@@ -115,7 +115,7 @@ export function PartyCard({ partyKey, meta, seats = 0, isAboveThreshold = false 
 
         {/* Quantile Range */}
         <div className="mt-3 flex items-center justify-between text-sm text-slate-400">
-          <span>Przedział ufności 10%–90%:</span>
+          <span>Pasmo 80% (p10–p90):</span>
           <span className="font-mono font-bold text-slate-200">
             {meta.p10.toFixed(1)}% – {meta.p90.toFixed(1)}%
           </span>

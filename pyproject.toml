@@ -1,7 +1,7 @@
 [project]
-name = "election-pulse-timesfm"
+name = "puls-wyborczy"
 version = "0.1.0"
-description = "Zero-Shot Native Multivariate Election Forecasting & Political Scenario Simulator with Google TimesFM 3.0"
+description = "Agregator sondazy wyborczych: model przestrzeni stanow z efektami pracowni i skalibrowana niepewnoscia"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
@@ -9,24 +9,20 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
-    "torch>=2.14.0",
-    "timesfm>=3.0.1",
-    "pytrends>=4.9.2",
     "requests>=2.34.2",
     "pandas>=3.0.0",
-    "polars>=1.40.0",
     "pyarrow>=25.0.0",
     "scipy>=1.18.0",
-    "scikit-learn>=1.9.0",
-    "statsmodels>=0.15.0",
-    "lightgbm>=4.7.0",
-    "plotly>=7.0.0",
-    "streamlit>=1.63.0",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=9.0.0",
+]
+# Local review dashboard only; the published pipeline produces JSON and needs neither.
+dashboard = [
+    "streamlit>=1.63.0",
+    "plotly>=7.0.0",
 ]
 
 [build-system]

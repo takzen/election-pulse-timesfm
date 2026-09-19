@@ -25,10 +25,18 @@ function XLogo({ className = "h-4 w-4" }: { className?: string }) {
 interface TwitterCardExportProps {
   metadata: {
     model_name: string;
+    model_short?: string;
+    basis_label?: string;
     cutoff_date: string;
     target_date: string;
     generated_at?: string;
   };
+  /**
+   * Undecided respondents arrive separately, not inside `partiesMeta`: they are a
+   * share of people asked, not of votes cast, so they sit on a different base and
+   * must never be mixed into the party percentages.
+   */
+  undecided?: { mean: number; p10: number; p90: number };
   partiesMeta: Record<
     string,
     {
@@ -43,7 +51,7 @@ interface TwitterCardExportProps {
   >;
 }
 
-export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportProps) {
+export function TwitterCardExport({ metadata, undecided, partiesMeta }: TwitterCardExportProps) {
   const [copiedText, setCopiedText] = useState(false);
   const [copiedImage, setCopiedImage] = useState(false);
   const [imageBlob, setImageBlob] = useState<Blob | null>(null);
@@ -134,7 +142,7 @@ export function TwitterCardExport({ metadata, partiesMeta }: TwitterCardExportPr
 
   const dailyText = `🗳️ Prognoza (${formattedDateShort}):
 ${pairedLines.join("\n")}${belowLine ? `\n${belowLine}` : ""}
-⚪ Niezd: ${p("Niezdecydowani")}%
+⚪ Niezdecydowani: ${undecided ? undecided.mean.toFixed(1) : "—"}%
 
 🏛️ Mandaty i koalicje:`;
 
@@ -272,7 +280,7 @@ Symulator koalicji na żywo:`;
 
     ctx.font = "600 14px sans-serif";
     ctx.fillStyle = "#94a3b8";
-    ctx.fillText("Model statystyczny: AI (beta)", W - 65, 100);
+    ctx.fillText(`Model: ${metadata.model_short ?? metadata.model_name}`, W - 65, 100);
     ctx.textAlign = "left";
 
     // 3. Section Title Bar
@@ -313,13 +321,29 @@ Symulator koalicji na żywo:`;
       "PSL",
       "Razem",
       "Polska_2050",
-      "Niezdecydowani",
     ];
 
-    // Sorted by forecast desc (excluding Niezdecydowani)
-    const sortedParties = partyKeys
-      .filter((k) => k !== "Niezdecydowani")
-      .sort((a, b) => (partiesMeta[b]?.forecast || 0) - (partiesMeta[a]?.forecast || 0));
+    // Draw whatever the payload actually contains, rather than a hard-coded roster:
+    // the party line-up changes between elections, and a stale name would silently
+    // drop a party from the card.
+    const availableKeys = Object.keys(partiesMeta).sort(
+      (a, b) => (partiesMeta[b]?.forecast || 0) - (partiesMeta[a]?.forecast || 0)
+    );
+    const sortedParties = availableKeys;
+
+    // Undecided respondents are not a party and are not in partiesMeta; give them a
+    // synthetic card so the image still shows them, on their own base.
+    const UNDECIDED_KEY = "__undecided";
+    const cardMeta: Record<string, { name: string; color?: string; forecast: number }> = {
+      ...partiesMeta,
+    };
+    if (undecided) {
+      cardMeta[UNDECIDED_KEY] = {
+        name: "Niezdecydowani",
+        color: "#64748b",
+        forecast: undecided.mean,
+      };
+    }
 
     // Top 5 Row
     const top5 = sortedParties.slice(0, 5);
@@ -386,13 +410,14 @@ Symulator koalicji na żywo:`;
     });
 
     // Bottom Row: Next 4 parties + Niezdecydowani
-    const bottomParties = [...sortedParties.slice(5), "Niezdecydowani"];
+    const bottomParties = [...sortedParties.slice(5), ...(undecided ? [UNDECIDED_KEY] : [])];
     const bottomCardH = 95;
     const bottomY = 355;
 
     bottomParties.forEach((key, idx) => {
-      const pm = partiesMeta[key];
+      const pm = cardMeta[key];
       if (!pm) return;
+      const isUndecided = key === UNDECIDED_KEY;
       const x = startX + idx * (cardW + gap);
       const color = pm.color || "#64748b";
       const seatCount = seats[key] || 0;
@@ -423,7 +448,7 @@ Symulator koalicji na żywo:`;
       // Name
       ctx.font = "700 15px sans-serif";
       ctx.fillStyle = "#cbd5e1";
-      ctx.fillText(key.replace("_", " "), x + 34, bottomY + 29);
+      ctx.fillText(isUndecided ? pm.name : key.replace("_", " "), x + 34, bottomY + 29);
 
       // Percentage
       ctx.font = "800 24px sans-serif";
@@ -432,10 +457,10 @@ Symulator koalicji na żywo:`;
 
       // Seats / status
       ctx.font = "600 12px sans-serif";
-      ctx.fillStyle = key === "Niezdecydowani" ? "#64748b" : seatCount > 0 ? "#10b981" : "#e11d48";
+      ctx.fillStyle = isUndecided ? "#64748b" : seatCount > 0 ? "#10b981" : "#e11d48";
       ctx.fillText(
-        key === "Niezdecydowani"
-          ? "brak partii"
+        isUndecided
+          ? "% ankietowanych"
           : seatCount > 0
           ? `${seatCount} mandatów`
           : "poza Sejmem",

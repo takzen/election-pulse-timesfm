@@ -1,1 +1,1 @@
-# TimesFM 3.0 engine and classical forecasting baselines
+# Poll aggregator: state-space model of latent support
