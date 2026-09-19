@@ -1,128 +1,133 @@
 # 🗳️ Puls Wyborczy (pulswyborczy.pl)
 
-> **Agregator sondaży wyborczych: oddziela realną zmianę poparcia od błędu próby i od odchyleń pracowni**
+> **Polish election poll aggregator: separating real movement in support from sampling error and pollster bias**
 
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Dane: CC BY-SA 4.0](https://img.shields.io/badge/dane-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![Data: CC BY-SA 4.0](https://img.shields.io/badge/data-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-**Puls Wyborczy** ([pulswyborczy.pl](https://pulswyborczy.pl)) agreguje opublikowane sondaże
-poparcia partii w Polsce. Zamiast rysować krzywą przez punkty, traktuje sondaż jako to, czym
-jest: **zaszumiony i obciążony pomiar** nieobserwowalnego stanu.
+**Puls Wyborczy** ([pulswyborczy.pl](https://pulswyborczy.pl)) aggregates published opinion
+polls on party support in Poland. Instead of drawing a curve through the data points, it
+treats a poll as what it is: a **noisy, biased measurement** of an unobserved state.
 
-Projekt [TAKZEN DEV](https://takzendev.pl/).
-
----
-
-## Dlaczego nie „kolejna średnia sondaży"
-
-Trzy rzeczy, których nie robi żaden inny publiczny polski tracker:
-
-1. **Efekty pracowni estymowane z danych.** Model wylicza, o ile każda pracownia systematycznie
-   zawyża lub zaniża poparcie względem pozostałych — i publikuje te liczby. Dzięki temu widać,
-   że „skok" w kolejnym sondażu danej pracowni to często jej stała cecha, nie zmiana nastrojów.
-2. **Niepewność wyliczona, nie przyjęta.** Pasmo p10–p90 wynika z modelu błędu pomiaru:
-   z liczebności próby, z estymowanego efektu planu próby i ze zmienności poparcia.
-3. **Sprawdzona trafność, także gdy wypada niekorzystnie.** Walidacja krocząca na sondażach,
-   których model nie widział, a wyniki — w tym porównanie z metodami naiwnymi — są publikowane
-   na stronie.
+Built by [TAKZEN DEV](https://takzendev.pl/). The site itself is in Polish.
 
 ---
 
-## Jak to działa
+## Why not just another poll average
 
-Model przestrzeni stanów na udziałach poparcia:
+Three things no other public Polish tracker does:
+
+1. **House effects estimated from the data.** The model works out how much each pollster
+   systematically over- or under-states support relative to the rest — and publishes those
+   figures. That makes it visible when a "jump" in one firm's latest poll is really just
+   that firm's standing habit rather than a change in opinion.
+2. **Uncertainty derived, not assumed.** The p10–p90 band comes out of the measurement
+   model: sample size, an estimated design effect, and the volatility of support itself.
+3. **Accuracy measured and published, including when it is unflattering.** Rolling-origin
+   validation on polls the model has never seen, with the comparison against naive
+   baselines shown on the site.
+
+---
+
+## How it works
+
+A state-space model on vote shares:
 
 ```
-stan:        theta_t = theta_{t-1} + eps_t,                    eps_t ~ N(0, Q)
-obserwacja:  z_i     = theta_{t(i)} + delta_{h(i)} + eta_i,    eta_i ~ N(0, V_i)
+state:        theta_t = theta_{t-1} + eps_t,                    eps_t ~ N(0, Q)
+observation:  z_i     = theta_{t(i)} + delta_{h(i)} + eta_i,    eta_i ~ N(0, V_i)
 ```
 
-`theta` to **additive log-ratio** (ALR) prawdziwych udziałów względem kategorii odniesienia,
-`delta_h` to efekt pracowni *h*, a `V_i` to kowariancja pomiaru sondażu *i*.
+`theta` is the **additive log-ratio** (ALR) of the true shares against a reference category,
+`delta_h` is pollster *h*'s house effect, and `V_i` is poll *i*'s measurement covariance.
 
-Praca w przestrzeni ALR daje trzy konkretne rzeczy:
+Working in ALR space buys three concrete things:
 
-| Własność | Dlaczego to ma znaczenie |
+| Property | Why it matters |
 | :--- | :--- |
-| Udziały sumują się do 100% **z konstrukcji** | Transformata odwrotna to softmax. Żaden kwantyl nie może złamać więzu, bo nic nie jest dzielone po fakcie. |
-| Log-ratio **nie zależy** od tego, czy sondaż podaje niezdecydowanych | Sondaże „wśród zdecydowanych" używane wprost, bez heurystyki przeskalowania. |
-| Obserwacja jest **liniowa** w nieznanych | Stosuje się dokładny filtr i wygładzanie Kalmana: bez MCMC, bez błędu próbkowania, poniżej sekundy na CPU. |
+| Shares sum to 100% **by construction** | The inverse transform is a softmax. No quantile can break the constraint, because nothing is divided after the fact. |
+| Log-ratios are **invariant** to whether a poll reports undecided voters | Polls quoted "among decided voters" are used directly, with no rescaling heuristic. |
+| The observation equation is **linear** in the unknowns | The exact Kalman filter and smoother apply: no MCMC, no sampling error, under a second on CPU. |
 
-Kowariancja pomiaru pochodzi z teorii wielomianowej (metoda delty):
+Measurement covariance comes from multinomial theory via the delta method:
 
 ```
 V_kl = (1/n) * (delta_kl / p_k + 1 / p_ref)
 ```
 
-Wzór jest **zweryfikowany numerycznie** na losowaniach wielomianowych (`tests/test_poll_aggregator.py`).
-Mnożymy go przez **efekt planu próby estymowany z danych**, bo realne sondaże mają większy błąd,
-niż wynika z prostego losowania — klastrowanie, ważenie, brak odpowiedzi.
+The formula is **verified numerically** against multinomial draws
+(`tests/test_poll_aggregator.py`). It is multiplied by a **design effect estimated from the
+data**, because real polls carry more error than simple random sampling implies —
+clustering, weighting, nonresponse.
 
-Wariancje i efekt planu próby dopasowywane są metodą największej wiarygodności; efekty pracowni
-iteracyjnie, z więzem sumy zero — bez tego nie są identyfikowalne względem stanu ukrytego.
+Variances and the design effect are fitted by maximum likelihood; house effects
+iteratively, under a sum-to-zero constraint, without which they are not identifiable
+against the latent state.
 
-### Czego model nie potrafi
+### What the model cannot do
 
-Prognoza to ekstrapolacja błądzeniem losowym, więc **jest niemal płaska, z rosnącym pasmem**.
-To nie usterka — przy braku przyszłych sondaży to statystycznie poprawna odpowiedź. Model nie
-przewiduje kampanii, debat ani skandali. Każdy model rysujący tam wyraźny trend dorysowuje
-momentum, którego w danych nie ma.
+The forecast is a random-walk extrapolation, so it is **nearly flat with a widening band**.
+That is not a defect — with no future polls it is the statistically correct answer. The
+model does not anticipate campaigns, debates or scandals. Any model drawing a clear trend
+there is inventing momentum the data does not contain.
 
 ---
 
-## Dane
+## Data
 
-Zestawienie sondaży pobieramy przez **MediaWiki API** z artykułu
+Poll figures are pulled through the **MediaWiki API** from
 [*Opinion polling for the next Polish parliamentary election*](https://en.wikipedia.org/wiki/Opinion_polling_for_the_next_Polish_parliamentary_election)
-(licencja **CC BY-SA 4.0**) — bez scrapingu HTML i bez pobierania z portali informacyjnych.
+(licensed **CC BY-SA 4.0**) — no HTML scraping and nothing taken from news portals.
 
-Każdy rekord ma zapisaną proweniencję: pracownię, zleceniodawcę, liczebność próby, datę końca
-badania i **odnośnik do publikacji źródłowej**, pokazywany na stronie.
+Every record carries its provenance: pollster, commissioning outlet, sample size, fieldwork
+end date and a **link to the original publication**, which is shown on the site.
 
-Obecnie: **330 sondaży, 13 pracowni**, od października 2023 r.
+Currently **330 polls from 13 pollsters**, from October 2023 onwards.
 
-Braki danych są traktowane jako braki, nie jako zera: gdy pracownia nie podaje partii osobno
-(np. raportuje Lewicę i Razem łącznie), filtr Kalmana obsługuje to jako brakującą obserwację —
-nie wstawiamy zmyślonej liczby.
+Missing data stays missing rather than becoming zero: when a pollster does not report a
+party separately (for instance quoting Lewica and Razem jointly), the Kalman filter treats
+it as a missing observation instead of having a number invented for it.
 
-**Serwis nie prowadzi własnych badań opinii.** Publikowane „efekty pracowni" to wynik estymacji
-statystycznej, a nie zarzut błędu metodologicznego wobec którejkolwiek pracowni.
+**The site does not conduct its own polling.** The published house effects are the output
+of a statistical estimate, not an allegation of methodological error against any pollster.
 
 ---
 
-## Prezentacja procentów
+## How percentages are expressed
 
-Procenty podajemy jako **odsetek głosów ważnych** (bez niezdecydowanych) — tak jak media, więc
-liczby są porównywalne z prasą. Udział niezdecydowanych podajemy osobno, bo dotyczy odsetka
-ankietowanych, a nie głosów.
+Figures are shares of **valid votes** (excluding undecided respondents) — the same basis the
+Polish press uses, so the numbers are directly comparable with what readers see elsewhere.
+The undecided share is reported separately, because it is a share of people asked rather
+than of votes.
 
-Ma to znaczenie także dla **progu 5%**: ustawowy próg liczy się od głosów ważnych, a osoby
-niezdecydowane żadnego głosu nie oddają. Przeliczenie na tę bazę odbywa się **na losowaniach
-przed wyznaczeniem kwantyli** — przeskalowanie gotowego kwantyla dałoby zły przedział, bo
-dzielnik też jest niepewny.
+This also matters for the **5% threshold**: the statutory threshold applies to valid votes
+cast, and undecided respondents cast none. The rebasing happens **on the simulated draws,
+before any quantile is taken** — rescaling a finished quantile would give the wrong
+interval, because the divisor is itself uncertain.
 
-Podział mandatów (D'Hondt, próg 5%) to **uproszczenie ogólnokrajowe**. Realny podział zależy od
-41 okręgów i może się istotnie różnić — liczenie ogólnokrajowe zwykle zawyża największą partię.
+Seat allocation (D'Hondt, 5% threshold) is a **nationwide approximation**. The real
+distribution depends on 41 districts and can differ materially; nationwide counting tends
+to overstate the largest party.
 
 ---
 
 ## Stack
 
-| Warstwa | Technologia |
+| Layer | Technology |
 | :--- | :--- |
-| Model | `numpy` + `scipy` — dokładny filtr Kalmana, MLE. Bez GPU, bez wag modeli, poniżej sekundy |
-| Dane | `pandas` + `pyarrow` (Parquet), `requests` (MediaWiki API) |
+| Model | `numpy` + `scipy` — exact Kalman filter, maximum likelihood. No GPU, no model weights, under a second |
+| Data | `pandas` + `pyarrow` (Parquet), `requests` (MediaWiki API) |
 | Frontend | Next.js 16 + React 19, Recharts 3, Tailwind CSS v4 |
-| Hosting | Vercel (strona statyczna) |
+| Hosting | Vercel (static site) |
 
-Cztery zależności runtime. Dashboard lokalny (`streamlit`, `plotly`) to opcjonalne extra —
-pipeline produkcyjny wypluwa JSON i nie potrzebuje żadnego z nich.
+Four runtime dependencies. The local review dashboard (`streamlit`, `plotly`) is an optional
+extra — the production pipeline emits JSON and needs neither.
 
 ---
 
-## Uruchomienie
+## Running it
 
 ```bash
 git clone https://github.com/takzen/puls-wyborczy.git
@@ -132,19 +137,19 @@ uv venv --python 3.13
 .venv\Scripts\activate          # Linux/macOS: source .venv/bin/activate
 uv pip install -e .
 
-# Pobierz sondaże, dopasuj model, wyeksportuj payload — jedna komenda
+# Fetch polls, fit the model, export the payload — one command
 python -m src.ingestion.run_sync
 
-# To samo plus walidacja out-of-sample (wolniejsze)
+# The same plus out-of-sample validation (slower)
 python -m src.ingestion.run_sync --validate
 ```
 
-Ingest, dopasowanie i eksport są celowo za **jednym** wejściem. Rozdzielenie ich raz
-doprowadziło do tego, że poprawka trafiła do kodu, nikt nie przeliczył pipeline'u, a strona
-tygodniami podawała liczby sprzed poprawki.
+Ingestion, fitting and export sit behind a **single** entry point on purpose. Splitting them
+once meant a correction landed in the code, nobody re-ran the pipeline, and the site served
+pre-fix figures for a week.
 
 ```bash
-# Lokalny inspektor payloadu (wykres, partie, efekty pracowni, sondaże źródłowe)
+# Local payload inspector (chart, parties, house effects, source polls)
 uv pip install -e ".[dashboard]"
 streamlit run src/app.py
 
@@ -154,49 +159,50 @@ cd web && pnpm install && pnpm run dev
 
 ---
 
-## Testy i walidacja
+## Tests and validation
 
 ```bash
-pytest -q                                  # testy jednostkowe
-python -m src.evaluation.validation        # trafność out-of-sample
+pytest -q                                  # unit tests
+python -m src.evaluation.validation        # out-of-sample accuracy
 ```
 
-Testy celują w błędy, które faktycznie wystąpiły, nie w kształty tablic. Najważniejszy —
-`test_recovers_known_state_and_house_effects` — generuje dane z modelu o znanych parametrach
-i wymaga ich odtworzenia; to on pilnuje poprawności estymatora.
+The tests target bugs that actually occurred, not array shapes. The important one —
+`test_recovers_known_state_and_house_effects` — generates data from the model with known
+parameters and requires the fit to recover them; that is what guards the estimator.
 
-Walidacja jest **krocząca**: przy każdym punkcie model dopasowuje się wyłącznie do wcześniejszych
-sondaży, potem przewiduje kolejny, nieznany. Hiperparametry przeliczane są na bieżącym oknie
-treningowym, nigdy raz na starcie. Mierzymy dwie rzeczy:
+Validation is **rolling-origin**: at each cut-off the model fits only on earlier polls, then
+predicts the next, unseen one. Hyper-parameters are re-estimated on the training window
+current at that point, never once at the start. Two things are measured:
 
-- **Pokrycie** — przedział 80% powinien obejmować rzeczywisty wynik w ~80% przypadków. Zbyt małe
-  pokrycie oznacza, że pasma kłamią o pewności; zbyt duże, że są bezużytecznie szerokie.
-- **Trafność punktową względem metod naiwnych** — średniej z trzech ostatnich sondaży i ostatniego
-  sondażu, z **parowanym bootstrapem po sondażach**. Losowanie po sondażach, nie po obserwacjach,
-  bo błędy kategorii w jednym sondażu są skorelowane; traktowanie ich jako niezależnych zawyżałoby
-  istotność.
+- **Coverage** — an 80% interval should contain the actual figure about 80% of the time. Too
+  little means the bands lie about certainty; too much means they are uselessly wide.
+- **Point accuracy against naive baselines** — the average of the three most recent polls,
+  and the single latest poll, with a **paired bootstrap resampled by poll**. Resampling by
+  poll rather than by observation matters: the category errors within one poll are
+  correlated, and treating them as independent would overstate significance.
 
-Aktualne wyniki są publikowane w stopce strony i w `dev/walidacja_pelna.json`. **Jeśli przewaga
-nad metodą naiwną nie jest istotna statystycznie, strona to wprost pisze** — przewagą modelu jest
-wtedy skalibrowana niepewność i korekta efektów pracowni, nie sam punktowy wynik.
-
----
-
-## Licencje
-
-Kod źródłowy: **MIT**.
-
-Dane sondażowe pochodzą z Wikipedii i objęte są licencją **CC BY-SA 4.0** — atrybucja znajduje się
-na stronie głównej, w liście sondaży i w nocie prawnej.
-
-> **Nota historyczna.** Wcześniejsze wersje tego projektu korzystały z wag Google TimesFM 3.0,
-> udostępnianych na `timesfm-non-commercial-license-v1.0`, która zabrania użycia zarobkowego
-> i produkcyjnego. Publiczna, monetyzowana strona naruszała oba warunki. Model został zastąpiony
-> własnym agregatorem — bez zewnętrznych wag i bez ograniczeń licencyjnych. Repozytorium zostało przemianowane
-> z `election-pulse-timesfm` na `puls-wyborczy`.
+Current scores are published in the site footer and in `dev/walidacja_pelna.json`. **If the
+advantage over the naive baseline is not statistically significant, the site says so
+outright** — in that case the model's contribution is its calibrated uncertainty and house
+effect correction, not the point estimate.
 
 ---
 
-## Kontakt
+## Licences
 
-Reklama, sponsoring, konsultacje: **takzen.app@gmail.com** · [takzendev.pl](https://takzendev.pl/)
+Source code: **MIT**.
+
+Poll data comes from Wikipedia and is licensed **CC BY-SA 4.0** — attribution appears on the
+home page, in the poll list and in the legal notice.
+
+> **Historical note.** Earlier versions of this project used Google TimesFM 3.0 weights,
+> distributed under `timesfm-non-commercial-license-v1.0`, which prohibits revenue-generating
+> and production use. A public, monetised site violated both conditions. The model was
+> replaced with a purpose-built aggregator — no external weights, no licence constraints. The
+> repository was renamed from `election-pulse-timesfm` to `puls-wyborczy`.
+
+---
+
+## Contact
+
+Advertising, sponsorship, consulting: **takzen.app@gmail.com** · [takzendev.pl](https://takzendev.pl/)
