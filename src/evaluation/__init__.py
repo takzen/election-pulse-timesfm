@@ -1,1 +1,1 @@
-# Backtesting and performance evaluation
+# Out-of-sample validation: coverage and accuracy against naive baselines

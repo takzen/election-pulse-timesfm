@@ -7,13 +7,11 @@ import { Logo } from "@/components/Logo";
 export const metadata: Metadata = {
   title: "Polityka prywatności i nota prawna | Puls Wyborczy",
   description: "Zasady prywatności, ochrony danych oraz nota prawna serwisu Puls Wyborczy (pulswyborczy.pl).",
+  // Indexed on purpose: this page carries the GDPR notice and the AI Act Art. 50
+  // disclosure. Hiding a transparency obligation from crawlers works against us.
   robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
+    index: true,
+    follow: true,
   },
 };
 
@@ -88,6 +86,14 @@ export default function PrivacyPolicy() {
               <li>Serwis <strong className="text-white">NIE prowadzi profilowania</strong> behawioralnego ani zautomatyzowanego targetowania reklam.</li>
               <li>Z uwagi na całkowity brak cookies śledzących, nie wyświetlamy irytujących pop-upów i banerów ze zgodami.</li>
             </ul>
+            <div className="mt-4 rounded-xl border border-slate-700 bg-slate-800/50 p-5 text-base sm:text-lg">
+              <p>
+                <strong className="text-white">Reklamy.</strong> Serwis może wyświetlać reklamy i treści sponsorowane. Obecnie są to <strong className="text-white">statyczne materiały własne</strong> — nie korzystamy z zewnętrznej sieci reklamowej, więc powyższe punkty obowiązują bez wyjątku.
+              </p>
+              <p className="mt-3">
+                Gdyby to się zmieniło i podłączylibyśmy zewnętrzną sieć reklamową, <strong className="text-white">zaktualizujemy tę politykę przed uruchomieniem takich reklam</strong> i — jeśli będą wymagać cookies lub profilowania — wdrożymy mechanizm zgody zgodny z RODO i prawem telekomunikacyjnym. Nie uruchomimy targetowania behawioralnego bez uprzedniej zmiany tego dokumentu.
+              </p>
+            </div>
           </section>
 
           {/* Section 3: Server Logs */}
@@ -111,14 +117,17 @@ export default function PrivacyPolicy() {
               <h2>4. Nota prawna i status systemu AI</h2>
             </div>
             <p>
-              Wszystkie wykresy, estymacje poparcia, wachlarze kwantyli (p10–p90) oraz symulacje gospodarcze prezentowane w serwisie <strong>Puls Wyborczy</strong> mają charakter <strong className="text-white">wyłącznie analityczno-badawczy i edukacyjny</strong>:
+              Wszystkie wykresy, estymacje poparcia, pasma kwantylowe (p10–p90) oraz szacunki mandatów prezentowane w serwisie <strong>Puls Wyborczy</strong> mają charakter <strong className="text-white">wyłącznie analityczno-badawczy i edukacyjny</strong>:
             </p>
             <ul className="list-disc list-inside space-y-2.5 pl-2 text-slate-200">
               <li>
-                <strong>Źródła danych:</strong> Analizy bazują na oficjalnych sondażach pracowni badawczych (IBRiS, United Surveys, CBOS, Pollster, Opinia24), wskaźnikach Narodowego Banku Polskiego (NBP), Głównego Urzędu Statystycznego (GUS) oraz trendach zapytań Google Trends.
+                <strong>Źródła danych:</strong> Serwis agreguje <strong className="text-white">opublikowane sondaże</strong> polskich pracowni badawczych (m.in. CBOS, IBRiS, United Surveys, Pollster, Opinia24, OGB, Research Partner, Social Changes, IPSOS) oraz oficjalne wyniki wyborów. Zestawienie sondaży pobieramy z artykułu <em>„Opinion polling for the next Polish parliamentary election”</em> w Wikipedii (licencja CC BY-SA 4.0). Przy każdym sondażu na stronie głównej podajemy pracownię, liczebność próby i odnośnik do publikacji źródłowej.
               </li>
               <li>
-                <strong>System AI (wersja beta):</strong> Trajektorie są generowane przez system sztucznej inteligencji (AI) w wersji beta. Nie stanowią one oficjalnych wyników wyborów, badań socjologicznych w rozumieniu prawa prasowego ani gwarancji przyszłego wyniku.
+                <strong>Czym serwis nie jest:</strong> Puls Wyborczy <strong className="text-white">nie prowadzi własnych badań opinii</strong> i nie zleca ich pracowniom. Prezentowane wartości są wynikiem obliczeń statystycznych na cudzych, opublikowanych sondażach — nie są sondażem, badaniem socjologicznym w rozumieniu prawa prasowego ani gwarancją przyszłego wyniku wyborów.
+              </li>
+              <li>
+                <strong>Odchylenia pracowni:</strong> Publikowane „efekty pracowni” to <strong className="text-white">wyniki estymacji statystycznej</strong>, mierzące odchylenie danej pracowni względem średniej z pozostałych. Nie są zarzutem błędu metodologicznego ani oceny rzetelności którejkolwiek pracowni — różnice w wynikach wynikają z odmiennych, legalnych i jawnych metodologii (sposób zadawania pytań, ważenie, traktowanie osób niezdecydowanych).
               </li>
               <li>
                 <strong>Brak skutków prawnych:</strong> Model nie podejmuje żadnych zautomatyzowanych decyzji wywołujących skutki prawne wobec osób fizycznych.
@@ -144,11 +153,14 @@ export default function PrivacyPolicy() {
               <h2>6. Przejrzystość systemu AI (Rozporządzenie UE 2024/1689 — AI Act)</h2>
             </div>
             <p>
-              Zgodnie z <strong className="text-white">Art. 50 Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2024/1689</strong> (tzw. AI Act) informujemy, że serwis Puls Wyborczy wykorzystuje <strong className="text-white">system sztucznej inteligencji</strong> do generowania prognoz wyborczych.
+              W duchu <strong className="text-white">Art. 50 Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2024/1689</strong> (tzw. AI Act) ujawniamy pełną charakterystykę systemu, który liczy publikowane wyniki. Dla jasności: serwis <strong className="text-white">nie używa modelu generatywnego</strong> ani modelu językowego i nie tworzy żadnych treści syntetycznych — liczby powstają z jawnego modelu statystycznego opisanego poniżej.
             </p>
             <ul className="list-disc list-inside space-y-2.5 pl-2 text-slate-200">
               <li>
-                <strong>Nazwa i wersja modelu:</strong> Model analityczny AI (wersja beta).
+                <strong>Nazwa i rodzaj modelu:</strong> Agregator sondaży — model przestrzeni stanów (transformata additive log-ratio, filtr i wygładzanie Kalmana). Efekty pracowni, zmienność poparcia i skala błędu pomiaru są estymowane metodą największej wiarygodności z danych sondażowych.
+              </li>
+              <li>
+                <strong>Kod źródłowy:</strong> Otwarty, na licencji MIT — metodę można niezależnie sprawdzić i odtworzyć.
               </li>
               <li>
                 <strong>Operator (deployer):</strong> TAKZEN DEV (<a href="https://takzendev.pl" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">takzendev.pl</a>).
@@ -160,10 +172,16 @@ export default function PrivacyPolicy() {
                 <strong>Klasyfikacja ryzyka:</strong> System nie jest klasyfikowany jako system AI wysokiego ryzyka w rozumieniu Załącznika III do AI Act. Nie podejmuje zautomatyzowanych decyzji wywołujących skutki prawne wobec osób fizycznych, nie profiluje wyborców ani nie generuje treści syntetycznych (deepfake).
               </li>
               <li>
-                <strong>Dane wejściowe:</strong> Publicznie dostępne sondaże pracowni badawczych, wskaźniki NBP i GUS, indeksy Google Trends oraz statystyki Wikimedia. System nie przetwarza danych osobowych użytkowników serwisu.
+                <strong>Dane wejściowe:</strong> Wyłącznie publicznie opublikowane sondaże pracowni badawczych oraz oficjalne wyniki wyborów. System <strong className="text-white">nie przetwarza żadnych danych osobowych</strong> — ani użytkowników serwisu, ani respondentów sondaży, do których nie mamy dostępu (otrzymujemy jedynie zagregowane, opublikowane odsetki).
               </li>
               <li>
-                <strong>Ograniczenia:</strong> Prognozy są obarczone niepewnością statystyczną (prezentowaną jako przedziały kwantylowe p10–p90). Model może nie uwzględniać nagłych wydarzeń politycznych, które nie mają precedensu w danych historycznych.
+                <strong>Jak podajemy procenty:</strong> Jako odsetek głosów ważnych, czyli wśród osób deklarujących zdecydowany wybór — tak jak media. Udział osób niezdecydowanych podajemy osobno, bo dotyczy odsetka ankietowanych, a nie głosów.
+              </li>
+              <li>
+                <strong>Ograniczenia — czego model nie potrafi:</strong> Prognoza to ekstrapolacja obecnego stanu (proces błądzenia losowego), więc nie przewiduje zwrotów akcji: nie uwzględnia kampanii, debat, skandali ani wydarzeń bez precedensu w danych. Im dalszy horyzont, tym szersze pasmo niepewności — i to pasmo, nie pojedyncza liczba, jest właściwym wynikiem. Szacunki dla ugrupowań o najniższym poparciu są najmniej precyzyjne. Rozkład mandatów to <strong className="text-white">uproszczenie ogólnokrajowe</strong>; realny podział zależy od 41 okręgów i może się istotnie różnić.
+              </li>
+              <li>
+                <strong>Weryfikowalność:</strong> Trafność modelu sprawdzamy na sondażach, których nie widział (walidacja krocząca), i publikujemy zmierzone wyniki w stopce strony głównej — również wtedy, gdy model nie okazuje się lepszy od prostszych metod.
               </li>
             </ul>
           </section>
